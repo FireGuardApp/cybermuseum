@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Музей Кибербезопасности им. МЧС России</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- ОСНОВНЫЕ ПЕРЕМЕННЫЕ --- */
+        :root {
+            --bg-dark: #0A1221;
+            --bg-card: #0F192B; /* Темно-синий фон карточек */
+            --accent-orange: #FF5722;
+            --accent-blue: #00BCD4;
+            --text-main: #FFFFFF;
+            --text-muted: #8FA3BF;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --grid-line: rgba(0, 188, 212, 0.05);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.5;
+            background-image: 
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1400px; /* Увеличил ширину для вместимости 4 видео */
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        
+        /* --- HEADER --- */
+        header {
+            text-align: center;
+            padding: 80px 0 60px;
+        }
+
+        .logo-shield {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            border: 2px solid var(--accent-orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(255, 87, 34, 0.2);
+        }
+
+        .logo-shield i { font-style: normal; font-size: 36px; color: var(--accent-orange); font-weight: bold; }
+
+        .sub-title {
+            color: var(--accent-blue);
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        h1.main-title {
+            font-size: 56px;
+            font-weight: 700;
+            margin: 0;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        
+        h1.main-title span { color: var(--accent-blue); }
+
+        .mission-text {
+            margin-top: 20px;
+            color: var(--text-muted);
+            font-size: 14px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            border-top: 2px solid var(--accent-orange);
+            padding-top: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        section { margin-bottom: 100px; }
+        
+        .section-header {
+            margin-bottom: 40px;
+            border-left: 4px solid var(--accent-blue);
+            padding-left: 20px;
+        }
+
+        /* --- КАРТОЧКИ УГРОЗ (Emergency) --- */
+        .emergency-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 40px 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .card-title { font-size: 22px; font-family: 'Oswald'; }
+        .card-text { font-size: 14px; color: var(--text-muted); margin-bottom: 30px; min-height: 65px; }
+
+        .action-link {
+            font-size: 12px; font-weight: 700; text-transform: uppercase; display: inline-flex; align-items: center;
+        }
+        .action-link::after { content: '›'; margin-left: 5px; font-size: 16px; }
+
+        .card.virus { border-left: 4px solid var(--accent-orange); }
+        .card.virus .action-link { color: var(--accent-orange); }
+        
+        .card.phishing { border-left: 4px solid var(--accent-blue); }
+        .card.phishing .action-link { color: var(--accent-blue); }
+
+        .card.leak { border-left: 4px solid white; }
+        .card.leak .action-link { color: white; }
+
+        /* --- ИСПРАВЛЕННЫЙ КАЛЕНДАРЬ --- */
+        .calendar-wrapper {
+            display: flex; /* Используем Flex для жесткого разделения */
+            gap: 0; /* Убираем отступы, чтобы они смыкались как на макете */
+            align-items: flex-start;
+        }
+
+        .date-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 120px); /* Два столбца фиксированной ширины */
+            grid-auto-rows: 120px;
+            gap: 5px;
+            margin-right: 20px; /* Отступ до информационной панели */
+        }
+
+        .date-box {
+            border: 1px solid var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Oswald';
+            font-size: 24px;
+            cursor: pointer;
+            transition: 0.2s;
+            background: rgba(255,255,255,0.02);
+            color: var(--text-muted);
+        }
+
+        .date-box:hover { background: rgba(255,255,255,0.1); }
+        
+        .date-box.active { 
+            background: var(--accent-orange); 
+            border-color: var(--accent-orange); 
+            color: white; 
+            /* Эффект, чтобы активный элемент выделялся */
+            box-shadow: 0 0 15px rgba(255, 87, 34, 0.4);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Панель деталей (стиль WannaCry с макета) */
+        .incident-details {
+            flex-grow: 1; /* Занимает всё оставшееся место */
+            background: #111b2e; /* Чуть темнее фон */
+            padding: 40px;
+            border-top: 1px solid var(--border-color);
+            position: relative;
+            min-height: 370px; /* Высота под два ряда кубиков + отступы */
+        }
+
+        /* Декор в углу панели */
+        .incident-details::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 0; height: 0;
+            border-style: solid;
+            border-width: 0 50px 50px 0;
+            border-color: transparent #1a263d transparent transparent;
+        }
+
+        .threat-tag {
+            border: 1px solid var(--accent-orange);
+            color: var(--accent-orange);
+            font-size: 11px;
+            padding: 4px 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .incident-date {
+            float: right;
+            font-family: 'Oswald';
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .incident-title {
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: white;
+            font-weight: 500;
+        }
+
+        .incident-content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .info-block h3 {
+            color: var(--accent-blue);
+            font-size: 12px;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+        
+        .info-block p, .info-block li {
+            font-size: 14px;
+            color: #b0c4de;
+            line-height: 1.6;
+        }
+
+        .measures-box {
+            background: rgba(0, 188, 212, 0.05); /* Легкий фон для мер */
+            padding: 20px;
+            border-left: 2px solid var(--accent-blue);
+        }
+
+        .measures-box ul { list-style: none; }
+        .measures-box li { position: relative; padding-left: 15px; margin-bottom: 10px; }
+        .measures-box li::before { content: '>'; position: absolute; left: 0; color: var(--accent-blue); font-weight: bold;}
+
+
+        /* --- НОВЫЙ РАЗДЕЛ: УЧЕБНЫЙ КЛАСС (ВИДЕО) --- */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Ровно 4 видео в ряд */
+            gap: 25px;
+        }
+
+        .video-card {
+            cursor: pointer;
+            group: video;
+        }
+
+        /* Имитация плеера */
+        .video-thumb {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background-color: #000;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            transition: border-color 0.3s;
+        }
+
+        .video-card:hover .video-thumb {
+            border-color: var(--accent-blue);
+        }
+
+        /* Кнопка Play */
+        .play-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s, background 0.3s;
+        }
+        
+        .play-btn::after {
+            content: '';
+            display: block;
+            width: 0; height: 0;
+            border-style: solid;
+            border-width: 7px 0 7px 12px;
+            border-color: transparent transparent transparent white;
+            margin-left: 4px; /* Визуальная центровка треугольника */
+        }
+
+        .video-card:hover .play-btn {
+            transform: scale(1.1);
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Таймкод в углу */
+        .video-time {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            font-size: 11px;
+            padding: 2px 6px;
+            font-weight: bold;
+        }
+
+        .video-title {
+            font-family: 'Roboto';
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 1.3;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        .video-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+
+        /* --- ОСТАЛЬНЫЕ БЛОКИ --- */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .game-card {
+            background: #0d1424;
+            padding: 40px 30px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .game-icon { font-size: 40px; margin-bottom: 20px; color: var(--text-muted); }
+        
+        .game-btn {
+            display: block; width: 100%; padding: 12px; margin-top: 25px;
+            background: transparent; border: 1px solid var(--accent-blue);
+            color: var(--accent-blue); text-transform: uppercase;
+            font-size: 12px; letter-spacing: 1px; cursor: pointer; transition: 0.3s;
+        }
+        .game-btn:hover { background: var(--accent-blue); color: #000; }
+        
+        /* Сводка */
+        .news-wrapper {
+            background: var(--bg-card);
+            padding: 0;
+            border: 1px solid var(--border-color);
+        }
+        
+        .news-item {
+            padding: 25px 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .news-item:last-child { border-bottom: none; }
+
+        .news-meta { font-size: 11px; margin-bottom: 8px; font-family: 'Oswald'; letter-spacing: 1px; }
+        .tag { margin-right: 10px; font-weight: bold; }
+        .tag.urgent { color: var(--accent-orange); }
+        .tag.report { color: #4CAF50; }
+        
+        .news-title { font-size: 20px; font-weight: 500; margin-bottom: 8px; }
+        .news-body { font-size: 14px; color: var(--text-muted); }
+
+        /* FOOTER */
+        footer {
+            background: #050911;
+            padding: 60px 0;
+            border-top: 1px solid var(--border-color);
+            font-size: 13px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer-col h4 { margin-bottom: 25px; color: white; font-size: 14px; }
+        .footer-links li { list-style: none; margin-bottom: 12px; color: var(--text-muted); }
+        .footer-links a:hover { color: var(--accent-blue); }
+
+        .status-dot {
+            display: inline-block; width: 8px; height: 8px;
+            background: #4CAF50; border-radius: 50%;
+            margin-right: 10px; box-shadow: 0 0 5px #4CAF50;
+        }
+
+        @media (max-width: 1024px) {
+            .emergency-grid, .games-grid, .video-grid { grid-template-columns: repeat(2, 1fr); }
+            .calendar-wrapper { flex-direction: column; }
+            .date-grid { grid-template-columns: repeat(6, 1fr); margin-bottom: 20px; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="container">
+        <div class="logo-shield"><i>!</i></div>
+        <div class="sub-title">УГПС МЧС РОССИИ</div>
+        <h1 class="main-title">МУЗЕЙ <span>КИБЕРБЕЗОПАСНОСТИ</span></h1>
+        <div class="mission-text">
+            ОФИЦИАЛЬНАЯ ПЛАТФОРМА МОНИТОРИНГА УГРОЗ И ОБУЧЕНИЯ НАСЕЛЕНИЯ
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <section>
+            <div class="emergency-grid">
+                <div class="card virus">
+                    <div class="card-header"><span class="card-title">ОБНАРУЖЕН ВИРУС</span><span style="color:var(--accent-orange)">☣</span></div>
+                    <div class="card-text">Немедленно отключите сеть. Не запускайте программы. Сохраните критические файлы на внешний носитель.</div>
+                    <a href="#" class="action-link">ПРОТОКОЛ ДЕЙСТВИЙ</a>
+                </div>
+                <div class="card phishing">
+                    <div class="card-header"><span class="card-title">ФИШИНГ-АТАКА</span><span style="color:var(--accent-blue)">⚡</span></div>
+                    <div class="card-text">Не вводите данные карты. Проверьте адресную строку. Сообщите в банк о компрометации карты.</div>
+                    <a href="#" class="action-link">ПРОТОКОЛ ДЕЙСТВИЙ</a>
+                </div>
+                <div class="card leak">
+                    <div class="card-header"><span class="card-title">УТЕЧКА ДАННЫХ</span><span style="color:white">🔒</span></div>
+                    <div class="card-text">Смените пароли на всех ресурсах. Настройте двухфакторную аутентификацию. Проверьте кредитную историю.</div>
+                    <a href="#" class="action-link">ПРОТОКОЛ ДЕЙСТВИЙ</a>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2>КАЛЕНДАРЬ КИБЕРИНЦИДЕНТОВ</h2>
+            </div>
+            <div class="calendar-wrapper">
+                <div class="date-grid">
+                    <div class="date-box">01</div>
+                    <div class="date-box" style="background: rgba(255,87,34,0.1); border-color:var(--accent-orange);">02</div> <div class="date-box active">03</div> <div class="date-box">04</div>
+                    <div class="date-box">05</div>
+                    <div class="date-box" style="border-color: var(--accent-blue); color:var(--accent-blue)">06</div>
+                </div>
+
+                <div class="incident-details">
+                    <div class="incident-date">DATE: 2017-05-12 | GMT+3 14:00</div>
+                    <div class="threat-tag">УРОВЕНЬ УГРОЗЫ: 5 (КРИТИЧЕСКИЙ)</div>
+                    
+                    <h2 class="incident-title">ВЫМОГАТЕЛЬ «WANNACRY»</h2>
+                    
+                    <div class="incident-content-grid">
+                        <div class="info-block">
+                            <h3>ОПИСАНИЕ УГРОЗЫ</h3>
+                            <p style="margin-bottom: 20px;">
+                                Сетевой червь, использующий уязвимость EternalBlue в протоколе SMB. 
+                                Шифрует файлы пользователя и требует выкуп в криптовалюте.
+                                Распространяется автоматически внутри локальных сетей.
+                            </p>
+                            <h3>ВЕКТОР АТАКИ</h3>
+                            <ul style="list-style: none; padding:0;">
+                                <li style="color:var(--accent-orange); margin-bottom:5px;">> Эксплойт уязвимости Windows</li>
+                                <li style="color:var(--accent-orange);">> Фишинговые рассылки</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="measures-box">
+                            <h3 style="color:white; margin-bottom:15px;">ПРИНЯТЫЕ МЕРЫ</h3>
+                            <ul>
+                                <li>Выпущен патч безопасности MS17-010. Блокировка портов 139 и 445.</li>
+                                <li>Выводы для населения: Регулярное обновление ОС обязательно. Создание оффлайн бэкапов.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <div style="text-align:center; margin-bottom:50px;">
+                <h2>КИБЕРПОЛИГОН</h2>
+                <p style="color:var(--text-muted)">Отработка навыков цифровой обороны в симулированной среде.</p>
+            </div>
+            <div class="games-grid">
+                <div class="game-card">
+                    <div class="game-icon">💣</div>
+                    <h3>КИБЕРСАПЁР</h3>
+                    <p style="font-size:13px; color:var(--text-muted); margin:15px 0;">Идентификация скрытых угроз. Отличите фишинговые ссылки от легитимных ресурсов.</p>
+                    <button class="game-btn">НАЧАТЬ ТРЕНИРОВКУ</button>
+                </div>
+                <div class="game-card">
+                    <div class="game-icon">🧱</div>
+                    <h3>АНТИВИРУСНЫЙ ТЕТРИС</h3>
+                    <p style="font-size:13px; color:var(--text-muted); margin:15px 0;">Динамическое построение обороны. Блокируйте потоки вредоносного кода правильными патчами.</p>
+                    <button class="game-btn" style="border-color:var(--accent-orange); color:var(--accent-orange)">НАЧАТЬ ТРЕНИРОВКУ</button>
+                </div>
+                <div class="game-card">
+                    <div class="game-icon">🕸</div>
+                    <h3>ЛАБИРИНТ ФИШИНГА</h3>
+                    <p style="font-size:13px; color:var(--text-muted); margin:15px 0;">Текстовый квест. Пройдите через серию социальных манипуляций и сохраните свои средства.</p>
+                    <button class="game-btn">НАЧАТЬ ТРЕНИРОВКУ</button>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header" style="display:flex; justify-content:space-between; align-items:flex-end;">
+                <div>
+                    <h2>УЧЕБНЫЙ КЛАСС</h2>
+                    <p style="font-size:13px; color:var(--text-muted)">Видеоинструктажи и методические материалы.</p>
+                </div>
+                <a href="#" class="action-link" style="color:var(--accent-blue); border:1px solid var(--accent-blue); padding: 5px 15px;">ВСЯ БИБЛИОТЕКА</a>
+            </div>
+
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-thumb">
+                        <div class="play-btn"></div>
+                        <div class="video-time">04:30</div>
+                    </div>
+                    <div class="video-title">Алгоритм действий при звонке мошенника</div>
+                    <div class="video-meta">Инструктаж №104</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumb">
+                        <div class="play-btn"></div>
+                        <div class="video-time">06:15</div>
+                    </div>
+                    <div class="video-title">Как опознать фейковый сайт госуслуг</div>
+                    <div class="video-meta">Инструктаж №105</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumb">
+                        <div class="play-btn"></div>
+                        <div class="video-time">03:45</div>
+                    </div>
+                    <div class="video-title">Инструктаж по настройке приватности</div>
+                    <div class="video-meta">Инструктаж №106</div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumb">
+                        <div class="play-btn"></div>
+                        <div class="video-time">02:20</div>
+                    </div>
+                    <div class="video-title">Памятка по созданию стойкого пароля</div>
+                    <div class="video-meta">Инструктаж №107</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2>ОПЕРАТИВНАЯ СВОДКА</h2>
+            </div>
+            
+            <div class="news-wrapper">
+                <div class="news-item">
+                    <div class="news-meta"><span class="tag urgent">● СРОЧНО</span> 12.10.2023 | 14:30</div>
+                    <div class="news-title">Уровень угрозы распространения вируса-шифровальщика повышен до «жёлтого»</div>
+                    <div class="news-body">По данным Центра мониторинга, зафиксирована массовая рассылка вредоносного ПО под видом повесток. Рекомендуется не открывать вложения.</div>
+                </div>
+                <div class="news-item">
+                    <div class="news-meta"><span class="tag report">● ОТЧЕТ</span> 11.10.2023 | 09:15</div>
+                    <div class="news-title">Обезврежена новая фишинг-кампания «ГосВыплата»</div>
+                    <div class="news-body">Специалисты ЦУК заблокировали сеть из 450 доменов, имитирующих портал государственных услуг.</div>
+                </div>
+                <div class="news-item">
+                    <div class="news-meta"><span class="tag" style="color:var(--accent-blue)">● ИНФО</span> 10.10.2023 | 18:00</div>
+                    <div class="news-title">Обновлены рекомендации по парольной политике</div>
+                    <div class="news-body">В связи с увеличением мощностей брутфорс-атак, минимальная длина пароля для критических систем увеличена до 12 символов.</div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <div style="display:flex; align-items:center; margin-bottom:20px;">
+                    <div class="logo-shield" style="width:30px; height:30px; margin:0 15px 0 0; font-size:14px; border-width:1px;"><i>!</i></div>
+                    <h4 style="margin:0">ЦИФРОВОЙ ЩИТ РФ</h4>
+                </div>
+                <p style="color:var(--text-muted); line-height:1.6;">Официальный ресурс по вопросам цифровой безопасности и противодействия киберугрозам.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h4>КАРТА САЙТА</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Оперативная сводка</a></li>
+                    <li><a href="#">Календарь инцидентов</a></li>
+                    <li><a href="#">Киберполигон</a></li>
+                    <li><a href="#">Учебный класс</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>ДОКУМЕНТЫ</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Политика конфиденциальности</a></li>
+                    <li><a href="#">Условия использования</a></li>
+                    <li><a href="#">Сертификаты безопасности</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>СТАТУС СИСТЕМЫ</h4>
+                <div style="color:var(--text-muted); margin-bottom:10px;"><span class="status-dot"></span> HTTPS Шифрование активно</div>
+                <div style="color:var(--text-muted); margin-bottom:10px;"><span class="status-dot"></span> Уязвимости не обнаружены</div>
+                <div style="color:var(--text-muted); margin-bottom:10px;"><span class="status-dot"></span> Мониторинг 24/7</div>
+            </div>
+        </div>
+    </footer>
+
+   <!-- ================= ПРОТОКОЛЫ ДЕЙСТВИЙ ================= -->
+
+<style>
+/* МОДАЛЬНОЕ ОКНО */
+#protocol-modal {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.85);
+  z-index:10000;
+  align-items:center;
+  justify-content:center;
+}
+#protocol-box {
+  background:#0F192B;
+  max-width:900px;
+  width:90%;
+  padding:30px;
+  border:1px solid rgba(255,255,255,0.2);
+  position:relative;
+}
+#protocol-close {
+  position:absolute;
+  top:10px;
+  right:15px;
+  cursor:pointer;
+  font-size:20px;
+}
+
+/* ВКЛАДКИ */
+.protocol-tabs {
+  display:flex;
+  gap:10px;
+  margin:20px 0;
+  flex-wrap:wrap;
+}
+.protocol-tab {
+  border:1px solid var(--accent-blue);
+  color:var(--accent-blue);
+  padding:6px 14px;
+  font-size:12px;
+  cursor:pointer;
+  background:none;
+}
+.protocol-tab.active {
+  background:var(--accent-blue);
+  color:#000;
+}
+
+/* КОНТЕНТ */
+.protocol-level {
+  font-size:12px;
+  color:var(--accent-orange);
+  margin-bottom:10px;
+}
+.protocol-content ol {
+  padding-left:20px;
+}
+.protocol-content li {
+  margin-bottom:10px;
+  color:#b0c4de;
+}
+</style>
+
+<!-- МОДАЛЬНОЕ ОКНО -->
+<div id="protocol-modal">
+  <div id="protocol-box">
+    <div id="protocol-close">✕</div>
+    <div id="protocol-body"></div>
+  </div>
+</div>
+
+<script>
+/* ================= ДАННЫЕ (ПСЕВДО-БД) ================= */
+const PROTOCOL_DB = {
+  virus: {
+    title: "Обнаружение вредоносного ПО",
+    level: "КРИТИЧЕСКИЙ",
+    stages: [
+      {
+        name: "Немедленные действия",
+        steps: [
+          "Отключить устройство от сети",
+          "Не запускать программы",
+          "Зафиксировать признаки заражения"
+        ]
+      },
+      {
+        name: "Уведомление",
+        steps: [
+          "Сообщить ответственному за ИБ",
+          "Не предпринимать самостоятельных действий"
+        ]
+      },
+      {
+        name: "Восстановление",
+        steps: [
+          "Провести антивирусную проверку",
+          "Восстановить данные из резервной копии"
+        ]
+      }
+    ]
+  },
+
+  phishing: {
+    title: "Фишинговая атака",
+    level: "ВЫСОКИЙ",
+    stages: [
+      {
+        name: "Распознавание",
+        steps: [
+          "Проверить адрес отправителя",
+          "Оценить содержание сообщения"
+        ]
+      },
+      {
+        name: "Реакция",
+        steps: [
+          "Не переходить по ссылкам",
+          "Не вводить данные"
+        ]
+      },
+      {
+        name: "Сообщение",
+        steps: [
+          "Передать информацию в службу безопасности",
+          "Удалить сообщение"
+        ]
+      }
+    ]
+  }
+};
+
+/* ================= UI ЛОГИКА ================= */
+const modal = document.getElementById('protocol-modal');
+const body = document.getElementById('protocol-body');
+document.getElementById('protocol-close').onclick = () => modal.style.display = 'none';
+
+function openProtocol(id) {
+  const p = PROTOCOL_DB[id];
+  if (!p) return;
+
+  body.innerHTML = `
+    <h2>${p.title}</h2>
+    <div class="protocol-level">Уровень угрозы: ${p.level}</div>
+    <div class="protocol-tabs">
+      ${p.stages.map((s,i)=>`
+        <button class="protocol-tab ${i===0?'active':''}" data-i="${i}">
+          ${s.name}
+        </button>
+      `).join('')}
+    </div>
+    <div class="protocol-content"></div>
+  `;
+
+  modal.style.display = 'flex';
+  loadStage(p,0);
+
+  body.querySelectorAll('.protocol-tab').forEach(tab=>{
+    tab.onclick = ()=>{
+      body.querySelectorAll('.protocol-tab').forEach(t=>t.classList.remove('active'));
+      tab.classList.add('active');
+      loadStage(p, tab.dataset.i);
+    };
+  });
+}
+
+function loadStage(protocol, index) {
+  const stage = protocol.stages[index];
+  body.querySelector('.protocol-content').innerHTML = `
+    <ol>${stage.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
+  `;
+}
+
+/* ================= ПРИВЯЗКА К КНОПКАМ ================= */
+document.querySelectorAll('.card.virus .action-link')
+  .forEach(a => a.onclick = e => { e.preventDefault(); openProtocol('virus'); });
+
+document.querySelectorAll('.card.phishing .action-link')
+  .forEach(a => a.onclick = e => { e.preventDefault(); openProtocol('phishing'); });
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  const protocolModal = document.getElementById('protocol-modal');
+  const protocolBody  = document.getElementById('protocol-body');
+  const protocolClose = document.getElementById('protocol-close');
+
+  if (!protocolModal) return;
+
+  const PROTOCOL_DB = {
+    virus: {
+      title: "Обнаружение вредоносного ПО",
+      level: "КРИТИЧЕСКИЙ",
+      stages: [
+        { name: "Немедленные действия", steps: [
+          "Отключить устройство от сети",
+          "Не запускать программы",
+          "Зафиксировать признаки заражения"
+        ]},
+        { name: "Уведомление", steps: [
+          "Сообщить ответственному за ИБ",
+          "Не предпринимать самостоятельных действий"
+        ]},
+        { name: "Восстановление", steps: [
+          "Провести антивирусную проверку",
+          "Восстановить данные из резервной копии"
+        ]}
+      ]
+    },
+
+    phishing: {
+      title: "Фишинговая атака",
+      level: "ВЫСОКИЙ",
+      stages: [
+        { name: "Распознавание", steps: [
+          "Проверить адрес отправителя",
+          "Оценить содержание сообщения"
+        ]},
+        { name: "Реакция", steps: [
+          "Не переходить по ссылкам",
+          "Не вводить данные"
+        ]},
+        { name: "Сообщение", steps: [
+          "Передать информацию в службу безопасности",
+          "Удалить сообщение"
+        ]}
+      ]
+    }
+  };
+
+  function openProtocol(id) {
+    const p = PROTOCOL_DB[id];
+    if (!p) return;
+
+    protocolBody.innerHTML = `
+      <h2>${p.title}</h2>
+      <div class="protocol-level">Уровень угрозы: ${p.level}</div>
+      <div class="protocol-tabs">
+        ${p.stages.map((s,i)=>`
+          <button class="protocol-tab ${i===0?'active':''}" data-i="${i}">
+            ${s.name}
+          </button>`).join('')}
+      </div>
+      <div class="protocol-content"></div>
+    `;
+
+    protocolModal.style.display = 'flex';
+    loadStage(p,0);
+
+    protocolBody.querySelectorAll('.protocol-tab').forEach(tab=>{
+      tab.onclick = ()=>{
+        protocolBody.querySelectorAll('.protocol-tab')
+          .forEach(t=>t.classList.remove('active'));
+        tab.classList.add('active');
+        loadStage(p, tab.dataset.i);
+      };
+    });
+  }
+
+  function loadStage(protocol, index) {
+    const stage = protocol.stages[index];
+    protocolBody.querySelector('.protocol-content').innerHTML =
+      <ol>${stage.steps.map(s=>`<li>${s}</li>`).join('')}</ol>;
+  }
+
+  protocolClose.onclick = () => protocolModal.style.display = 'none';
+
+  document.querySelectorAll('.card.virus .action-link')
+    .forEach(a => a.onclick = e => { e.preventDefault(); openProtocol('virus'); });
+
+  document.querySelectorAll('.card.phishing .action-link')
+    .forEach(a => a.onclick = e => { e.preventDefault(); openProtocol('phishing'); });
+
+});
+</script>
+</body>
+</html>
