@@ -1,0 +1,531 @@
+/* --- ОСНОВНЫЕ ПЕРЕМЕННЫЕ --- */
+        :root {
+            --bg-dark: #0A1221;
+            --bg-card: #0F192B; /* Темно-синий фон карточек */
+            --accent-orange: #FF5722;
+            --accent-blue: #00BCD4;
+            --text-main: #FFFFFF;
+            --text-muted: #8FA3BF;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --grid-line: rgba(0, 188, 212, 0.05);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.5;
+            background-image: 
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1400px; /* Увеличил ширину для вместимости 4 видео */
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        
+        /* --- HEADER --- */
+        header {
+            text-align: center;
+            padding: 80px 0 60px;
+        }
+
+        .logo-shield {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            border: 2px solid var(--accent-orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(255, 87, 34, 0.2);
+        }
+
+        .logo-shield i { font-style: normal; font-size: 36px; color: var(--accent-orange); font-weight: bold; }
+
+        .sub-title {
+            color: var(--accent-blue);
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        h1.main-title {
+            font-size: 56px;
+            font-weight: 700;
+            margin: 0;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        
+        h1.main-title span { color: var(--accent-blue); }
+
+        .mission-text {
+            margin-top: 20px;
+            color: var(--text-muted);
+            font-size: 14px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            border-top: 2px solid var(--accent-orange);
+            padding-top: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        section { margin-bottom: 100px; }
+        
+        .section-header {
+            margin-bottom: 40px;
+            border-left: 4px solid var(--accent-blue);
+            padding-left: 20px;
+        }
+
+        /* --- КАРТОЧКИ УГРОЗ (Emergency) --- */
+        .emergency-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 40px 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .card-title { font-size: 22px; font-family: 'Oswald'; }
+        .card-text { font-size: 14px; color: var(--text-muted); margin-bottom: 30px; min-height: 65px; }
+
+        .action-link {
+            font-size: 12px; font-weight: 700; text-transform: uppercase; display: inline-flex; align-items: center;
+        }
+        .action-link::after { content: '›'; margin-left: 5px; font-size: 16px; }
+
+        .card.virus { border-left: 4px solid var(--accent-orange); }
+        .card.virus .action-link { color: var(--accent-orange); }
+        
+        .card.phishing { border-left: 4px solid var(--accent-blue); }
+        .card.phishing .action-link { color: var(--accent-blue); }
+
+        .card.leak { border-left: 4px solid white; }
+        .card.leak .action-link { color: white; }
+
+        /* --- ИСПРАВЛЕННЫЙ КАЛЕНДАРЬ --- */
+        .calendar-wrapper {
+            display: flex; /* Используем Flex для жесткого разделения */
+            gap: 0; /* Убираем отступы, чтобы они смыкались как на макете */
+            align-items: flex-start;
+        }
+
+        .date-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 120px); /* Два столбца фиксированной ширины */
+            grid-auto-rows: 120px;
+            gap: 5px;
+            margin-right: 20px; /* Отступ до информационной панели */
+        }
+
+        .date-box {
+            border: 1px solid var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Oswald';
+            font-size: 24px;
+            cursor: pointer;
+            transition: 0.2s;
+            background: rgba(255,255,255,0.02);
+            color: var(--text-muted);
+        }
+
+        .date-box:hover { background: rgba(255,255,255,0.1); }
+        
+        .date-box.active { 
+            background: var(--accent-orange); 
+            border-color: var(--accent-orange); 
+            color: white; 
+            /* Эффект, чтобы активный элемент выделялся */
+            box-shadow: 0 0 15px rgba(255, 87, 34, 0.4);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Панель деталей (стиль WannaCry с макета) */
+        .incident-details {
+            flex-grow: 1; /* Занимает всё оставшееся место */
+            background: #111b2e; /* Чуть темнее фон */
+            padding: 40px;
+            border-top: 1px solid var(--border-color);
+            position: relative;
+            min-height: 370px; /* Высота под два ряда кубиков + отступы */
+        }
+
+        /* Декор в углу панели */
+        .incident-details::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 0; height: 0;
+            border-style: solid;
+            border-width: 0 50px 50px 0;
+            border-color: transparent #1a263d transparent transparent;
+        }
+
+        .threat-tag {
+            border: 1px solid var(--accent-orange);
+            color: var(--accent-orange);
+            font-size: 11px;
+            padding: 4px 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .incident-date {
+            float: right;
+            font-family: 'Oswald';
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .incident-title {
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: white;
+            font-weight: 500;
+        }
+
+        .incident-content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .info-block h3 {
+            color: var(--accent-blue);
+            font-size: 12px;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+        
+        .info-block p, .info-block li {
+            font-size: 14px;
+            color: #b0c4de;
+            line-height: 1.6;
+        }
+
+        .measures-box {
+            background: rgba(0, 188, 212, 0.05); /* Легкий фон для мер */
+            padding: 20px;
+            border-left: 2px solid var(--accent-blue);
+        }
+
+        .measures-box ul { list-style: none; }
+        .measures-box li { position: relative; padding-left: 15px; margin-bottom: 10px; }
+        .measures-box li::before { content: '>'; position: absolute; left: 0; color: var(--accent-blue); font-weight: bold;}
+
+
+        /* --- НОВЫЙ РАЗДЕЛ: УЧЕБНЫЙ КЛАСС (ВИДЕО) --- */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Ровно 4 видео в ряд */
+            gap: 25px;
+        }
+
+        .video-card {
+            cursor: pointer;
+            group: video;
+        }
+
+        /* Имитация плеера */
+        .video-thumb {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background-color: #000;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            transition: border-color 0.3s;
+        }
+
+        .video-card:hover .video-thumb {
+            border-color: var(--accent-blue);
+        }
+
+        /* Кнопка Play */
+        .play-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s, background 0.3s;
+        }
+        
+        .play-btn::after {
+            content: '';
+            display: block;
+            width: 0; height: 0;
+            border-style: solid;
+            border-width: 7px 0 7px 12px;
+            border-color: transparent transparent transparent white;
+            margin-left: 4px; /* Визуальная центровка треугольника */
+        }
+
+        .video-card:hover .play-btn {
+            transform: scale(1.1);
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Таймкод в углу */
+        .video-time {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            font-size: 11px;
+            padding: 2px 6px;
+            font-weight: bold;
+        }
+
+        .video-title {
+            font-family: 'Roboto';
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 1.3;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        .video-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+
+        /* --- ОСТАЛЬНЫЕ БЛОКИ --- */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .game-card {
+            background: #0d1424;
+            padding: 40px 30px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .game-icon { font-size: 40px; margin-bottom: 20px; color: var(--text-muted); }
+        
+        .game-btn {
+            display: block; width: 100%; padding: 12px; margin-top: 25px;
+            background: transparent; border: 1px solid var(--accent-blue);
+            color: var(--accent-blue); text-transform: uppercase;
+            font-size: 12px; letter-spacing: 1px; cursor: pointer; transition: 0.3s;
+        }
+        .game-btn:hover { background: var(--accent-blue); color: #000; }
+        
+        /* Сводка */
+        .news-wrapper {
+            background: var(--bg-card);
+            padding: 0;
+            border: 1px solid var(--border-color);
+        }
+        
+        .news-item {
+            padding: 25px 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .news-item:last-child { border-bottom: none; }
+
+        .news-meta { font-size: 11px; margin-bottom: 8px; font-family: 'Oswald'; letter-spacing: 1px; }
+        .tag { margin-right: 10px; font-weight: bold; }
+        .tag.urgent { color: var(--accent-orange); }
+        .tag.report { color: #4CAF50; }
+        
+        .news-title { font-size: 20px; font-weight: 500; margin-bottom: 8px; }
+        .news-body { font-size: 14px; color: var(--text-muted); }
+
+        /* FOOTER */
+        footer {
+            background: #050911;
+            padding: 60px 0;
+            border-top: 1px solid var(--border-color);
+            font-size: 13px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer-col h4 { margin-bottom: 25px; color: white; font-size: 14px; }
+        .footer-links li { list-style: none; margin-bottom: 12px; color: var(--text-muted); }
+        .footer-links a:hover { color: var(--accent-blue); }
+
+        .status-dot {
+            display: inline-block; width: 8px; height: 8px;
+            background: #4CAF50; border-radius: 50%;
+            margin-right: 10px; box-shadow: 0 0 5px #4CAF50;
+        }
+
+        @media (max-width: 1024px) {
+            .emergency-grid, .games-grid, .video-grid { grid-template-columns: repeat(2, 1fr); }
+            .calendar-wrapper { flex-direction: column; }
+            .date-grid { grid-template-columns: repeat(6, 1fr); margin-bottom: 20px; width: 100%; }
+        }
+
+        /* МОДАЛЬНОЕ ОКНО */
+#protocol-modal {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.85);
+  z-index:10000;
+  align-items:center;
+  justify-content:center;
+}
+#protocol-box {
+  background:#0F192B;
+  max-width:900px;
+  width:90%;
+  padding:30px;
+  border:1px solid rgba(255,255,255,0.2);
+  position:relative;
+}
+#protocol-close {
+  position:absolute;
+  top:10px;
+  right:15px;
+  cursor:pointer;
+  font-size:20px;
+}
+
+/* ВКЛАДКИ */
+.protocol-tabs {
+  display:flex;
+  gap:10px;
+  margin:20px 0;
+  flex-wrap:wrap;
+}
+.protocol-tab {
+  border:1px solid var(--accent-blue);
+  color:var(--accent-blue);
+  padding:6px 14px;
+  font-size:12px;
+  cursor:pointer;
+  background:none;
+}
+.protocol-tab.active {
+  background:var(--accent-blue);
+  color:#000;
+}
+
+/* КОНТЕНТ */
+.protocol-level {
+  font-size:12px;
+  color:var(--accent-orange);
+  margin-bottom:10px;
+}
+.protocol-content ol {
+  padding-left:20px;
+}
+.protocol-content li {
+  margin-bottom:10px;
+  color:#b0c4de;
+}
+
+#content-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-box {
+  background: #0F192B;
+  width: 90%;
+  max-width: 900px;
+  padding: 30px;
+  border: 1px solid rgba(255,255,255,0.2);
+  position: relative;
+}
+
+.content-close {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 20px;
+}
+.library-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.library-video {
+  cursor: pointer;
+}
+
+.library-video .video-thumb {
+  margin-bottom: 10px;
+}
+
+.library-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:30px;
+}
+
+.library-header h2 {
+  margin:0;
+}
+/* ===== МОДАЛЬНОЕ ОКНО БИБЛИОТЕКИ ===== */
+#library-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  z-index: 10002;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
