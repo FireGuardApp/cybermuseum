@@ -529,7 +529,9 @@
                     <h2>УЧЕБНЫЙ КЛАСС</h2>
                     <p style="font-size:13px; color:var(--text-muted)">Видеоинструктажи и методические материалы.</p>
                 </div>
-                <a href="#" class="action-link" style="color:var(--accent-blue); border:1px solid var(--accent-blue); padding: 5px 15px;">ВСЯ БИБЛИОТЕКА</a>
+                <a href="#" id="open-library" class="action-link"
+   style="color:var(--accent-blue); border:1px solid var(--accent-blue); padding: 5px 15px;"> 
+   ВСЯ БИБЛИОТЕКА</a>
             </div>
 
             <div class="video-grid">
@@ -694,6 +696,57 @@
   margin-bottom:10px;
   color:#b0c4de;
 }
+
+#content-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-box {
+  background: #0F192B;
+  width: 90%;
+  max-width: 900px;
+  padding: 30px;
+  border: 1px solid rgba(255,255,255,0.2);
+  position: relative;
+}
+
+.content-close {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 20px;
+}
+.library-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.library-video {
+  cursor: pointer;
+}
+
+.library-video .video-thumb {
+  margin-bottom: 10px;
+}
+
+.library-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:30px;
+}
+
+.library-header h2 {
+  margin:0;
+}
 </style>
 
 <!-- МОДАЛЬНОЕ ОКНО -->
@@ -701,6 +754,21 @@
   <div id="protocol-box">
     <div id="protocol-close">✕</div>
     <div id="protocol-body"></div>
+  </div>
+</div>
+
+<!-- ===== МОДАЛЬНОЕ ОКНО КОНТЕНТА ===== -->
+<div id="content-modal" style="display:none;">
+  <div class="content-box">
+    <div class="content-close">✕</div>
+    <div id="content-body"></div>
+  </div>
+</div>
+<!-- ===== МОДАЛЬНОЕ ОКНО БИБЛИОТЕКИ ===== -->
+<div id="library-modal" style="display:none;">
+  <div class="content-box" style="max-width:1100px;">
+    <div class="content-close" id="library-close">✕</div>
+    <div id="library-body"></div>
   </div>
 </div>
 
@@ -762,6 +830,20 @@ const PROTOCOL_DB = {
         ]
       }
     ]
+  },
+
+
+  leak: {
+    title: "Утечка данных",
+    level: "СРЕДНИЙ",
+    stages: [
+      { name: "Идентификация", steps: 
+      ["Определить источник утечки", "Проанализировать масштабы"] },
+      { name: "Реагирование", steps: 
+      ["Сменить пароли на всех сервисах", "Включить двухфакторную аутентификацию"] },
+      { name: "Мониторинг", steps: 
+      ["Проверить кредитную историю", "Отслеживать подозрительные действия"] }
+    ] 
   }
 };
 
@@ -812,8 +894,253 @@ document.querySelectorAll('.card.virus .action-link')
 
 document.querySelectorAll('.card.phishing .action-link')
   .forEach(a => a.onclick = e => { e.preventDefault(); openProtocol('phishing'); });
+
+document.querySelectorAll('.card.leak .action-link')
+  .forEach(a => a.onclick = e => { e.preventDefault(); openProtocol('phishing'); });
+  
+
+  // ==================== ВИДЕО-КАРТОЧКИ ====================
+document.querySelectorAll('.video-card').forEach(v=>{
+  v.onclick = ()=>{
+    const title = v.querySelector('.video-title').innerText;
+    const time = v.querySelector('.video-time').innerText;
+    alert(`Сейчас запущено видео: "${title}"\nДлительность: ${time}`);
+    // Здесь можно заменить alert на реальный модальный плеер
+  }
+});
+
+// ==================== КНОПКИ ИГР ====================
+document.querySelectorAll('.game-btn').forEach(btn => {
+  btn.onclick = () => {
+    const game = btn.closest('.game-card').querySelector('h3').innerText;
+
+    contentBody.innerHTML = `
+      <h2>${game}</h2>
+      <p style="color:#8FA3BF; margin:15px 0;">
+        Учебный симулятор запускается в изолированной среде.
+      </p>
+
+      <div style="padding:20px; border:1px dashed #00BCD4; text-align:center;">
+        ▶ Игровой модуль
+      </div>
+    `;
+    contentModal.style.display = 'flex';
+  };
+});
+
+const contentModal = document.getElementById('content-modal');
+const contentBody  = document.getElementById('content-body');
+
+document.querySelector('.content-close').onclick = () => {
+  contentModal.style.display = 'none';
+  contentBody.innerHTML = '';
+};
+
+document.querySelectorAll('.video-card').forEach(card => {
+  card.onclick = () => {
+    const title = card.querySelector('.video-title').innerText;
+    const time  = card.querySelector('.video-time').innerText;
+
+    contentBody.innerHTML = `
+      <h2 style="margin-bottom:15px;">${title}</h2>
+      <p style="color:#8FA3BF; margin-bottom:15px;">Длительность: ${time}</p>
+
+      <div style="aspect-ratio:16/9; background:#000; display:flex; align-items:center; justify-content:center;">
+        <div style="color:#8FA3BF;">▶ Здесь будет видеоплеер</div>
+      </div>
+    `;
+    contentModal.style.display = 'flex';
+  };
+});
+
+
+const INCIDENT_DB = {
+  "01": {
+    date: "2016-10-21 | GMT+3 09:00",
+    level: "3 (СРЕДНИЙ)",
+    title: "АТАКА НА DNS-ПРОВАЙДЕРА DYNS",
+    description: `
+      Массовая DDoS-атака с использованием ботнета Mirai.
+      Были нарушены работы Twitter, GitHub, Netflix.
+    `,
+    vectors: [
+      "IoT-устройства с дефолтными паролями",
+      "Ботнет Mirai"
+    ],
+    measures: [
+      "Фильтрация трафика",
+      "Ограничение IoT-устройств"
+    ]
+  },
+
+  "02": {
+    date: "2017-03-07 | GMT+3 11:20",
+    level: "4 (ВЫСОКИЙ)",
+    title: "БАНКОВСКИЙ ТРОЯН LOCKY",
+    description: `
+      Распространение вредоносного ПО через вложения электронной почты.
+      Заражены корпоративные сети.
+    `,
+    vectors: [
+      "Фишинговые письма",
+      "Макросы Office"
+    ],
+    measures: [
+      "Блокировка вложений",
+      "Обучение персонала"
+    ]
+  },
+
+  "03": {
+    date: "2017-05-12 | GMT+3 14:00",
+    level: "5 (КРИТИЧЕСКИЙ)",
+    title: "ВЫМОГАТЕЛЬ WANNACRY",
+    description: `
+      Сетевой червь, использующий уязвимость EternalBlue.
+      Автоматическое распространение по сети.
+    `,
+    vectors: [
+      "Эксплойт SMB EternalBlue",
+      "Фишинговые рассылки"
+    ],
+    measures: [
+      "Патч MS17-010",
+      "Блокировка портов 139 и 445"
+    ]
+  },
+
+  "04": {
+    date: "2018-06-27 | GMT+3 10:00",
+    level: "4 (ВЫСОКИЙ)",
+    title: "NOTPETYA (PETYA.A)",
+    description: `
+      Маскировался под обновление бухгалтерского ПО.
+      Привёл к остановке предприятий.
+    `,
+    vectors: [
+      "Supply Chain",
+      "Обновления ПО"
+    ],
+    measures: [
+      "Контроль обновлений",
+      "Изоляция сегментов сети"
+    ]
+  }
+};
+
+function renderIncident(day) {
+  const data = INCIDENT_DB[day];
+  if (!data) return;
+
+  const details = document.querySelector('.incident-details');
+
+  details.innerHTML = `
+    <div class="incident-date">DATE: ${data.date}</div>
+    <div class="threat-tag">УРОВЕНЬ УГРОЗЫ: ${data.level}</div>
+
+    <h2 class="incident-title">${data.title}</h2>
+
+    <div class="incident-content-grid">
+      <div class="info-block">
+        <h3>ОПИСАНИЕ УГРОЗЫ</h3>
+        <p>${data.description}</p>
+
+        <h3 style="margin-top:20px;">ВЕКТОР АТАКИ</h3>
+        <ul style="list-style:none; padding:0;">
+          ${data.vectors.map(v => `<li style="color:var(--accent-orange)">> ${v}</li>`).join('')}
+        </ul>
+      </div>
+
+      <div class="measures-box">
+        <h3 style="color:white; margin-bottom:15px;">ПРИНЯТЫЕ МЕРЫ</h3>
+        <ul>
+          ${data.measures.map(m => `<li>${m}</li>`).join('')}
+        </ul>
+      </div>
+    </div>
+  `;
+}
+document.querySelectorAll('.date-box').forEach(box => {
+  box.addEventListener('click', () => {
+
+    // активный класс
+    document.querySelectorAll('.date-box')
+      .forEach(b => b.classList.remove('active'));
+
+    box.classList.add('active');
+
+    // номер дня
+    const day = box.textContent.trim().padStart(2, '0');
+
+    renderIncident(day);
+  });
+});
+
+const VIDEO_LIBRARY = [
+  { id:1, title:"Алгоритм действий при звонке мошенника", time:"04:30", tag:"Инструктаж №104" },
+  { id:2, title:"Как опознать фейковый сайт госуслуг", time:"06:15", tag:"Инструктаж №105" },
+  { id:3, title:"Инструктаж по настройке приватности", time:"03:45", tag:"Инструктаж №106" },
+  { id:4, title:"Памятка по созданию стойкого пароля", time:"02:20", tag:"Инструктаж №107" },
+  { id:5, title:"Что делать при утечке данных", time:"05:10", tag:"Методика №201" },
+  { id:6, title:"Безопасность мобильных устройств", time:"07:00", tag:"Методика №202" }
+];
+const libraryModal = document.getElementById('library-modal');
+const libraryBody  = document.getElementById('library-body');
+
+document.getElementById('library-close').onclick = () => {
+  libraryModal.style.display = 'none';
+};
+
+function openLibrary() {
+  libraryBody.innerHTML = `
+    <div class="library-header">
+      <h2>ВИДЕОБИБЛИОТЕКА</h2>
+      <span style="color:#8FA3BF;">Всего: ${VIDEO_LIBRARY.length}</span>
+    </div>
+
+    <div class="library-grid">
+      ${VIDEO_LIBRARY.map(v => `
+        <div class="library-video" data-id="${v.id}">
+          <div class="video-thumb">
+            <div class="play-btn"></div>
+            <div class="video-time">${v.time}</div>
+          </div>
+          <div class="video-title">${v.title}</div>
+          <div class="video-meta">${v.tag}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  libraryModal.style.display = 'flex';
+
+  libraryBody.querySelectorAll('.library-video').forEach(card => {
+    card.onclick = () => openVideo(card.dataset.id);
+  });
+}
+function openVideo(id) {
+  const video = VIDEO_LIBRARY.find(v => v.id == id);
+  if (!video) return;
+
+  contentBody.innerHTML = `
+    <h2>${video.title}</h2>
+    <p style="color:#8FA3BF; margin-bottom:15px;">${video.tag} · ${video.time}</p>
+
+    <div style="aspect-ratio:16/9; background:#000; display:flex; align-items:center; justify-content:center;">
+      ▶ Здесь будет видеоплеер
+    </div>
+  `;
+
+  libraryModal.style.display = 'none';
+  contentModal.style.display = 'flex';
+}
+
+document.getElementById('open-library').addEventListener('click', e => {
+  e.preventDefault();
+  openLibrary();
+});
+
 </script>
 
 </body>
-
 </html>
