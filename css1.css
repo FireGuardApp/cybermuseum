@@ -1,3 +1,29 @@
+/* ================= ТОП-БАР ================= */
+.top-bar {
+    width: 100%;
+    background-color: #050911; /* тёмный фон */
+    color:  #00BCD4;           /* белый текст */
+    font-size: 25px;
+    font-weight: 500;
+    padding: 25px 0;
+    text-align:left;
+    position: fixed;          /* фиксируем сверху */
+    top: 0;
+    left: 0;
+    z-index: 9999;            /* чтобы было поверх всего */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+/* чтобы основной контент не прятался под фиксированным топ-баром */
+body {
+    padding-top: 100px; /* подстрой под высоту топ-бара */
+}
+
+.top-bar-container {
+    max-width: 1200px; /* можно под размер сайта */
+    margin: 0 auto;
+    padding: 0 15px;
+}
 /* --- ОСНОВНЫЕ ПЕРЕМЕННЫЕ --- */
         :root {
             --bg-dark: #0A1221;
@@ -528,4 +554,5 @@
   display: none;
   align-items: center;
   justify-content: center;
+
 }
