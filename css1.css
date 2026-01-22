@@ -11,7 +11,7 @@
     position: fixed;          /* фиксируем сверху */
     top: 0;
     left: 0;
-    z-index: 9999;            /* чтобы было поверх всего */
+    z-index: 10;            /* чтобы было поверх всего */
     box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
@@ -99,6 +99,19 @@ body {
   }
 }
 
+/* === Скрываем бургер-меню по умолчанию на ПК === */
+.burger-menu,
+.burger-overlay {
+  display: none;
+}
+
+/* === Показываем бургер и overlay только на мобильных === */
+@media (min-width: 1024px) {
+  .burger {
+    display: none; /* кнопка бургер */
+    z-index: 10000; /* чтобы быть над шапкой */
+  }
+
 /* ===== МЕНЮ ===== */
 .burger-menu {
   position: fixed;
@@ -111,8 +124,9 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  transform: translateX(100%);
   transition: right 0.3s ease;
-  z-index: 1002;
+  z-index: 9999;
 }
 
 .burger-menu a {
@@ -124,6 +138,7 @@ body {
 }
 
 .burger-menu.active {
+    transform: translateX(0);
   right: 0;
 }
 
@@ -133,11 +148,12 @@ body {
   inset: 0;
   background: rgba(0,0,0,0.5);
   display: none;
-  z-index: 1000;
+  z-index: 9998;
 }
 
 .burger-overlay.active {
   display: block;
+}
 }
 
 /* --- ОСНОВНЫЕ ПЕРЕМЕННЫЕ --- */
