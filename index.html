@@ -728,18 +728,36 @@ document.querySelectorAll('.top-nav--bar a').forEach(link => {
 
     /* 🎮 КИБЕРПОЛИГОН */
     if (action === 'games') {
+  contentBody.innerHTML = `
+    <h2>КИБЕРПОЛИГОН</h2>
+    <p style="color:#8FA3BF; margin-bottom:15px;">
+      Общая библиотека тренировочных симуляторов
+    </p>
+    <div class="games-grid">
+      ${document.querySelector('.games-grid').innerHTML}
+    </div>
+  `;
+  contentModal.style.display = 'flex';
+
+  // Привязываем кнопки внутри модального окна
+  contentBody.querySelectorAll('.game-btn').forEach(btn => {
+    btn.onclick = () => {
+      const game = btn.closest('.game-card').querySelector('h3').innerText;
+
       contentBody.innerHTML = `
-        <h2>КИБЕРПОЛИГОН</h2>
-        <p style="color:#8FA3BF; margin-bottom:15px;">
-          Общая библиотека тренировочных симуляторов
+        <h2>${game}</h2>
+        <p style="color:#8FA3BF; margin:15px 0;">
+          Учебный симулятор запускается в изолированной среде.
         </p>
-        <div class="games-grid">
-          ${document.querySelector('.games-grid').innerHTML}
+
+        <div style="padding:20px; border:1px dashed #00BCD4; text-align:center;">
+          ▶ Игровой модуль
         </div>
       `;
-      contentModal.style.display = 'flex';
-      return;
-    }
+    };
+  });
+}
+     
 
     /* 📰 ОПЕРАТИВНАЯ СВОДКА */
     if (action === 'summary') {
