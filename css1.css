@@ -1,3 +1,4 @@
+
 /* ================= ТОП-БАР ================= */
 .top-bar {
     width: 100%;
@@ -24,6 +25,121 @@ body {
     margin: 0 auto;
     padding: 0 15px;
 }
+
+/* ===== БУРГЕР ===== */
+.burger {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 30px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.burger span {
+  display: block;
+  height: 3px;
+  background: #00BCD4;
+  margin: 6px 0;
+  transition: 0.3s;
+}
+
+/* ===== TOP BAR С МЕНЮ ===== */
+.top-bar-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top-bar-title {
+   text-transform: uppercase;     /* КАПС */
+  font-size: 18px;               /* больше */
+  font-weight: 600;
+  letter-spacing: 1.2px;         /* как у вкладок */
+}
+
+/* меню справа */
+.top-nav--bar {
+  display: flex;
+  gap: 25px;
+}
+
+.top-nav--bar a {
+  font-size: 12px;
+  color: #8FA3BF;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.top-nav--bar a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: #00BCD4;
+  transition: 0.3s;
+}
+
+.top-nav--bar a:hover {
+  color: #EAF2FF;
+}
+
+.top-nav--bar a:hover::after {
+  width: 100%;
+}
+
+/* 📱 ТЕЛЕФОН — ТОЛЬКО ТЕКСТ */
+@media (max-width: 768px) {
+  .top-nav--bar {
+    display: none;
+  }
+}
+
+/* ===== МЕНЮ ===== */
+.burger-menu {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 320px;
+  height: 100%;
+  background: #0B1220;
+  padding: 80px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: right 0.3s ease;
+  z-index: 1002;
+}
+
+.burger-menu a {
+  color: #EAF2FF;
+  text-decoration: none;
+  font-size: 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 10px;
+}
+
+.burger-menu.active {
+  right: 0;
+}
+
+/* затемнение */
+.burger-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  z-index: 1000;
+}
+
+.burger-overlay.active {
+  display: block;
+}
+
 /* --- ОСНОВНЫЕ ПЕРЕМЕННЫЕ --- */
         :root {
             --bg-dark: #0A1221;
@@ -73,6 +189,7 @@ body {
             width: 70px;
             height: 70px;
             margin: 0 auto 20px;
+            margin-top: 20px;
             border: 2px solid var(--accent-orange);
             border-radius: 50%;
             display: flex;
@@ -81,7 +198,12 @@ body {
             box-shadow: 0 0 20px rgba(255, 87, 34, 0.2);
         }
 
-        .logo-shield i { font-style: normal; font-size: 36px; color: var(--accent-orange); font-weight: bold; }
+        .logo-shield i { 
+            font-style: normal; 
+            font-size: 36px;
+             color: var(--accent-orange);
+            font-weight: bold;
+         }
 
         .sub-title {
             color: var(--accent-blue);
@@ -435,124 +557,74 @@ body {
             .date-grid { grid-template-columns: repeat(6, 1fr); margin-bottom: 20px; width: 100%; }
         }
 
-        /* МОДАЛЬНОЕ ОКНО */
+        /* ===== ОБЩИЕ МОДАЛЬНЫЕ ОКНА (FIX) ===== */
+#content-modal,
+#library-modal,
 #protocol-modal {
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.85);
-  z-index:10000;
-  align-items:center;
-  justify-content:center;
-}
-#protocol-box {
-  background:#0F192B;
-  max-width:900px;
-  width:90%;
-  padding:30px;
-  border:1px solid rgba(255,255,255,0.2);
-  position:relative;
-}
-#protocol-close {
-  position:absolute;
-  top:10px;
-  right:15px;
-  cursor:pointer;
-  font-size:20px;
-}
-
-/* ВКЛАДКИ */
-.protocol-tabs {
-  display:flex;
-  gap:10px;
-  margin:20px 0;
-  flex-wrap:wrap;
-}
-.protocol-tab {
-  border:1px solid var(--accent-blue);
-  color:var(--accent-blue);
-  padding:6px 14px;
-  font-size:12px;
-  cursor:pointer;
-  background:none;
-}
-.protocol-tab.active {
-  background:var(--accent-blue);
-  color:#000;
-}
-
-/* КОНТЕНТ */
-.protocol-level {
-  font-size:12px;
-  color:var(--accent-orange);
-  margin-bottom:10px;
-}
-.protocol-content ol {
-  padding-left:20px;
-}
-.protocol-content li {
-  margin-bottom:10px;
-  color:#b0c4de;
-}
-
-#content-modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.9);
-  z-index: 10001;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 5000;
 }
 
-.content-box {
-  background: #0F192B;
-  width: 90%;
-  max-width: 900px;
-  padding: 30px;
-  border: 1px solid rgba(255,255,255,0.2);
-  position: relative;
+/* коробка контента */
+.content-box,
+#protocol-box {
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
-.content-close {
-  position: absolute;
-  top: 12px;
-  right: 15px;
-  cursor: pointer;
-  font-size: 20px;
-}
-.library-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 25px;
+/* ❌ ЗАПРЕТ СКРОЛЛА СТРАНИЦЫ */
+body.modal-open {
+  overflow: hidden;
 }
 
-.library-video {
-  cursor: pointer;
-}
+/* ===== НАСТОЯЩАЯ OVERLAY-МОДАЛКА ===== */
+#content-modal,
+#library-modal,
+#protocol-modal {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
 
-.library-video .video-thumb {
-  margin-bottom: 10px;
-}
-
-.library-header {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:30px;
-}
-
-.library-header h2 {
-  margin:0;
-}
-/* ===== МОДАЛЬНОЕ ОКНО БИБЛИОТЕКИ ===== */
-#library-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.9);
-  z-index: 10002;
   display: none;
   align-items: center;
   justify-content: center;
 
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 99999 !important;
 }
+
+/* окно */
+.content-box,
+#protocol-box {
+  max-height: 90vh;
+  width: 90%;
+  max-width: 1100px;
+  overflow-y: auto;
+}
+
+/* блокируем прокрутку страницы */
+body.modal-open {
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ===== ОПЕРАТИВНАЯ СВОДКА (НЕПРОЗРАЧНЫЙ ФОН) ===== */
+.summary-modal {
+  background: #0C1320;   /* плотный тёмный */
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 40px rgba(0,0,0,0.8);
+}
+
+/* убираем прозрачность, если была */
+.summary-modal * {
+  backdrop-filter: none !important;
+}
+        
