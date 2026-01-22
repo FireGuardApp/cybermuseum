@@ -9,10 +9,36 @@
 </head>
 <body>
 
-  <div class="top-bar">
-    <div class="top-bar-container">
-        Виртуальный Музей Киберинцидентов
+  <!-- БУРГЕР -->
+<div class="burger" id="burger">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+<!-- МЕНЮ -->
+<nav class="burger-menu" id="burgerMenu">
+  <a href="#" data-action="videos">🎬 Видеобиблиотека</a>
+  <a href="#" data-action="games">🎮 Библиотека игр</a>
+  <a href="#" data-action="training">📚 Учебный класс</a>
+</nav>
+
+<div class="burger-overlay" id="burgerOverlay"></div>
+
+ <div class="top-bar">
+  <div class="top-bar-container top-bar-flex">
+
+    <div class="top-bar-title">
+      Виртуальный Музей Киберинцидентов
     </div>
+
+    <nav class="top-nav top-nav--bar">
+      <a href="#" data-action="videos">Видеобиблиотека</a>
+      <a href="#" data-action="games">Киберполигон</a>
+      <a href="#" data-action="summary">Оперативная сводка</a>
+    </nav>
+
+  </div>
 </div>
     <header class="container">
         <div class="logo-shield"><i>!</i></div>
@@ -614,7 +640,123 @@ document.getElementById('open-library').addEventListener('click', e => {
   openLibrary();
 });
 
+const burger = document.getElementById('burger');
+const menu   = document.getElementById('burgerMenu');
+const overlay = document.getElementById('burgerOverlay');
+
+function closeMenu() {
+  menu.classList.remove('active');
+  overlay.classList.remove('active');
+}
+
+burger.onclick = () => {
+  menu.classList.toggle('active');
+  overlay.classList.toggle('active');
+};
+
+overlay.onclick = closeMenu;
+
+/* пункты меню */
+menu.querySelectorAll('a').forEach(link => {
+  link.onclick = e => {
+    e.preventDefault();
+    const action = link.dataset.action;
+
+    closeMenu();
+
+    if (action === 'videos') {
+      openLibrary();
+    }
+
+    if (action === 'games') {
+      contentBody.innerHTML = `
+        <h2>КИБЕРПОЛИГОН</h2>
+        <p style="color:#8FA3BF; margin-bottom:15px;">
+          Общая библиотека тренировочных симуляторов
+        </p>
+        <div class="games-grid">
+          ${document.querySelector('.games-grid').innerHTML}
+        </div>
+      `;
+      contentModal.style.display = 'flex';
+    }
+
+    if (action === 'training') {
+      openLibrary();
+    }
+  };
+});
+
+document.querySelectorAll('.top-nav a').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+
+    const action = link.dataset.action;
+
+    if (action === 'videos' || action === 'training') {
+      openLibrary();
+    }
+
+    if (action === 'games') {
+      contentBody.innerHTML = `
+        <h2>КИБЕРПОЛИГОН</h2>
+        <p style="color:#8FA3BF; margin-bottom:15px;">
+          Общая библиотека тренировочных симуляторов
+        </p>
+        <div class="games-grid">
+          ${document.querySelector('.games-grid').innerHTML}
+        </div>
+      `;
+      contentModal.style.display = 'flex';
+    }
+  });
+});
+
+/* ================= ЕДИНОЕ ВЕРХНЕЕ МЕНЮ ================= */
+
+document.querySelectorAll('.top-nav--bar a').forEach(link => {
+  link.onclick = e => {
+    e.preventDefault();
+
+    const action = link.dataset.action;
+
+    /* 🎬 ВИДЕОБИБЛИОТЕКА */
+    if (action === 'videos') {
+      openLibrary();
+      return;
+    }
+
+    /* 🎮 КИБЕРПОЛИГОН */
+    if (action === 'games') {
+      contentBody.innerHTML = `
+        <h2>КИБЕРПОЛИГОН</h2>
+        <p style="color:#8FA3BF; margin-bottom:15px;">
+          Общая библиотека тренировочных симуляторов
+        </p>
+        <div class="games-grid">
+          ${document.querySelector('.games-grid').innerHTML}
+        </div>
+      `;
+      contentModal.style.display = 'flex';
+      return;
+    }
+
+    /* 📰 ОПЕРАТИВНАЯ СВОДКА */
+    if (action === 'summary') {
+      contentBody.innerHTML = `
+       <div class="summary-modal">
+        <h2>ОПЕРАТИВНАЯ СВОДКА</h2>
+        ${document.querySelector('.news-wrapper').innerHTML}
+          </div>
+      `;
+      contentModal.style.display = 'flex';
+      document.body.classList.add('modal-open');
+      return;
+    }
+  };
+});
 </script>
+
 
 </body>
 </html>
