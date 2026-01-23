@@ -247,7 +247,7 @@ body {
             margin-right: auto;
             border-top: 2px solid var(--accent-orange);
             padding-top: 15px;
-            padding: 15px;
+            padding: 10px;
             letter-spacing: 0.5px;
         }
 
@@ -645,4 +645,5 @@ body.modal-open {
   backdrop-filter: none !important;
 }
         
+
 
