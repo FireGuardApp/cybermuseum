@@ -18,9 +18,9 @@
 
 <!-- МЕНЮ -->
 <nav class="burger-menu" id="burgerMenu">
-  <a href="#" data-action="videos">🎬 Видеобиблиотека</a>
-  <a href="#" data-action="games">🎮 Библиотека игр</a>
-  <a href="#" data-action="training">📚 Учебный класс</a>
+  <a href="library.html" >🎬 Видеобиблиотека</a>
+  <a href="games.html" >🎮 Библиотека игр</a>
+  <a href="traning.html" >📚 Учебный класс</a>
 </nav>
 
 <div class="burger-overlay" id="burgerOverlay"></div>
@@ -35,7 +35,7 @@
     <nav class="top-nav top-nav--bar">
       <a href="library.html" >Видеобиблиотека</a>
       <a href="games.html" >Киберполигон</a>
-      <a href="summary.html" data-action="summary">Оперативная сводка</a>
+      <a href="summary.html" >Оперативная сводка</a>
     </nav>
 
   </div>
@@ -61,7 +61,7 @@
                 <div class="card phishing">
                     <div class="card-header"><span class="card-title">ФИШИНГ-АТАКА</span><span style="color:var(--accent-blue)">⚡</span></div>
                     <div class="card-text">Не вводите данные карты. Проверьте адресную строку. Сообщите в банк о компрометации карты.</div>
-                    <a href="proocol-phishing.html" class="action-link">ПРОТОКОЛ ДЕЙСТВИЙ</a>
+                    <a href="protocol-phishing.html" class="action-link">ПРОТОКОЛ ДЕЙСТВИЙ</a>
                 </div>
                 <div class="card leak">
                     <div class="card-header"><span class="card-title">УТЕЧКА ДАННЫХ</span><span style="color:white">🔒</span></div>
@@ -126,19 +126,19 @@
                     <div class="game-icon">💣</div>
                     <h3>КИБЕРСАПЁР</h3>
                     <p style="font-size:13px; color:var(--text-muted); margin:15px 0;">Идентификация скрытых угроз. Отличите фишинговые ссылки от легитимных ресурсов.</p>
-                    <button class="game-btn">НАЧАТЬ ТРЕНИРОВКУ</button>
+                    <a href="game-cybersaper.html" class="game-btn">НАЧАТЬ ТРЕНИРОВКУ</a>   
                 </div>
                 <div class="game-card">
                     <div class="game-icon">🧱</div>
                     <h3>АНТИВИРУСНЫЙ ТЕТРИС</h3>
                     <p style="font-size:13px; color:var(--text-muted); margin:15px 0;">Динамическое построение обороны. Блокируйте потоки вредоносного кода правильными патчами.</p>
-                    <button class="game-btn" style="border-color:var(--accent-orange); color:var(--accent-orange)">НАЧАТЬ ТРЕНИРОВКУ</button>
+                    <a href="game-tetris.html" class="game-btn">НАЧАТЬ ТРЕНИРОВКУ</a>
                 </div>
                 <div class="game-card">
                     <div class="game-icon">🕸</div>
                     <h3>ЛАБИРИНТ ФИШИНГА</h3>
                     <p style="font-size:13px; color:var(--text-muted); margin:15px 0;">Текстовый квест. Пройдите через серию социальных манипуляций и сохраните свои средства.</p>
-                    <button class="game-btn">НАЧАТЬ ТРЕНИРОВКУ</button>
+                    <a href="game-phishing.html" class="game-btn">НАЧАТЬ ТРЕНИРОВКУ</a>
                 </div>
             </div>
         </section>
@@ -149,7 +149,7 @@
                     <h2>УЧЕБНЫЙ КЛАСС</h2>
                     <p style="font-size:13px; color:var(--text-muted)">Видеоинструктажи и методические материалы.</p>
                 </div>
-                <a href="#" id="open-library" class="action-link"
+                <a href="library" class="action-link"
    style="color:var(--accent-blue); border:1px solid var(--accent-blue); padding: 5px 15px;"> 
    ВСЯ БИБЛИОТЕКА</a>
             </div>
@@ -425,33 +425,7 @@ document.getElementById('library-close').onclick = () => {
   libraryModal.style.display = 'none';
 };
 
-function openLibrary() {
-  libraryBody.innerHTML = `
-    <div class="library-header">
-      <h2>ВИДЕОБИБЛИОТЕКА</h2>
-      <span style="color:#8FA3BF;">Всего: ${VIDEO_LIBRARY.length}</span>
-    </div>
 
-    <div class="library-grid">
-      ${VIDEO_LIBRARY.map(v => `
-        <div class="library-video" data-id="${v.id}">
-          <div class="video-thumb">
-            <div class="play-btn"></div>
-            <div class="video-time">${v.time}</div>
-          </div>
-          <div class="video-title">${v.title}</div>
-          <div class="video-meta">${v.tag}</div>
-        </div>
-      `).join('')}
-    </div>
-  `;
-
-  libraryModal.style.display = 'flex';
-
-  libraryBody.querySelectorAll('.library-video').forEach(card => {
-    card.onclick = () => openVideo(card.dataset.id);
-  });
-}
 function openVideo(id) {
   const video = VIDEO_LIBRARY.find(v => v.id == id);
   if (!video) return;
@@ -609,6 +583,21 @@ document.querySelectorAll('.top-nav--bar a').forEach(link => {
 });
 </script>
 
+<!-- МОДАЛЬНОЕ ОКНО ДЛЯ КОНТЕНТА (ВИДЕО, ИГРЫ, СВОДКА) -->
+<div id="content-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); justify-content:center; align-items:center; z-index:999;">
+  <div style="background:#1e1e1e; padding:20px; max-width:900px; width:90%; max-height:90%; overflow:auto; position:relative; border-radius:8px;">
+    <span class="content-close" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:24px; color:#fff;">×</span>
+    <div id="content-body"></div>
+  </div>
+</div>
+
+<!-- МОДАЛЬНОЕ ОКНО ДЛЯ БИБЛИОТЕКИ ВИДЕО -->
+<div id="library-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); justify-content:center; align-items:center; z-index:998;">
+  <div style="background:#1e1e1e; padding:20px; max-width:1000px; width:95%; max-height:90%; overflow:auto; position:relative; border-radius:8px;">
+    <span id="library-close" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:24px; color:#fff;">×</span>
+    <div id="library-body"></div>
+  </div>
+</div>
 
 </body>
 </html>
