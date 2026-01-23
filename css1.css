@@ -239,7 +239,7 @@ body {
         h1.main-title span { color: var(--accent-blue); }
 
         .mission-text {
-            margin-top: 20px;
+            margin-top: 10px;
             color: var(--text-muted);
             font-size: 14px;
             max-width: 600px;
@@ -645,3 +645,4 @@ body.modal-open {
   backdrop-filter: none !important;
 }
         
+
