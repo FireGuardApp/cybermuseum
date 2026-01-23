@@ -53,7 +53,7 @@ body {
 
 .top-bar-title {
    text-transform: uppercase;     /* КАПС */
-  font-size: 18px;               /* больше */
+  font-size: 22px;               /* больше */
   font-weight: 600;
   letter-spacing: 1.2px;         /* как у вкладок */
 }
@@ -65,7 +65,7 @@ body {
 }
 
 .top-nav--bar a {
-  font-size: 12px;
+  font-size: 15px;
   color: #8FA3BF;
   text-decoration: none;
   text-transform: uppercase;
@@ -223,7 +223,7 @@ body {
 
         .sub-title {
             color: var(--accent-blue);
-            font-size: 14px;
+            font-size: 20px;
             font-weight: 700;
             margin-bottom: 10px;
             text-transform: uppercase;
@@ -247,6 +247,7 @@ body {
             margin-right: auto;
             border-top: 2px solid var(--accent-orange);
             padding-top: 15px;
+            padding: 15px;
             letter-spacing: 0.5px;
         }
 
@@ -612,7 +613,7 @@ body.modal-open {
   align-items: center;
   justify-content: center;
 
-  background: rgba(0, 0, 0, 0.75);
+  background: #0C1320;
   z-index: 99999 !important;
 }
 
