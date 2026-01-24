@@ -735,18 +735,29 @@ body.modal-open {
   backdrop-filter: none !important;
 }
 
+/* === СЛАЙДЕР === */
 .emergency-slider {
   position: relative;
   display: flex;
   align-items: center;
   margin: 60px 0;
+  overflow: hidden; /* обрезаем лишние карточки */
 }
 
 .emergency-viewport {
   overflow: hidden;
-  position: relative;
   flex: 1;
- width: 90%;
+}
+
+.emergency-track {
+  display: flex;
+  gap: 30px;
+  transition: transform 0.5s ease;
+  will-change: transform;
+}
+
+.emergency-track .card {
+  flex: 0 0 320px;
 }
 
 /* стрелки */
@@ -759,22 +770,14 @@ body.modal-open {
   height: 48px;
   cursor: pointer;
   transition: 0.3s;
-  z-index: 10;
-  
-}
-.slider-arrow.prev {
   position: absolute;
-  left: -60px;  /* слева от слайдера */
   top: 50%;
   transform: translateY(-50%);
+  z-index: 10;
 }
 
-.slider-arrow.next {
-  position: absolute;
-  right: -60px; /* справа от слайдера */
-  top: 50%;
-  transform: translateY(-50%);
-}
+.slider-arrow.prev { left: 10px; }
+.slider-arrow.next { right: 10px; }
 
 .slider-arrow:hover {
   background: var(--accent-blue);
@@ -782,20 +785,46 @@ body.modal-open {
 }
 
 /* лента */
-.emergency-track {
+/* Горизонтальный скролл в emergency-viewport */
+.emergency-viewport {
+  overflow-x: auto;
+  scroll-behavior: smooth;
   display: flex;
-  flex-wrap: nowrap;        /* ❗️ запрещаем перенос */
   gap: 30px;
-  transition: transform 0.5s ease;
-  will-change: transform;
+  width: 100%;
+  
+  /* скрываем стандартный скроллбар в некоторых браузерах */
+  scrollbar-width: thin;           /* Firefox */
+  scrollbar-color: #1a263d transparent; /* Firefox: ползунок и фон */
 }
 
-/* ВСЕ карточки одинаковые */
+/* Webkit-браузеры (Chrome, Safari, Edge) */
+.emergency-viewport::-webkit-scrollbar {
+  height: 6px; /* толщина горизонтального скролла */
+}
+
+.emergency-viewport::-webkit-scrollbar-track {
+  background: transparent; /* прозрачный фон */
+}
+
+.emergency-viewport::-webkit-scrollbar-thumb {
+  background-color: #1a263d; /* темный ползунок */
+  border-radius: 3px;        /* скругление */
+  border: 1px solid rgba(255,255,255,0.1); /* легкая рамка для видимости */
+}
+
+/* Наведение на скроллбар */
+.emergency-viewport::-webkit-scrollbar-thumb:hover {
+  background-color: #00BCD4; /* акцент при наведении */
+}
+/* Трек с карточками */
+.emergency-track {
+  display: flex;
+  flex-wrap: nowrap;       /* запрещаем перенос */
+  gap: 30px;
+}
 .emergency-track .card {
-  flex: 0 0 320px;          /* ❗️ фикс ширина */
- 
-
-
+  flex: 0 0 320px;         /* фиксированная ширина карточки */
 }
 
 /* ================= ТЕСТЫ ================= */
