@@ -61,29 +61,29 @@
                 <div class="card virus">
                     <div class="card-header"><span class="card-title">ОБНАРУЖЕН ВИРУС</span><span style="color:var(--accent-orange)">☣</span></div>
                     <div class="card-text">Немедленно отключите сеть. Не запускайте программы. Сохраните критические файлы на внешний носитель.</div>
-                    <a href="protocol-virus.html" class="action-link">ПРОТОКОЛ ДЕЙСТВИЙ</a>
+                    <a href="#" class="action-link" data-protocol="virus">ПРОТОКОЛ ДЕЙСТВИЙ</a>
                 </div>
                 <div class="card phishing">
                     <div class="card-header"><span class="card-title">ФИШИНГ-АТАКА</span><span style="color:var(--accent-blue)">⚡</span></div>
                     <div class="card-text">Не вводите данные карты. Проверьте адресную строку. Сообщите в банк о компрометации карты.</div>
-                    <a href="protocol-phishing.html" class="action-link">ПРОТОКОЛ ДЕЙСТВИЙ</a>
+                    <a href="#" class="action-link" data-protocol="phishing">ПРОТОКОЛ ДЕЙСТВИЙ</a>
                 </div>
                 <div class="card leak">
                     <div class="card-header"><span class="card-title">УТЕЧКА ДАННЫХ</span><span style="color:white">🔒</span></div>
                     <div class="card-text">Смените пароли на всех ресурсах. Настройте двухфакторную аутентификацию. Проверьте кредитную историю.</div>
-                    <a href="protocol-leak.html" class="action-link">ПРОТОКОЛ ДЕЙСТВИЙ</a>
+                    <a href="#" class="action-link" data-protocol="leak">ПРОТОКОЛ ДЕЙСТВИЙ</a>
                 </div>
 
             <div class="card ddos">
                     <div class="card-header"><span class="card-title">DDOS-АТАКА</span><span style="color:white">🔒</span></div>
                     <div class="card-text">Массовая перегрузка сервиса сетевым трафиком.</div>
-                    <a href="protocol-ddos.html" class="action-link">ПРОТОКОЛ ДЕЙСТВИЙ</a>
+                    <a href="#" class="action-link" data-protocol="ddos">ПРОТОКОЛ ДЕЙСТВИЙ</a>
                 </div>
            
             <div class="card social">
                     <div class="card-header"><span class="card-title">СОЦ. ИНЖЕНЕРИЯ</span><span style="color:white">🔒</span></div>
                     <div class="card-text">Манипуляция пользователями для получения доступа.</div>
-                    <a href="protocol-social.html" class="action-link">ПРОТОКОЛ ДЕЙСТВИЙ</a>
+                   <a href="#" class="action-link" data-protocol="social">ПРОТОКОЛ ДЕЙСТВИЙ</a>
                 </div>
           
 
@@ -264,6 +264,15 @@
         </section>
 
     </div>
+
+
+    <!-- ===== МОДАЛЬНОЕ ОКНО ПРОТОКОЛОВ ===== -->
+<div class="modal-overlay" id="protocolOverlay">
+  <div class="modal-window">
+    <button class="modal-close" id="protocolClose">✕</button>
+    <div class="modal-content" id="protocolContent"></div>
+  </div>
+</div>
 
     <footer>
         <div class="container footer-grid">
@@ -676,6 +685,96 @@ function autoScroll() {
 
 // Запускаем автоскролл каждые 5 секунды
 setInterval(autoScroll, 5000);
+
+const PROTOCOLS = {
+  virus: {
+    title: "ПРОТОКОЛ: ВРЕДОНОСНОЕ ПО",
+    steps: [
+      "Немедленно отключить устройство от сети",
+      "Не перезагружать систему",
+      "Сохранить критические данные на внешний носитель",
+      "Просканировать систему в безопасном режиме",
+      "Сообщить в ИБ-отдел или специалисту"
+    ]
+  },
+
+  phishing: {
+    title: "ПРОТОКОЛ: ФИШИНГ-АТАКА",
+    steps: [
+      "Не переходить по ссылке",
+      "Не вводить персональные данные",
+      "Проверить адрес сайта",
+      "Сообщить в банк или организацию",
+      "Сменить пароли"
+    ]
+  },
+
+  leak: {
+    title: "ПРОТОКОЛ: УТЕЧКА ДАННЫХ",
+    steps: [
+      "Сменить все пароли",
+      "Включить 2FA",
+      "Проверить активные сессии",
+      "Проверить кредитную историю",
+      "Сообщить оператору сервиса"
+    ]
+  },
+
+  ddos: {
+    title: "ПРОТОКОЛ: DDOS-АТАКА",
+    steps: [
+      "Ограничить входящий трафик",
+      "Подключить анти-DDoS",
+      "Уведомить провайдера",
+      "Логировать источники атаки"
+    ]
+  },
+
+  social: {
+    title: "ПРОТОКОЛ: СОЦИАЛЬНАЯ ИНЖЕНЕРИЯ",
+    steps: [
+      "Прекратить диалог",
+      "Не передавать коды и пароли",
+      "Проверить источник обращения",
+      "Сообщить в службу безопасности"
+    ]
+  }
+};
+
+const protocolOverlay = document.getElementById('protocolOverlay');
+const protocolContent = document.getElementById('protocolContent');
+const protocolClose = document.getElementById('protocolClose');
+
+document.querySelectorAll('.action-link[data-protocol]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+
+    const key = link.dataset.protocol;
+    const protocol = PROTOCOLS[key];
+    if (!protocol) return;
+
+    protocolContent.innerHTML = `
+      <h2>${protocol.title}</h2>
+      <ul>
+        ${protocol.steps.map(step => `<li>${step}</li>`).join('')}
+      </ul>
+    `;
+
+    protocolOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+protocolClose.onclick = () => {
+  protocolOverlay.classList.remove('active');
+  document.body.style.overflow = '';
+};
+
+protocolOverlay.onclick = e => {
+  if (e.target === protocolOverlay) {
+    protocolClose.onclick();
+  }
+};
 </script>
 
 
