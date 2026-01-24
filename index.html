@@ -125,19 +125,19 @@
                 <div class="game-card">
                     <div class="game-icon">💣</div>
                     <h3>КИБЕРСАПЁР</h3>
-                    <p style="font-size:13px; color:var(--text-muted); margin:15px 0;">Идентификация скрытых угроз. Отличите фишинговые ссылки от легитимных ресурсов.</p>
+                    <p style="font-size:15px; color:var(--text-muted); margin:15px 0;">Идентификация скрытых угроз. Отличите фишинговые ссылки от легитимных ресурсов.</p>
                     <a href="game-cybersaper.html" class="game-btn">НАЧАТЬ ТРЕНИРОВКУ</a>   
                 </div>
                 <div class="game-card">
                     <div class="game-icon">🧱</div>
                     <h3>АНТИВИРУСНЫЙ ТЕТРИС</h3>
-                    <p style="font-size:13px; color:var(--text-muted); margin:15px 0;">Динамическое построение обороны. Блокируйте потоки вредоносного кода правильными патчами.</p>
+                    <p style="font-size:15px; color:var(--text-muted); margin:15px 0;">Динамическое построение обороны. Блокируйте потоки вредоносного кода правильными патчами.</p>
                     <a href="game-tetris.html" class="game-btn">НАЧАТЬ ТРЕНИРОВКУ</a>
                 </div>
                 <div class="game-card">
                     <div class="game-icon">🕸</div>
                     <h3>ЛАБИРИНТ ФИШИНГА</h3>
-                    <p style="font-size:13px; color:var(--text-muted); margin:15px 0;">Текстовый квест. Пройдите через серию социальных манипуляций и сохраните свои средства.</p>
+                    <p style="font-size:15px; color:var(--text-muted); margin:15px 0;">Текстовый квест. Пройдите через серию социальных манипуляций и сохраните свои средства.</p>
                     <a href="game-phishing.html" class="game-btn">НАЧАТЬ ТРЕНИРОВКУ</a>
                 </div>
             </div>
@@ -147,9 +147,9 @@
             <div class="section-header" style="display:flex; justify-content:space-between; align-items:flex-end;">
                 <div>
                     <h2>УЧЕБНЫЙ КЛАСС</h2>
-                    <p style="font-size:13px; color:var(--text-muted)">Видеоинструктажи и методические материалы.</p>
+                    <p style="font-size:16px; color:var(--text-muted)">Видеоинструктажи и методические материалы.</p>
                 </div>
-                <a href="library" class="action-link"
+                <a href="library.html" class="action-link"
    style="color:var(--accent-blue); border:1px solid var(--accent-blue); padding: 5px 15px;"> 
    ВСЯ БИБЛИОТЕКА</a>
             </div>
@@ -220,7 +220,7 @@
         <div class="container footer-grid">
             <div class="footer-col">
                 <div style="display:flex; align-items:center; margin-bottom:20px;">
-                    <div class="logo-shield" style="width:30px; height:30px; margin:0 15px 0 0; font-size:14px; border-width:1px;"><i>!</i></div>
+                    <div class="logo-shield" style="width:30px; height:30px; margin:0 15px 0 0; font-size:16px; border-width:1px;"><i>!</i></div>
                     <h4 style="margin:0">ЦИФРОВОЙ ЩИТ РФ</h4>
                 </div>
                 <p style="color:var(--text-muted); line-height:1.6;">Официальный ресурс по вопросам цифровой безопасности и противодействия киберугрозам.</p>
@@ -250,42 +250,22 @@
                 <div style="color:var(--text-muted); margin-bottom:10px;"><span class="status-dot"></span> HTTPS Шифрование активно</div>
                 <div style="color:var(--text-muted); margin-bottom:10px;"><span class="status-dot"></span> Уязвимости не обнаружены</div>
                 <div style="color:var(--text-muted); margin-bottom:10px;"><span class="status-dot"></span> Мониторинг 24/7</div>
+                <!-- счетчик -->
+        <p>
+        <div style="color:var(--text-muted); margin-bottom:10px;"><span class="status-dot"></span>Посетителей: <span
+            id="counter">0</span></p>
+        </div>
+
             </div>
         </div>
     </footer>
 
-   <!-- ================= ПРОТОКОЛЫ ДЕЙСТВИЙ ================= -->
-
+  
 
 
 <script>
 
 
-
-const contentModal = document.getElementById('content-modal');
-const contentBody  = document.getElementById('content-body');
-
-document.querySelector('.content-close').onclick = () => {
-  contentModal.style.display = 'none';
-  contentBody.innerHTML = '';
-};
-
-document.querySelectorAll('.video-card').forEach(card => {
-  card.onclick = () => {
-    const title = card.querySelector('.video-title').innerText;
-    const time  = card.querySelector('.video-time').innerText;
-
-    contentBody.innerHTML = `
-      <h2 style="margin-bottom:15px;">${title}</h2>
-      <p style="color:#8FA3BF; margin-bottom:15px;">Длительность: ${time}</p>
-
-      <div style="aspect-ratio:16/9; background:#000; display:flex; align-items:center; justify-content:center;">
-        <div style="color:#8FA3BF;">▶ Здесь будет видеоплеер</div>
-      </div>
-    `;
-    contentModal.style.display = 'flex';
-  };
-});
 
 
 const INCIDENT_DB = {
@@ -581,7 +561,50 @@ document.querySelectorAll('.top-nav--bar a').forEach(link => {
     }
   };
 });
+
 </script>
+
+<!-- ПРИВЯЗКА СЧЕТЧИКА К БД И ЕГО ФУНКЦИОНИРОВАНИЕ -->
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+    import {
+      getFirestore,
+      doc,
+      getDoc,
+      setDoc,
+      updateDoc
+    } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDn5ZBf238tM4DpNu5y23qwAJ5DxsnLyhc",
+      authDomain: "cubermuseum.firebaseapp.com",
+      projectId: "cubermuseum",
+      storageBucket: "cubermuseum.firebasestorage.app",
+      messagingSenderId: "884172103093",
+      appId: "1:884172103093:web:5956d7aa378d37f1b20dfc"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const counterRef = doc(db, "статистика", "посетители");
+
+    async function updateCounter() {
+      const snap = await getDoc(counterRef);
+
+      if (snap.exists()) {
+        const newCount = snap.data().считать + 1;
+        await updateDoc(counterRef, { считать: newCount });
+        document.getElementById("counter").textContent = newCount;
+      } else {
+        await setDoc(counterRef, { считать: 1 });
+        document.getElementById("counter").textContent = 1;
+      }
+    }
+
+    updateCounter();
+  </script>
 
 <!-- МОДАЛЬНОЕ ОКНО ДЛЯ КОНТЕНТА (ВИДЕО, ИГРЫ, СВОДКА) -->
 <div id="content-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); justify-content:center; align-items:center; z-index:999;">
