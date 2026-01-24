@@ -54,7 +54,7 @@
         
         <section class="emergency-slider">
 
-  <button class="slider-arrow left">‹</button>
+  
 
   <div class="emergency-viewport">
     <div class="emergency-track">
@@ -87,7 +87,7 @@
                 </div>
           
 
-<button class="slider-arrow right">›</button>
+
 
         </section>
 
@@ -163,33 +163,7 @@
   </div>
 </section>
         
-        <section>
-            <div style="text-align:center; margin-bottom:50px;">
-                <h2>КИБЕРПОЛИГОН</h2>
-                <p style="color:var(--text-muted)">Отработка навыков цифровой обороны в симулированной среде.</p>
-            </div>
-            <div class="games-grid">
-                <div class="game-card">
-                    <div class="game-icon">💣</div>
-                    <h3>КИБЕРСАПЁР</h3>
-                    <p style="font-size:15px; color:var(--text-muted); margin:15px 0;">Идентификация скрытых угроз. Отличите фишинговые ссылки от легитимных ресурсов.</p>
-                    <a href="game-cybersaper.html" class="game-btn">НАЧАТЬ ТРЕНИРОВКУ</a>   
-                </div>
-                <div class="game-card">
-                    <div class="game-icon">🧱</div>
-                    <h3>АНТИВИРУСНЫЙ ТЕТРИС</h3>
-                    <p style="font-size:15px; color:var(--text-muted); margin:15px 0;">Динамическое построение обороны. Блокируйте потоки вредоносного кода правильными патчами.</p>
-                    <a href="game-tetris.html" class="game-btn">НАЧАТЬ ТРЕНИРОВКУ</a>
-                </div>
-                <div class="game-card">
-                    <div class="game-icon">🕸</div>
-                    <h3>ЛАБИРИНТ ФИШИНГА</h3>
-                    <p style="font-size:15px; color:var(--text-muted); margin:15px 0;">Текстовый квест. Пройдите через серию социальных манипуляций и сохраните свои средства.</p>
-                    <a href="game-phishing.html" class="game-btn">НАЧАТЬ ТРЕНИРОВКУ</a>
-                </div>
-            </div>
-        </section>
-
+       
         <section>
             <div class="section-header" style="display:flex; justify-content:space-between; align-items:flex-end;">
                 <div>
@@ -236,6 +210,34 @@
                 </div>
             </div>
         </section>
+
+         <section>
+            <div style="text-align:center; margin-bottom:50px;">
+                <h2>КИБЕРПОЛИГОН</h2>
+                <p style="color:var(--text-muted)">Отработка навыков цифровой обороны в симулированной среде.</p>
+            </div>
+            <div class="games-grid">
+                <div class="game-card">
+                    <div class="game-icon">💣</div>
+                    <h3>КИБЕРСАПЁР</h3>
+                    <p style="font-size:15px; color:var(--text-muted); margin:15px 0;">Идентификация скрытых угроз. Отличите фишинговые ссылки от легитимных ресурсов.</p>
+                    <a href="game-cybersaper.html" class="game-btn">НАЧАТЬ ТРЕНИРОВКУ</a>   
+                </div>
+                <div class="game-card">
+                    <div class="game-icon">🧱</div>
+                    <h3>АНТИВИРУСНЫЙ ТЕТРИС</h3>
+                    <p style="font-size:15px; color:var(--text-muted); margin:15px 0;">Динамическое построение обороны. Блокируйте потоки вредоносного кода правильными патчами.</p>
+                    <a href="game-tetris.html" class="game-btn">НАЧАТЬ ТРЕНИРОВКУ</a>
+                </div>
+                <div class="game-card">
+                    <div class="game-icon">🕸</div>
+                    <h3>ЛАБИРИНТ ФИШИНГА</h3>
+                    <p style="font-size:15px; color:var(--text-muted); margin:15px 0;">Текстовый квест. Пройдите через серию социальных манипуляций и сохраните свои средства.</p>
+                    <a href="game-phishing.html" class="game-btn">НАЧАТЬ ТРЕНИРОВКУ</a>
+                </div>
+            </div>
+        </section>
+
 
         <section>
             <div class="section-header">
@@ -651,36 +653,29 @@ document.querySelectorAll('.top-nav--bar a').forEach(link => {
   </script>
 
   <script>
-document.addEventListener('DOMContentLoaded', () => {
+// ======== Круговой автослайдер с возможностью скролла ========
 
-  const track = document.querySelector('.emergency-track');
-  const cards = document.querySelectorAll('.emergency-track .card');
-  const prev  = document.querySelector('.slider-arrow.left');
-  const next  = document.querySelector('.slider-arrow.right');
+const track = document.querySelector('.emergency-track');
+const viewport = document.querySelector('.emergency-viewport');
+const cards = document.querySelectorAll('.emergency-track .card');
 
-  const cardWidth = cards[0].offsetWidth + 30; // 30 = gap
-  const visibleCards = Math.floor(
-    document.querySelector('.emergency-viewport').offsetWidth / cardWidth
-  );
+const cardWidth = cards[0].offsetWidth + 30; // ширина + gap
+let scrollPosition = 0;
 
-  let index = 0;
-  const maxIndex = cards.length - visibleCards;
+function autoScroll() {
+  scrollPosition += cardWidth;
 
-  function updateSlider() {
-    track.style.transform = 'translateX(-' + (index * cardWidth) + 'px)';
+  // Если дошли до конца, возвращаемся в начало
+  if (scrollPosition >= track.scrollWidth / 2) {
+    scrollPosition = 0;
+    viewport.scrollTo({ left: 0, behavior: 'auto' });
+  } else {
+    viewport.scrollTo({ left: scrollPosition, behavior: 'smooth' });
   }
+}
 
-  next.onclick = () => {
-    if (index < maxIndex) index++;
-    updateSlider();
-  };
-
-  prev.onclick = () => {
-    if (index > 0) index--;
-    updateSlider();
-  };
-
-});
+// Запускаем автоскролл каждые 5 секунды
+setInterval(autoScroll, 5000);
 </script>
 
 
