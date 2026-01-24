@@ -246,8 +246,8 @@ body {
             margin-left: auto;
             margin-right: auto;
             border-top: 2px solid var(--accent-orange);
-            padding-top: 15px;
-            padding: 10px;
+            padding-top: 10px;
+            padding: 15px;
             letter-spacing: 0.5px;
         }
 
@@ -273,7 +273,10 @@ body {
             transition: transform 0.3s, box-shadow 0.3s;
         }
         
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .card:hover { 
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
+        }
 
         .card-header {
             display: flex;
@@ -282,22 +285,49 @@ body {
             margin-bottom: 25px;
         }
 
-        .card-title { font-size: 22px; font-family: 'Oswald'; }
-        .card-text { font-size: 14px; color: var(--text-muted); margin-bottom: 30px; min-height: 65px; }
+        .card-title { 
+            font-size: 24px;
+            font-family: 'Oswald';
+         }
+        .card-text { 
+            font-size: 16px; 
+            color: var(--text-muted); 
+            margin-bottom: 30px; 
+            min-height: 65px; 
+        }
 
         .action-link {
-            font-size: 12px; font-weight: 700; text-transform: uppercase; display: inline-flex; align-items: center;
+            font-size: 15px; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            display: inline-flex; 
+            align-items: center;
         }
-        .action-link::after { content: '›'; margin-left: 5px; font-size: 16px; }
+        .action-link::after { 
+            content: '›'; 
+            margin-left: 5px; 
+            font-size: 16px; }
 
-        .card.virus { border-left: 4px solid var(--accent-orange); }
-        .card.virus .action-link { color: var(--accent-orange); }
+        .card.virus { 
+            border-left: 4px solid var(--accent-orange);
+        }
+        .card.virus .action-link { 
+            color: var(--accent-orange); 
+        }
         
-        .card.phishing { border-left: 4px solid var(--accent-blue); }
-        .card.phishing .action-link { color: var(--accent-blue); }
+        .card.phishing { 
+            border-left: 4px solid var(--accent-blue); 
+        }
+        .card.phishing .action-link { 
+            color: var(--accent-blue); 
+        }
 
-        .card.leak { border-left: 4px solid white; }
-        .card.leak .action-link { color: white; }
+        .card.leak { 
+            border-left: 4px solid white; 
+        }
+        .card.leak .action-link {
+            color: white; 
+        }
 
         /* --- ИСПРАВЛЕННЫЙ КАЛЕНДАРЬ --- */
         .calendar-wrapper {
@@ -320,7 +350,7 @@ body {
             align-items: center;
             justify-content: center;
             font-family: 'Oswald';
-            font-size: 24px;
+            font-size: 26px;
             cursor: pointer;
             transition: 0.2s;
             background: rgba(255,255,255,0.02);
@@ -363,7 +393,7 @@ body {
         .threat-tag {
             border: 1px solid var(--accent-orange);
             color: var(--accent-orange);
-            font-size: 11px;
+            font-size: 13px;
             padding: 4px 8px;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -375,11 +405,11 @@ body {
             float: right;
             font-family: 'Oswald';
             color: var(--text-muted);
-            font-size: 14px;
+            font-size: 15px;
         }
 
         .incident-title {
-            font-size: 36px;
+            font-size: 38px;
             margin-bottom: 30px;
             color: white;
             font-weight: 500;
@@ -399,7 +429,7 @@ body {
         }
         
         .info-block p, .info-block li {
-            font-size: 14px;
+            font-size: 16px;
             color: #b0c4de;
             line-height: 1.6;
         }
@@ -410,9 +440,20 @@ body {
             border-left: 2px solid var(--accent-blue);
         }
 
-        .measures-box ul { list-style: none; }
-        .measures-box li { position: relative; padding-left: 15px; margin-bottom: 10px; }
-        .measures-box li::before { content: '>'; position: absolute; left: 0; color: var(--accent-blue); font-weight: bold;}
+        .measures-box ul { 
+            list-style: none; 
+        }
+        .measures-box li { 
+            position: relative; 
+            padding-left: 15px;
+            margin-bottom: 10px;
+        }
+        .measures-box li::before { 
+            content: '>'; position: absolute; 
+            left: 0; color: 
+            var(--accent-blue); 
+            font-weight: bold;
+        }
 
 
         /* --- НОВЫЙ РАЗДЕЛ: УЧЕБНЫЙ КЛАСС (ВИДЕО) --- */
@@ -479,7 +520,7 @@ body {
             right: 10px;
             background: rgba(0,0,0,0.8);
             color: white;
-            font-size: 11px;
+            font-size: 14px;
             padding: 2px 6px;
             font-weight: bold;
         }
@@ -487,14 +528,14 @@ body {
         .video-title {
             font-family: 'Roboto';
             font-weight: 500;
-            font-size: 15px;
+            font-size: 17px;
             line-height: 1.3;
             margin-bottom: 5px;
             color: white;
         }
 
         .video-meta {
-            font-size: 12px;
+            font-size: 14px;
             color: var(--text-muted);
         }
 
@@ -513,15 +554,30 @@ body {
             border: 1px solid rgba(255,255,255,0.05);
         }
 
-        .game-icon { font-size: 40px; margin-bottom: 20px; color: var(--text-muted); }
+        .game-icon { 
+            font-size: 42px; 
+            margin-bottom: 20px; 
+            color: var(--text-muted); 
+        }
         
         .game-btn {
-            display: block; width: 100%; padding: 12px; margin-top: 25px;
-            background: transparent; border: 1px solid var(--accent-blue);
-            color: var(--accent-blue); text-transform: uppercase;
-            font-size: 12px; letter-spacing: 1px; cursor: pointer; transition: 0.3s;
+            display: block; 
+            width: 100%; 
+            padding: 12px; 
+            margin-top: 25px;
+            background: transparent; 
+            border: 1px solid var(--accent-blue);
+            color: var(--accent-blue); 
+            text-transform: uppercase;
+            font-size: 15px; 
+            letter-spacing: 1px; 
+            cursor: pointer; 
+            transition: 0.3s;
         }
-        .game-btn:hover { background: var(--accent-blue); color: #000; }
+        .game-btn:hover { 
+            background: var(--accent-blue); 
+            color: #000; 
+        }
         
         /* Сводка */
         .news-wrapper {
@@ -536,20 +592,39 @@ body {
         }
         .news-item:last-child { border-bottom: none; }
 
-        .news-meta { font-size: 11px; margin-bottom: 8px; font-family: 'Oswald'; letter-spacing: 1px; }
-        .tag { margin-right: 10px; font-weight: bold; }
-        .tag.urgent { color: var(--accent-orange); }
-        .tag.report { color: #4CAF50; }
+        .news-meta { 
+            font-size: 14px; 
+            margin-bottom: 8px; 
+            font-family: 'Oswald'; 
+            letter-spacing: 1px; 
+        }
+        .tag { 
+            margin-right: 10px; 
+            font-weight: bold; 
+        }
+        .tag.urgent { 
+            color: var(--accent-orange); 
+        }
+        .tag.report { 
+            color: #4CAF50; 
+        }
         
-        .news-title { font-size: 20px; font-weight: 500; margin-bottom: 8px; }
-        .news-body { font-size: 14px; color: var(--text-muted); }
+        .news-title { 
+            font-size: 22px; 
+            font-weight: 500; 
+            margin-bottom: 8px; 
+        }
+        .news-body { 
+            font-size: 15px; 
+            color: var(--text-muted); 
+        }
 
         /* FOOTER */
         footer {
             background: #050911;
-            padding: 60px 0;
+            padding: 12px 0;
             border-top: 1px solid var(--border-color);
-            font-size: 13px;
+            font-size: 16px;
         }
 
         .footer-grid {
@@ -558,14 +633,28 @@ body {
             gap: 40px;
         }
 
-        .footer-col h4 { margin-bottom: 25px; color: white; font-size: 14px; }
-        .footer-links li { list-style: none; margin-bottom: 12px; color: var(--text-muted); }
-        .footer-links a:hover { color: var(--accent-blue); }
+        .footer-col h4 { 
+            margin-bottom: 25px; 
+            color: white; 
+            font-size: 15px; 
+        }
+        .footer-links li { 
+            list-style: none; 
+            margin-bottom: 12px; 
+            color: var(--text-muted); 
+        }
+        .footer-links a:hover { 
+            color: var(--accent-blue);
+        }
 
         .status-dot {
-            display: inline-block; width: 8px; height: 8px;
-            background: #4CAF50; border-radius: 50%;
-            margin-right: 10px; box-shadow: 0 0 5px #4CAF50;
+            display: inline-block; 
+            width: 8px; 
+            height: 8px;
+            background: #4CAF50;
+            border-radius: 50%;
+            margin-right: 10px;
+            box-shadow: 0 0 5px #4CAF50;
         }
 
         @media (max-width: 1024px) {
@@ -594,10 +683,6 @@ body {
   overflow-y: auto;
 }
 
-/* ❌ ЗАПРЕТ СКРОЛЛА СТРАНИЦЫ */
-body.modal-open {
-  overflow: hidden;
-}
 
 /* ===== НАСТОЯЩАЯ OVERLAY-МОДАЛКА ===== */
 #content-modal,
@@ -645,5 +730,3 @@ body.modal-open {
   backdrop-filter: none !important;
 }
         
-
-
