@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Музей Кибербезопасности им. МЧС России</title>
     <link rel="stylesheet" href="css1.css">
+    <link rel="stylesheet" href="js.js">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -51,8 +52,12 @@
 
     <div class="container">
         
-        <section>
-            <div class="emergency-grid">
+        <section class="emergency-slider">
+
+  <button class="slider-arrow left">‹</button>
+
+  <div class="emergency-viewport">
+    <div class="emergency-track">
                 <div class="card virus">
                     <div class="card-header"><span class="card-title">ОБНАРУЖЕН ВИРУС</span><span style="color:var(--accent-orange)">☣</span></div>
                     <div class="card-text">Немедленно отключите сеть. Не запускайте программы. Сохраните критические файлы на внешний носитель.</div>
@@ -68,7 +73,22 @@
                     <div class="card-text">Смените пароли на всех ресурсах. Настройте двухфакторную аутентификацию. Проверьте кредитную историю.</div>
                     <a href="protocol-leak.html" class="action-link">ПРОТОКОЛ ДЕЙСТВИЙ</a>
                 </div>
-            </div>
+
+            <div class="card ddos">
+                    <div class="card-header"><span class="card-title">DDOS-АТАКА</span><span style="color:white">🔒</span></div>
+                    <div class="card-text">Массовая перегрузка сервиса сетевым трафиком.</div>
+                    <a href="protocol-ddos.html" class="action-link">ПРОТОКОЛ ДЕЙСТВИЙ</a>
+                </div>
+           
+            <div class="card social">
+                    <div class="card-header"><span class="card-title">СОЦ. ИНЖЕНЕРИЯ</span><span style="color:white">🔒</span></div>
+                    <div class="card-text">Манипуляция пользователями для получения доступа.</div>
+                    <a href="protocol-social.html" class="action-link">ПРОТОКОЛ ДЕЙСТВИЙ</a>
+                </div>
+          
+
+<button class="slider-arrow right">›</button>
+
         </section>
 
         <section>
@@ -115,6 +135,33 @@
                 </div>
             </div>
         </section>
+
+        <section>
+  <div style="text-align:center; margin-bottom:50px;">
+      <h2>КИБЕРТЕСТЫ</h2>
+      <p style="color:var(--text-muted)">Проверка знаний по кибербезопасности в интерактивном формате.</p>
+  </div>
+  <div class="games-grid tests-grid">
+      <div class="game-card">
+          <div class="game-icon">🛡️</div>
+          <h3>Основы кибербезопасности</h3>
+          <p style="font-size:15px; color:var(--text-muted); margin:15px 0;">Пройдите тест и проверьте базовые знания о киберугрозах и защите данных.</p>
+          <a href="test-basic.html" class="game-btn">Пройти тест</a>
+      </div>
+      <div class="game-card">
+          <div class="game-icon">🔐</div>
+          <h3>Пароли и защита аккаунтов</h3>
+          <p style="font-size:15px; color:var(--text-muted); margin:15px 0;">Узнайте, насколько вы умеете создавать безопасные пароли и защищать свои учетные записи.</p>
+          <a href="test-password.html" class="game-btn">Пройти тест</a>
+      </div>
+      <div class="game-card">
+          <div class="game-icon">📧</div>
+          <h3>Фишинг и социальная инженерия</h3>
+          <p style="font-size:15px; color:var(--text-muted); margin:15px 0;">Попробуйте распознать фишинговые атаки и защитить себя от мошенников.</p>
+          <a href="test-phishing.html" class="game-btn">Пройти тест</a>
+      </div>
+  </div>
+</section>
         
         <section>
             <div style="text-align:center; margin-bottom:50px;">
@@ -259,9 +306,6 @@
             </div>
         </div>
     </footer>
-
-  
-
 
 <script>
 
@@ -606,21 +650,40 @@ document.querySelectorAll('.top-nav--bar a').forEach(link => {
     updateCounter();
   </script>
 
-<!-- МОДАЛЬНОЕ ОКНО ДЛЯ КОНТЕНТА (ВИДЕО, ИГРЫ, СВОДКА) -->
-<div id="content-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); justify-content:center; align-items:center; z-index:999;">
-  <div style="background:#1e1e1e; padding:20px; max-width:900px; width:90%; max-height:90%; overflow:auto; position:relative; border-radius:8px;">
-    <span class="content-close" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:24px; color:#fff;">×</span>
-    <div id="content-body"></div>
-  </div>
-</div>
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
 
-<!-- МОДАЛЬНОЕ ОКНО ДЛЯ БИБЛИОТЕКИ ВИДЕО -->
-<div id="library-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); justify-content:center; align-items:center; z-index:998;">
-  <div style="background:#1e1e1e; padding:20px; max-width:1000px; width:95%; max-height:90%; overflow:auto; position:relative; border-radius:8px;">
-    <span id="library-close" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:24px; color:#fff;">×</span>
-    <div id="library-body"></div>
-  </div>
-</div>
+  const track = document.querySelector('.emergency-track');
+  const cards = document.querySelectorAll('.emergency-track .card');
+  const prev  = document.querySelector('.slider-arrow.left');
+  const next  = document.querySelector('.slider-arrow.right');
+
+  const cardWidth = cards[0].offsetWidth + 30; // 30 = gap
+  const visibleCards = Math.floor(
+    document.querySelector('.emergency-viewport').offsetWidth / cardWidth
+  );
+
+  let index = 0;
+  const maxIndex = cards.length - visibleCards;
+
+  function updateSlider() {
+    track.style.transform = 'translateX(-' + (index * cardWidth) + 'px)';
+  }
+
+  next.onclick = () => {
+    if (index < maxIndex) index++;
+    updateSlider();
+  };
+
+  prev.onclick = () => {
+    if (index > 0) index--;
+    updateSlider();
+  };
+
+});
+</script>
+
+
 
 </body>
 </html>
