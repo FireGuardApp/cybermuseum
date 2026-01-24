@@ -259,12 +259,7 @@ body {
             padding-left: 20px;
         }
 
-        /* --- КАРТОЧКИ УГРОЗ (Emergency) --- */
-        .emergency-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
+        
 
         .card {
             background: var(--bg-card);
@@ -728,5 +723,50 @@ body.modal-open {
 /* убираем прозрачность, если была */
 .summary-modal * {
   backdrop-filter: none !important;
+}
+
+.emergency-slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 60px 0;
+}
+
+.emergency-viewport {
+  overflow: hidden;
+ position: relative;
+}
+
+/* лента */
+.emergency-track {
+  display: flex;
+  flex-wrap: nowrap;        /* ❗️ запрещаем перенос */
+  gap: 30px;
+  transition: transform 0.5s ease;
+  will-change: transform;
+}
+
+/* ВСЕ карточки одинаковые */
+.emergency-track .card {
+  flex: 0 0 320px;          /* ❗️ фикс ширина */
+  height: 200px;            /* ❗️ фикс высота */
+  box-sizing: border-box;
+}
+
+/* стрелки */
+.slider-arrow {
+  background: none;
+  border: 1px solid var(--accent-blue);
+  color: var(--accent-blue);
+  font-size: 32px;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.slider-arrow:hover {
+  background: var(--accent-blue);
+  color: #000;
 }
         
