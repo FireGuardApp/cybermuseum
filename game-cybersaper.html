@@ -23,20 +23,69 @@
   </div>
 </div>
 
-<!-- КОНТЕНТ (ПОКА ПУСТО) -->
-<div class="container" style="padding-top:120px; min-height:60vh;">
-  <h1>РАЗДЕЛ В РАЗРАБОТКЕ</h1>
-  <p style="color:var(--text-muted); max-width:600px;">
-    Контент будет добавлен позже.
-  </p>
-</div>
+<div class="cyber-interface">
+        <header>
+            <div class="header-top">
+                <h1>CYBER<span class="accent">SWEEPER</span></h1>
+                <div class="version">BUILD 2099.v4</div>
+            </div>
+            
+            <div class="story-terminal" id="story-text">
+                > CONNECTING TO HELIOS SERVER...<br>
+                > WARNING: NEURAL BOMBS DETECTED.<br>
+                > MISSION: ISOLATE MALWARE. DO NOT TRIGGER.<br>
+            </div>
+        </header>
+
+        <div class="control-panel">
+            <div class="hud-stat">
+                <span class="hud-label">THREATS</span>
+                <span class="hud-value" id="mine-count">015</span>
+            </div>
+            
+            <button class="cyber-btn main-reset" id="reset-btn">REBOOT</button>
+            
+            <div class="hud-stat">
+                <span class="hud-label">UPTIME</span>
+                <span class="hud-value" id="timer">000</span>
+            </div>
+        </div>
+        
+        <div class="settings-bar">
+             <select id="difficulty" class="cyber-select">
+                 <option value="easy">SECTOR 1 (10x10)</option>
+                 <option value="medium">SECTOR 2 (15x15)</option>
+                 <option value="hard">SECTOR 3 (20x20)</option>
+             </select>
+             <div class="best-score">BEST: <span id="best-score">--</span>s</div>
+        </div>
+
+        <div class="game-container">
+            <div id="grid" class="grid-board"></div>
+        </div>
+
+        <div class="mobile-controls">
+            <button class="mode-btn active" id="mode-scan">SCAN (TAP)</button>
+            <button class="mode-btn" id="mode-flag">FLAG (TAP)</button>
+        </div>
+
+        <div id="modal-screen" class="modal">
+            <h2 id="modal-title">SYSTEM FAILURE</h2>
+            <p id="modal-msg">CONNECTION LOST</p>
+            <button class="cyber-btn" id="modal-retry">RETRY PROTOCOL</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 
 <!-- FOOTER (копируешь 1 в 1) -->
- <footer>
-        <div class="container footer-grid">
+<footer>
+  <div class="container footer-grid">
+    <!-- твой footer без изменений -->
+       <div class="container footer-grid">
             <div class="footer-col">
                 <div style="display:flex; align-items:center; margin-bottom:20px;">
-                    <div class="logo-shield" style="width:30px; height:30px; margin:0 15px 0 0; font-size:16px; border-width:1px;"><i>!</i></div>
+                    <div class="logo-shield" style="width:30px; height:30px; margin:0 15px 0 0; font-size:14px; border-width:1px;"><i>!</i></div>
                     <h4 style="margin:0">ЦИФРОВОЙ ЩИТ РФ</h4>
                 </div>
                 <p style="color:var(--text-muted); line-height:1.6;">Официальный ресурс по вопросам цифровой безопасности и противодействия киберугрозам.</p>
@@ -66,16 +115,10 @@
                 <div style="color:var(--text-muted); margin-bottom:10px;"><span class="status-dot"></span> HTTPS Шифрование активно</div>
                 <div style="color:var(--text-muted); margin-bottom:10px;"><span class="status-dot"></span> Уязвимости не обнаружены</div>
                 <div style="color:var(--text-muted); margin-bottom:10px;"><span class="status-dot"></span> Мониторинг 24/7</div>
-                <!-- счетчик -->
-        <p>
-        <div style="color:var(--text-muted); margin-bottom:10px;"><span class="status-dot"></span>Посетителей: <span
-            id="counter">0</span></p>
-        </div>
-
             </div>
         </div>
-    </footer>
+  </div>
+</footer>
 
 </body>
-
 </html>
