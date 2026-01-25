@@ -303,7 +303,7 @@ body {
             margin-left: 5px; 
             font-size: 16px; }
 
-        .card.virus { 
+                .card.virus { 
             border-left: 4px solid var(--accent-orange);
         }
         .card.virus .action-link { 
@@ -318,10 +318,24 @@ body {
         }
 
         .card.leak { 
-            border-left: 4px solid white; 
+            border-left: 4px solid var(--accent-orange); 
         }
         .card.leak .action-link {
-            color: white; 
+            color: var(--accent-orange); 
+        }
+
+        .card.ddos { 
+            border-left: 4px solid var(--accent-blue); 
+        }
+        .card.ddos .action-link {
+            color: var(--accent-blue); 
+        }
+
+        .card.social { 
+            border-left: 4px solid var(--accent-orange); 
+        }
+        .card.social .action-link {
+            color: var(--accent-orange); 
         }
 
         
@@ -802,3 +816,4 @@ body.modal-open {
   display: flex;
   justify-content: flex-end;
 }
+
