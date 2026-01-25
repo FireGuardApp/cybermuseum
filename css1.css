@@ -324,131 +324,7 @@ body {
             color: white; 
         }
 
-        /* --- ИСПРАВЛЕННЫЙ КАЛЕНДАРЬ --- */
-        .calendar-wrapper {
-            display: flex; /* Используем Flex для жесткого разделения */
-            gap: 0; /* Убираем отступы, чтобы они смыкались как на макете */
-            align-items: flex-start;
-        }
-
-        .date-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 120px); /* Два столбца фиксированной ширины */
-            grid-auto-rows: 120px;
-            gap: 5px;
-            margin-right: 20px; /* Отступ до информационной панели */
-        }
-
-        .date-box {
-            border: 1px solid var(--text-muted);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Oswald';
-            font-size: 26px;
-            cursor: pointer;
-            transition: 0.2s;
-            background: rgba(255,255,255,0.02);
-            color: var(--text-muted);
-        }
-
-        .date-box:hover { background: rgba(255,255,255,0.1); }
         
-        .date-box.active { 
-            background: var(--accent-orange); 
-            border-color: var(--accent-orange); 
-            color: white; 
-            /* Эффект, чтобы активный элемент выделялся */
-            box-shadow: 0 0 15px rgba(255, 87, 34, 0.4);
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Панель деталей (стиль WannaCry с макета) */
-        .incident-details {
-            flex-grow: 1; /* Занимает всё оставшееся место */
-            background: #111b2e; /* Чуть темнее фон */
-            padding: 40px;
-            border-top: 1px solid var(--border-color);
-            position: relative;
-            min-height: 370px; /* Высота под два ряда кубиков + отступы */
-        }
-
-        /* Декор в углу панели */
-        .incident-details::after {
-            content: '';
-            position: absolute;
-            top: 0; right: 0;
-            width: 0; height: 0;
-            border-style: solid;
-            border-width: 0 50px 50px 0;
-            border-color: transparent #1a263d transparent transparent;
-        }
-
-        .threat-tag {
-            border: 1px solid var(--accent-orange);
-            color: var(--accent-orange);
-            font-size: 13px;
-            padding: 4px 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-
-        .incident-date {
-            float: right;
-            font-family: 'Oswald';
-            color: var(--text-muted);
-            font-size: 15px;
-        }
-
-        .incident-title {
-            font-size: 38px;
-            margin-bottom: 30px;
-            color: white;
-            font-weight: 500;
-        }
-
-        .incident-content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-        }
-
-        .info-block h3 {
-            color: var(--accent-blue);
-            font-size: 12px;
-            margin-bottom: 10px;
-            opacity: 0.8;
-        }
-        
-        .info-block p, .info-block li {
-            font-size: 16px;
-            color: #b0c4de;
-            line-height: 1.6;
-        }
-
-        .measures-box {
-            background: rgba(0, 188, 212, 0.05); /* Легкий фон для мер */
-            padding: 20px;
-            border-left: 2px solid var(--accent-blue);
-        }
-
-        .measures-box ul { 
-            list-style: none; 
-        }
-        .measures-box li { 
-            position: relative; 
-            padding-left: 15px;
-            margin-bottom: 10px;
-        }
-        .measures-box li::before { 
-            content: '>'; position: absolute; 
-            left: 0; color: 
-            var(--accent-blue); 
-            font-weight: bold;
-        }
 
 
         /* --- НОВЫЙ РАЗДЕЛ: УЧЕБНЫЙ КЛАСС (ВИДЕО) --- */
@@ -653,20 +529,11 @@ body {
         }
 
         @media (max-width: 1024px) {
-            .games-grid, 
-            .video-grid { 
-                grid-template-columns: repeat(2, 1fr); 
-            }
-            .calendar-wrapper { 
-                flex-direction: column; 
-            }
-            .date-grid 
-            { 
-                grid-template-columns: repeat(6, 1fr); 
-                margin-bottom: 20px; 
-                width: 100%; 
-            }
-        }
+    .games-grid, 
+    .video-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
 
         /* ===== ОБЩИЕ МОДАЛЬНЫЕ ОКНА (FIX) ===== */
 #content-modal,
