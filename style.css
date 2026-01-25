@@ -1,3 +1,159 @@
+/* ================= ТОП-БАР ================= */
+.top-bar {
+    width: 100%;
+    background-color: #050911; /* тёмный фон */
+    color:  #00BCD4;           /* белый текст */
+    font-size: 25px;
+    font-weight: 500;
+    padding: 25px 0;
+    text-align:left;
+    position: fixed;          /* фиксируем сверху */
+    top: 0;
+    left: 0;
+    z-index: 10;            /* чтобы было поверх всего */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+/* чтобы основной контент не прятался под фиксированным топ-баром */
+body {
+    padding-top: 100px; /* подстрой под высоту топ-бара */
+}
+
+.top-bar-container {
+    max-width: 1200px; /* можно под размер сайта */
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* ===== БУРГЕР ===== */
+.burger {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 30px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.burger span {
+  display: block;
+  height: 3px;
+  background: #00BCD4;
+  margin: 6px 0;
+  transition: 0.3s;
+}
+
+/* ===== TOP BAR С МЕНЮ ===== */
+.top-bar-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top-bar-title {
+   text-transform: uppercase;     /* КАПС */
+  font-size: 22px;               /* больше */
+  font-weight: 600;
+  letter-spacing: 1.2px;         /* как у вкладок */
+}
+
+/* меню справа */
+.top-nav--bar {
+  display: flex;
+  gap: 25px;
+}
+
+.top-nav--bar a {
+  font-size: 15px;
+  color: #8FA3BF;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.top-nav--bar a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: #00BCD4;
+  transition: 0.3s;
+}
+
+.top-nav--bar a:hover {
+  color: #EAF2FF;
+}
+
+.top-nav--bar a:hover::after {
+  width: 100%;
+}
+
+/* 📱 ТЕЛЕФОН — ТОЛЬКО ТЕКСТ */
+@media (max-width: 768px) {
+  .top-nav--bar {
+    display: none;
+  }
+}
+
+/* === Скрываем бургер-меню по умолчанию на ПК === */
+.burger-menu,
+.burger-overlay {
+  display: none;
+}
+
+/* === Показываем бургер и overlay только на мобильных === */
+@media (min-width: 1024px) {
+  .burger {
+    display: none; /* кнопка бургер */
+    z-index: 10000; /* чтобы быть над шапкой */
+  }
+
+/* ===== МЕНЮ ===== */
+.burger-menu {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 320px;
+  height: 100%;
+  background: #0B1220;
+  padding: 80px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transform: translateX(100%);
+  transition: right 0.3s ease;
+  z-index: 9999;
+}
+
+.burger-menu a {
+  color: #EAF2FF;
+  text-decoration: none;
+  font-size: 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 10px;
+}
+
+.burger-menu.active {
+    transform: translateX(0);
+  right: 0;
+}
+
+/* затемнение */
+.burger-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  z-index: 9998;
+}
+
+.burger-overlay.active {
+  display: block;
+}
+}
 :root {
     --bg-dark: #000505;
     --bg-panel: rgba(0, 25, 25, 0.85);
@@ -94,4 +250,49 @@ body {
     color: var(--neon-cyan); padding: 8px 15px; cursor: pointer;
     font-family: var(--font-tech);
 }
+
 .cyber-btn:hover { background: var(--neon-cyan); color: #000; }
+
+footer {
+            background: #050911;
+            padding: 12px 0;
+            border-top: 1px solid var(--border-color);
+            font-size: 16px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer-col h4 { 
+            margin-bottom: 25px; 
+            color: white; 
+            font-size: 15px; 
+        }
+        .footer-links li { 
+            list-style: none; 
+            margin-bottom: 12px; 
+            color: var(--text-muted); 
+        }
+        .footer-links a:hover { 
+            color: var(--accent-blue);
+        }
+
+        .status-dot {
+            display: inline-block; 
+            width: 8px; 
+            height: 8px;
+            background: #4CAF50;
+            border-radius: 50%;
+            margin-right: 10px;
+            box-shadow: 0 0 5px #4CAF50;
+        }
+
+        @media (max-width: 1024px) {
+    .games-grid, 
+    .video-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
