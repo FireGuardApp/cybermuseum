@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="css1.css">
     <link rel="stylesheet" href="js.js">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="calendar.css">
+
+
+
 </head>
 <body>
 
@@ -91,50 +96,40 @@
 
         </section>
 
-        <section>
-            <div class="section-header">
-                <h2>КАЛЕНДАРЬ КИБЕРИНЦИДЕНТОВ</h2>
+        
+<section class="calendar-section">
+    <div class="calendar-header">
+        <h2>КАЛЕНДАРЬ КИБЕРИНЦИДЕНТОВ</h2>
+        
+        <div class="week-navigation">
+            <button class="week-arrow prev" aria-label="Предыдущая неделя" title="Предыдущая неделя">‹</button>
+            <div class="week-label" id="weekLabel">Загрузка...</div>
+            <button class="week-arrow next" aria-label="Следующая неделя" title="Следующая неделя">›</button>
+        </div>
+        
+        <a href="full-calendar.html" class="full-calendar-link">
+            📅 ПОЛНЫЙ КАЛЕНДАРЬ
+        </a>
+    </div>
+    
+    <div class="calendar-wrapper">
+        <div class="loading-indicator">Загрузка календаря...</div>
+        
+        <!-- 7 дней слева -->
+        <div class="date-grid" id="dateGrid">
+            <!-- JavaScript заполнит это -->
+        </div>
+        
+        <!-- Детали события справа -->
+        <div class="incident-details" id="incidentDetails">
+            <div class="loading-placeholder">
+                <div class="threat-tag threat-level-low" style="width: 150px; height: 30px; margin-bottom: 20px;"></div>
+                <div style="width: 80%; height: 40px; background: rgba(255,255,255,0.1); margin-bottom: 30px;"></div>
+                <div style="width: 90%; height: 100px; background: rgba(255,255,255,0.05);"></div>
             </div>
-            <div class="calendar-wrapper">
-                <div class="date-grid">
-                    <div class="date-box">01</div>
-                    <div class="date-box" style="background: rgba(255,87,34,0.1); border-color:var(--accent-orange);">02</div> <div class="date-box active">03</div> <div class="date-box">04</div>
-                    <div class="date-box">05</div>
-                    <div class="date-box" style="border-color: var(--accent-blue); color:var(--accent-blue)">06</div>
-                </div>
-
-                <div class="incident-details">
-                    <div class="incident-date">DATE: 2017-05-12 | GMT+3 14:00</div>
-                    <div class="threat-tag">УРОВЕНЬ УГРОЗЫ: 5 (КРИТИЧЕСКИЙ)</div>
-                    
-                    <h2 class="incident-title">ВЫМОГАТЕЛЬ «WANNACRY»</h2>
-                    
-                    <div class="incident-content-grid">
-                        <div class="info-block">
-                            <h3>ОПИСАНИЕ УГРОЗЫ</h3>
-                            <p style="margin-bottom: 20px;">
-                                Сетевой червь, использующий уязвимость EternalBlue в протоколе SMB. 
-                                Шифрует файлы пользователя и требует выкуп в криптовалюте.
-                                Распространяется автоматически внутри локальных сетей.
-                            </p>
-                            <h3>ВЕКТОР АТАКИ</h3>
-                            <ul style="list-style: none; padding:0;">
-                                <li style="color:var(--accent-orange); margin-bottom:5px;">> Эксплойт уязвимости Windows</li>
-                                <li style="color:var(--accent-orange);">> Фишинговые рассылки</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="measures-box">
-                            <h3 style="color:white; margin-bottom:15px;">ПРИНЯТЫЕ МЕРЫ</h3>
-                            <ul>
-                                <li>Выпущен патч безопасности MS17-010. Блокировка портов 139 и 445.</li>
-                                <li>Выводы для населения: Регулярное обновление ОС обязательно. Создание оффлайн бэкапов.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        </div>
+    </div>
+</section>
 
         <section>
   <div style="text-align:center; margin-bottom:50px;">
@@ -320,131 +315,6 @@
 
 <script>
 
-
-
-
-const INCIDENT_DB = {
-  "01": {
-    date: "2016-10-21 | GMT+3 09:00",
-    level: "3 (СРЕДНИЙ)",
-    title: "АТАКА НА DNS-ПРОВАЙДЕРА DYNS",
-    description: `
-      Массовая DDoS-атака с использованием ботнета Mirai.
-      Были нарушены работы Twitter, GitHub, Netflix.
-    `,
-    vectors: [
-      "IoT-устройства с дефолтными паролями",
-      "Ботнет Mirai"
-    ],
-    measures: [
-      "Фильтрация трафика",
-      "Ограничение IoT-устройств"
-    ]
-  },
-
-  "02": {
-    date: "2017-03-07 | GMT+3 11:20",
-    level: "4 (ВЫСОКИЙ)",
-    title: "БАНКОВСКИЙ ТРОЯН LOCKY",
-    description: `
-      Распространение вредоносного ПО через вложения электронной почты.
-      Заражены корпоративные сети.
-    `,
-    vectors: [
-      "Фишинговые письма",
-      "Макросы Office"
-    ],
-    measures: [
-      "Блокировка вложений",
-      "Обучение персонала"
-    ]
-  },
-
-  "03": {
-    date: "2017-05-12 | GMT+3 14:00",
-    level: "5 (КРИТИЧЕСКИЙ)",
-    title: "ВЫМОГАТЕЛЬ WANNACRY",
-    description: `
-      Сетевой червь, использующий уязвимость EternalBlue.
-      Автоматическое распространение по сети.
-    `,
-    vectors: [
-      "Эксплойт SMB EternalBlue",
-      "Фишинговые рассылки"
-    ],
-    measures: [
-      "Патч MS17-010",
-      "Блокировка портов 139 и 445"
-    ]
-  },
-
-  "04": {
-    date: "2018-06-27 | GMT+3 10:00",
-    level: "4 (ВЫСОКИЙ)",
-    title: "NOTPETYA (PETYA.A)",
-    description: `
-      Маскировался под обновление бухгалтерского ПО.
-      Привёл к остановке предприятий.
-    `,
-    vectors: [
-      "Supply Chain",
-      "Обновления ПО"
-    ],
-    measures: [
-      "Контроль обновлений",
-      "Изоляция сегментов сети"
-    ]
-  }
-};
-
-function renderIncident(day) {
-  const data = INCIDENT_DB[day];
-  if (!data) return;
-
-  const details = document.querySelector('.incident-details');
-
-  details.innerHTML = `
-    <div class="incident-date">DATE: ${data.date}</div>
-    <div class="threat-tag">УРОВЕНЬ УГРОЗЫ: ${data.level}</div>
-
-    <h2 class="incident-title">${data.title}</h2>
-
-    <div class="incident-content-grid">
-      <div class="info-block">
-        <h3>ОПИСАНИЕ УГРОЗЫ</h3>
-        <p>${data.description}</p>
-
-        <h3 style="margin-top:20px;">ВЕКТОР АТАКИ</h3>
-        <ul style="list-style:none; padding:0;">
-          ${data.vectors.map(v => `<li style="color:var(--accent-orange)">> ${v}</li>`).join('')}
-        </ul>
-      </div>
-
-      <div class="measures-box">
-        <h3 style="color:white; margin-bottom:15px;">ПРИНЯТЫЕ МЕРЫ</h3>
-        <ul>
-          ${data.measures.map(m => `<li>${m}</li>`).join('')}
-        </ul>
-      </div>
-    </div>
-  `;
-}
-document.querySelectorAll('.date-box').forEach(box => {
-  box.addEventListener('click', () => {
-
-    // активный класс
-    document.querySelectorAll('.date-box')
-      .forEach(b => b.classList.remove('active'));
-
-    box.classList.add('active');
-
-    // номер дня
-    const day = box.textContent.trim().padStart(2, '0');
-
-    renderIncident(day);
-  });
-});
-
 const VIDEO_LIBRARY = [
   { id:1, title:"Алгоритм действий при звонке мошенника", time:"04:30", tag:"Инструктаж №104" },
   { id:2, title:"Как опознать фейковый сайт госуслуг", time:"06:15", tag:"Инструктаж №105" },
@@ -459,7 +329,7 @@ const libraryBody  = document.getElementById('library-body');
 document.getElementById('library-close').onclick = () => {
   libraryModal.style.display = 'none';
 };
-
+ 
 
 function openVideo(id) {
   const video = VIDEO_LIBRARY.find(v => v.id == id);
@@ -776,6 +646,11 @@ protocolOverlay.onclick = e => {
   }
 };
 </script>
+
+
+
+<script src="calendar.js"></script>
+
 
 
 
