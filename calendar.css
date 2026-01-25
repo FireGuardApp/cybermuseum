@@ -1,0 +1,666 @@
+/* ================= КАЛЕНДАРЬ С НАВИГАЦИЕЙ ================= */
+
+/* Контейнер календаря */
+.calendar-wrapper {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+/* Заголовок календаря с навигацией */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+    position: relative;
+}
+
+.calendar-header h2 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 500;
+}
+
+/* Контейнер для навигации неделями */
+.week-navigation {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Метка недели */
+.week-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    color: var(--accent-blue);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    min-width: 180px;
+    text-align: center;
+    padding: 5px 15px;
+    background: rgba(0, 188, 212, 0.05);
+    border-radius: 4px;
+    border: 1px solid rgba(0, 188, 212, 0.2);
+}
+
+/* Стрелки навигации */
+.week-arrow {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--accent-blue);
+    background: rgba(0, 188, 212, 0.05);
+    color: var(--accent-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.week-arrow:hover:not(.disabled) {
+    background: var(--accent-blue);
+    color: #000;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(0, 188, 212, 0.3);
+}
+
+.week-arrow.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    border-color: var(--text-muted);
+    color: var(--text-muted);
+}
+
+/* Сетка дат (7 дней недели ВЕРТИКАЛЬНО) */
+.date-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 140px; /* Ширина вертикальной колонки */
+}
+
+/* Кубик с датой - теперь вертикальные прямоугольники */
+.date-box {
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: row; /* Горизонтальное расположение */
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Oswald', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 12px 15px;
+    height: 55px; /* Высота прямоугольников */
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Индикатор угрозы слева */
+.date-box::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: transparent;
+    transition: background 0.3s;
+}
+
+/* Индикаторы для инцидентов (3 типа) */
+.date-box.has-critical::before {
+    background: #F44336;
+    box-shadow: 0 0 8px rgba(244, 67, 54, 0.5);
+}
+
+.date-box.has-medium::before {
+    background: #FFC107;
+    box-shadow: 0 0 6px rgba(255, 193, 7, 0.3);
+}
+
+.date-box.has-low::before {
+    background: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
+}
+
+/* Индикаторы для праздников (голубой) */
+.date-box.has-holiday::before {
+    background: #00BCD4;
+    box-shadow: 0 0 6px rgba(0, 188, 212, 0.4);
+}
+
+/* День недели */
+.date-weekday {
+    font-size: 13px;
+    text-transform: uppercase;
+    opacity: 0.8;
+    color: var(--text-muted);
+    min-width: 30px;
+}
+
+/* Число */
+.date-day {
+    font-size: 22px;
+    font-weight: 500;
+    color: white;
+    margin-left: 10px;
+    flex-grow: 1;
+}
+
+/* Месяц справа */
+.date-month {
+    font-size: 11px;
+    color: var(--text-muted);
+    opacity: 0.7;
+    margin-left: auto;
+    padding-left: 10px;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* Ховер эффект */
+.date-box:hover {
+    background: rgba(0, 188, 212, 0.08);
+    border-color: var(--accent-blue);
+    transform: translateX(5px);
+}
+
+.date-box:hover::before {
+    background: var(--accent-blue) !important;
+}
+
+/* Активный день */
+.date-box.active {
+    background: rgba(255, 87, 34, 0.15);
+    border-color: var(--accent-orange);
+    box-shadow: 0 5px 15px rgba(255, 87, 34, 0.2);
+}
+
+.date-box.active::before {
+    background: var(--accent-orange) !important;
+    box-shadow: 0 0 10px rgba(255, 87, 34, 0.5);
+}
+
+.date-box.active .date-day {
+    color: var(--accent-orange);
+    font-weight: 600;
+}
+
+/* Панель деталей события */
+.incident-details {
+    flex-grow: 1;
+    background: linear-gradient(135deg, #0d1629 0%, #111f3a 100%);
+    padding: 35px 40px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    min-height: 480px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Фоновый паттерн */
+.incident-details::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(0,188,212,0.05) 0%, transparent 70%);
+    z-index: 0;
+}
+
+/* Ссылка на источник внизу по центру */
+.source-link-bottom {
+    margin-top: auto;
+    padding-top: 25px;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.source-link-bottom a {
+    color: var(--accent-blue);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 25px;
+    background: rgba(0, 188, 212, 0.08);
+    border-radius: 6px;
+    border: 1px solid rgba(0, 188, 212, 0.3);
+    transition: all 0.3s ease;
+    min-width: 300px;
+    justify-content: center;
+}
+
+.source-link-bottom a:hover {
+    color: #000;
+    background: var(--accent-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0, 188, 212, 0.3);
+    border-color: var(--accent-blue);
+}
+
+/* Тег оценки/типа события */
+.threat-tag {
+    display: inline-block;
+    padding: 6px 14px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    border-radius: 4px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Стили для 3 типов угроз */
+.threat-level-low {
+    background: rgba(76, 175, 80, 0.15);
+    color: #4CAF50;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.1);
+}
+
+.threat-level-medium {
+    background: rgba(255, 193, 7, 0.15);
+    color: #FFC107;
+    border: 1px solid rgba(255, 193, 7, 0.3);
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.1);
+}
+
+.threat-level-critical {
+    background: rgba(244, 67, 54, 0.15);
+    color: #F44336;
+    border: 1px solid rgba(244, 67, 54, 0.3);
+    box-shadow: 0 0 10px rgba(244, 67, 54, 0.2);
+    animation: pulse 2s infinite;
+}
+
+/* Стили для праздников (голубой) */
+.threat-level-holiday {
+    background: rgba(0, 188, 212, 0.15);
+    color: #00BCD4;
+    border: 1px solid rgba(0, 188, 212, 0.3);
+    box-shadow: 0 0 10px rgba(0, 188, 212, 0.2);
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 10px rgba(244, 67, 54, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(244, 67, 54, 0.4); }
+    100% { box-shadow: 0 0 10px rgba(244, 67, 54, 0.2); }
+}
+
+/* Дата события (ВЕРНУЛИ НА МЕСТО) */
+.incident-date {
+    float: right;
+    font-family: 'Roboto Mono', monospace;
+    color: var(--accent-blue);
+    font-size: 14px;
+    background: rgba(0, 188, 212, 0.1);
+    padding: 4px 10px;
+    border-radius: 3px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Заголовок события */
+.incident-title {
+    font-size: 32px;
+    margin: 15px 0 25px 0;
+    color: white;
+    font-weight: 600;
+    line-height: 1.3;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 1;
+}
+
+/* Сетка контента */
+.incident-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 20px;
+}
+
+/* Блок информации */
+.info-block h3 {
+    color: var(--accent-blue);
+    font-size: 13px;
+    margin-bottom: 12px;
+    opacity: 1;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.info-block p {
+    font-size: 16px;
+    color: #d1e0f0;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.info-block li {
+    font-size: 15px;
+    color: #c8d6e5;
+    line-height: 1.7;
+    margin-bottom: 12px;
+}
+
+.info-block ul {
+    padding-left: 20px;
+    margin-top: 15px;
+}
+
+.info-block li {
+    position: relative;
+    padding-left: 15px;
+    margin-bottom: 10px;
+}
+
+.info-block li:before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--accent-blue);
+    font-size: 12px;
+}
+
+/* Блок с мерами/рекомендациями */
+.measures-box {
+    background: linear-gradient(135deg, rgba(0, 188, 212, 0.08) 0%, rgba(0, 188, 212, 0.03) 100%);
+    padding: 25px;
+    border-left: 3px solid var(--accent-blue);
+    border-radius: 5px;
+    box-shadow: inset 0 0 20px rgba(0, 188, 212, 0.05);
+}
+
+.measures-box h3 {
+    color: white;
+    font-size: 13px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.measures-box ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.measures-box li {
+    margin-bottom: 14px;
+    padding-left: 25px;
+    position: relative;
+    color: #b0c4de;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+.measures-box li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--accent-blue);
+    font-weight: bold;
+    font-size: 14px;
+    width: 18px;
+    height: 18px;
+    background: rgba(0, 188, 212, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ссылка на полный календарь */
+.full-calendar-link {
+    color: var(--accent-blue);
+    text-decoration: none;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    border: 1px solid var(--accent-blue);
+    padding: 10px 24px;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    background: rgba(0, 188, 212, 0.05);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 180px;
+    justify-content: center;
+}
+
+.full-calendar-link::after {
+    content: "→";
+    font-size: 16px;
+    transition: transform 0.3s;
+}
+
+.full-calendar-link:hover {
+    background: var(--accent-blue);
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 188, 212, 0.3);
+}
+
+.full-calendar-link:hover::after {
+    transform: translateX(3px);
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 1024px) {
+    .calendar-wrapper {
+        flex-direction: column;
+    }
+    
+    .calendar-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    
+    .week-navigation {
+        position: static;
+        transform: none;
+        align-self: center;
+        margin-top: 10px;
+    }
+    
+    
+.date-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 140px; /* Ширина вертикальной колонки */
+}
+    
+    .date-box {
+        flex: 1;
+        min-width: 120px;
+        max-width: 150px;
+    }
+    
+    .incident-content-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .incident-details {
+        padding: 25px;
+        min-height: auto;
+    }
+    
+    .incident-title {
+        font-size: 26px;
+    }
+    
+    .info-block p {
+        font-size: 15px;
+    }
+    
+    .source-link-bottom a {
+        min-width: 250px;
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+    
+    .full-calendar-link {
+        align-self: flex-start;
+        margin-top: 10px;
+    }
+}
+
+
+/* Контейнер для даты и уровня угрозы */
+.incident-details > .threat-tag,
+.incident-details > .incident-date {
+    display: inline-block;
+    vertical-align: top;
+}
+
+/* Альтернативное решение - flex контейнер */
+.incident-header-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+/* ================= ОПТИМИЗАЦИИ И ДОПОЛНЕНИЯ ================= */
+
+/* Стиль для сегодняшней даты */
+.date-box.today {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 15px rgba(0, 188, 212, 0.2);
+}
+
+.date-box.today .date-day {
+    color: var(--accent-blue);
+    font-weight: 700;
+}
+
+.date-box.today .date-weekday {
+    color: var(--accent-blue);
+    font-weight: 600;
+}
+
+/* Анимация загрузки */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.date-box, .incident-details {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Улучшенные стили для пустых дней */
+.date-box:not(.has-critical):not(.has-medium):not(.has-low):not(.has-holiday)::before {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Адаптивность для очень маленьких экранов */
+@media (max-width: 768px) {
+    .calendar-header {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .week-navigation {
+        order: 2;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .full-calendar-link {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        margin-top: 15px;
+    }
+    
+    .incident-title {
+        font-size: 24px;
+    }
+    
+    .info-block p, .measures-box li {
+        font-size: 14px;
+    }
+}
+
+/* Плавный скролл при навигации */
+.calendar-wrapper {
+    scroll-behavior: smooth;
+}
+
+/* Индикатор загрузки (опционально) */
+.loading-indicator {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--accent-blue);
+    font-size: 14px;
+}
+
+.calendar-wrapper.loading .loading-indicator {
+    display: block;
+}
+
+.calendar-wrapper.loading .date-grid,
+.calendar-wrapper.loading .incident-details {
+    opacity: 0.5;
+    pointer-events: none;
+}
+/* Стиль для даты пользователя (текущий день) */
+.date-box.user-date {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 15px rgba(0, 188, 212, 0.2);
+}
+
+.date-box.user-date .date-day {
+    color: var(--accent-blue);
+    font-weight: 700;
+}
+
+.date-box.user-date .date-weekday {
+    color: var(--accent-blue);
+    font-weight: 600;
+}
+
+/* Если дата пользователя также активна */
+.date-box.user-date.active {
+    background: rgba(0, 188, 212, 0.15);
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 20px rgba(0, 188, 212, 0.3);
+}
