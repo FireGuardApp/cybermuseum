@@ -15,8 +15,39 @@
 }
 
 /* чтобы основной контент не прятался под фиксированным топ-баром */
+
+
+
+}
+:root {
+    --bg-dark: #000505;
+    --bg-panel: rgba(0, 25, 25, 0.85);
+    --neon-cyan: #00ffff;
+    --neon-green: #00ffaa;
+    --neon-red: #ff4444;
+    --neon-purple: #bc13fe;
+    --grid-line: rgba(0, 255, 255, 0.1);
+    --font-ui: 'Montserrat', sans-serif;
+    --font-tech: 'Share Tech Mono', monospace;
+}
+
 body {
-    padding-top: 100px; /* подстрой под высоту топ-бара */
+    margin: 0; padding: 0;
+    background-color: var(--bg-dark);
+    color: var(--neon-cyan);
+    font-family: var(--font-ui);
+    height: 100vh; overflow: hidden;
+    display: flex; justify-content: center; align-items: center;
+    background-image: 
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 40px 40px; }
 }
 
 .top-bar-container {
@@ -153,37 +184,6 @@ body {
 .burger-overlay.active {
   display: block;
 }
-}
-:root {
-    --bg-dark: #000505;
-    --bg-panel: rgba(0, 25, 25, 0.85);
-    --neon-cyan: #00ffff;
-    --neon-green: #00ffaa;
-    --neon-red: #ff4444;
-    --neon-purple: #bc13fe;
-    --grid-line: rgba(0, 255, 255, 0.1);
-    --font-ui: 'Montserrat', sans-serif;
-    --font-tech: 'Share Tech Mono', monospace;
-}
-
-body {
-    margin: 0; padding: 0;
-    background-color: var(--bg-dark);
-    color: var(--neon-cyan);
-    font-family: var(--font-ui);
-    height: 100vh; overflow: hidden;
-    display: flex; justify-content: center; align-items: center;
-    background-image: 
-        linear-gradient(var(--grid-line) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-    background-size: 40px 40px;
-    animation: gridMove 20s linear infinite;
-}
-
-@keyframes gridMove {
-    0% { background-position: 0 0; }
-    100% { background-position: 40px 40px; }
-}
 
 .cyber-interface {
     width: 95%; max-width: 600px; height: 95vh;
@@ -296,3 +296,4 @@ footer {
         grid-template-columns: repeat(2, 1fr); 
     }
 }
+
