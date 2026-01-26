@@ -14,11 +14,7 @@
     box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
-/* чтобы основной контент не прятался под фиксированным топ-баром */
 
-
-
-}
 :root {
     --bg-dark: #000505;
     --bg-panel: rgba(0, 25, 25, 0.85);
@@ -32,12 +28,17 @@
 }
 
 body {
-    margin: 0; padding: 0;
+    margin: 0;
+    padding-top: 100px; /* чтобы топ-бар не перекрывал контент */
     background-color: var(--bg-dark);
     color: var(--neon-cyan);
     font-family: var(--font-ui);
-    height: 100vh; overflow: hidden;
-    display: flex; justify-content: center; align-items: center;
+    /* Убираем height и overflow для нормального скролла */
+    /* height: 100vh; */
+    /* overflow: hidden; */
+    /* display: flex; justify-content: center; align-items: center; */
+
+    /* Сетка и анимация фона */
     background-image: 
         linear-gradient(var(--grid-line) 1px, transparent 1px),
         linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
@@ -50,148 +51,18 @@ body {
     100% { background-position: 40px 40px; }
 }
 
-.top-bar-container {
-    max-width: 1200px; /* можно под размер сайта */
-    margin: 0 auto;
-    padding: 0 15px;
-}
-
-/* ===== БУРГЕР ===== */
-.burger {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  width: 30px;
-  cursor: pointer;
-  z-index: 1001;
-}
-
-.burger span {
-  display: block;
-  height: 3px;
-  background: #00BCD4;
-  margin: 6px 0;
-  transition: 0.3s;
-}
-
-/* ===== TOP BAR С МЕНЮ ===== */
-.top-bar-flex {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.top-bar-title {
-   text-transform: uppercase;     /* КАПС */
-  font-size: 22px;               /* больше */
-  font-weight: 600;
-  letter-spacing: 1.2px;         /* как у вкладок */
-}
-
-/* меню справа */
-.top-nav--bar {
-  display: flex;
-  gap: 25px;
-}
-
-.top-nav--bar a {
-  font-size: 15px;
-  color: #8FA3BF;
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  position: relative;
-}
-
-.top-nav--bar a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 0;
-  height: 2px;
-  background: #00BCD4;
-  transition: 0.3s;
-}
-
-.top-nav--bar a:hover {
-  color: #EAF2FF;
-}
-
-.top-nav--bar a:hover::after {
-  width: 100%;
-}
-
-/* 📱 ТЕЛЕФОН — ТОЛЬКО ТЕКСТ */
-@media (max-width: 768px) {
-  .top-nav--bar {
-    display: none;
-  }
-}
-
-/* === Скрываем бургер-меню по умолчанию на ПК === */
-.burger-menu,
-.burger-overlay {
-  display: none;
-}
-
-/* === Показываем бургер и overlay только на мобильных === */
-@media (min-width: 1024px) {
-  .burger {
-    display: none; /* кнопка бургер */
-    z-index: 10000; /* чтобы быть над шапкой */
-  }
-
-/* ===== МЕНЮ ===== */
-.burger-menu {
-  position: fixed;
-  top: 0;
-  right: -320px;
-  width: 320px;
-  height: 100%;
-  background: #0B1220;
-  padding: 80px 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  transform: translateX(100%);
-  transition: right 0.3s ease;
-  z-index: 9999;
-}
-
-.burger-menu a {
-  color: #EAF2FF;
-  text-decoration: none;
-  font-size: 18px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  padding-bottom: 10px;
-}
-
-.burger-menu.active {
-    transform: translateX(0);
-  right: 0;
-}
-
-/* затемнение */
-.burger-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  display: none;
-  z-index: 9998;
-}
-
-.burger-overlay.active {
-  display: block;
-}
 
 .cyber-interface {
-    width: 95%; max-width: 600px; height: 95vh;
+    width: 95%; max-width: 600px; min-height: 80vh;
     background: rgba(0, 10, 10, 0.6);
     backdrop-filter: blur(5px);
     border: 1px solid var(--neon-cyan);
     box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-    padding: 15px; display: flex; flex-direction: column;
+    padding: 15px;
+
+    /* Центровка контента */
+    display: flex; flex-direction: column;
+    margin: 0 auto;
 }
 
 .accent { color: var(--neon-purple); }
