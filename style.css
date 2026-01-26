@@ -29,21 +29,21 @@
 
 body {
     margin: 0;
-    padding-top: 100px; /* чтобы топ-бар не перекрывал контент */
+    padding-top: 100px; /* место под топ-бар */
     background-color: var(--bg-dark);
     color: var(--neon-cyan);
     font-family: var(--font-ui);
-    /* Убираем height и overflow для нормального скролла */
-    /* height: 100vh; */
-    /* overflow: hidden; */
-    /* display: flex; justify-content: center; align-items: center; */
 
-    /* Сетка и анимация фона */
     background-image: 
         linear-gradient(var(--grid-line) 1px, transparent 1px),
         linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
     background-size: 40px 40px;
     animation: gridMove 20s linear infinite;
+
+    /* Важно: не используем flex и не скрываем overflow */
+    /* height: 100vh; */
+    /* display: flex; justify-content: center; align-items: center; */
+    /* overflow: hidden; */
 }
 
 @keyframes gridMove {
@@ -60,9 +60,8 @@ body {
     box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
     padding: 15px;
 
-    /* Центровка контента */
     display: flex; flex-direction: column;
-    margin: 0 auto;
+    margin: 0 auto; /* центр по горизонтали */
 }
 
 .accent { color: var(--neon-purple); }
@@ -167,4 +166,5 @@ footer {
         grid-template-columns: repeat(2, 1fr); 
     }
 }
+
 
