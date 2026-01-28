@@ -1,80 +1,456 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Протокол реагирования</title>
-  <link rel="stylesheet" href="css1.css">
-  <link href="https://fonts.googleapis.com/css2?family=Oswald&family=Roboto&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Полный календарь киберинцидентов | Музей Кибербезопасности</title>
+    
+    <!-- Стили -->
+    <link rel="stylesheet" href="css1.css">
+    <link rel="stylesheet" href="calendar.css">
+    <link rel="stylesheet" href="full-calendar.css">
+    
+    <!-- Шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Roboto+Mono:wght@300;400;500&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Иконки -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
-
-<!-- ТОП-БАР (тот же самый) -->
-<div class="top-bar">
-  <div class="top-bar-container top-bar-flex">
-    <div class="top-bar-title">
-      Виртуальный Музей Киберинцидентов
+<body class="full-calendar-page">
+    <!-- Сканирующая линия -->
+    <div class="scanline"></div>
+    
+    <!-- Бургер-меню -->
+    <div class="burger" id="burger">
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
-
-    <nav class="top-nav top-nav--bar">
-      <a href="library.html">Видеобиблиотека</a>
-      <a href="games.html">Киберполигон</a>
-      <a href="index.html">На главную</a>
+    
+    <nav class="burger-menu" id="burgerMenu">
+        <a href="index.html">🏠 Главная</a>
+        <a href="library.html">🎬 Видеобиблиотека</a>
+        <a href="games.html">🎮 Библиотека игр</a>
+        <a href="traning.html">📚 Учебный класс</a>
     </nav>
-  </div>
-</div>
-
-<!-- КОНТЕНТ (ПОКА ПУСТО) -->
-<div class="container" style="padding-top:120px; min-height:60vh;">
-  <h1>РАЗДЕЛ В РАЗРАБОТКЕ</h1>
-  <p style="color:var(--text-muted); max-width:600px;">
-    Контент будет добавлен позже.
-  </p>
-</div>
-
-<!-- FOOTER (копируешь 1 в 1) -->
- <footer>
+    
+    <div class="burger-overlay" id="burgerOverlay"></div>
+    
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="top-bar-container top-bar-flex">
+            <div class="top-bar-title">
+                Календарь киберинцидентов 2026
+            </div>
+            <nav class="top-nav top-nav--bar">
+                <a href="index.html">Главная</a>
+                <a href="#stats">Статистика</a>
+                <a href="#timeline">Хронология</a>
+            </nav>
+        </div>
+    </div>
+    
+    <!-- Основной контент -->
+    <main class="container">
+        <!-- Заголовок с анимированным логотипом -->
+        <header class="calendar-header-main">
+            <div class="hologram-logo">
+                <div class="hologram-inner">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+            </div>
+            <h1 class="cyber-title">
+                <span class="title-glitch" data-text="ПОЛНЫЙ КАЛЕНДАРЬ">ПОЛНЫЙ КАЛЕНДАРЬ</span>
+                <span class="title-sub">КИБЕРИНЦИДЕНТОВ 2026</span>
+            </h1>
+            <div class="cyber-subtitle">
+                <span class="pulse-dot"></span>
+                РЕАЛЬНОЕ ВРЕМЯ | СИСТЕМА МОНИТОРИНГА УГРОЗ
+            </div>
+        </header>
+        
+        <!-- Панель управления календарем -->
+        <section class="calendar-controls">
+            <div class="controls-grid">
+                <div class="control-box">
+                    <div class="control-label"><i class="fas fa-calendar-week"></i> ВЫБОР МЕСЯЦА</div>
+                    <div class="month-selector">
+                        <button class="month-nav prev"><i class="fas fa-chevron-left"></i></button>
+                        <div class="current-month">
+                            <span class="month-name">ЯНВАРЬ</span>
+                            <span class="year">2026</span>
+                        </div>
+                        <button class="month-nav next"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                
+                <div class="control-box">
+                    <div class="control-label"><i class="fas fa-filter"></i> ФИЛЬТР УГРОЗ</div>
+                    <div class="threat-filters">
+                        <button class="filter-btn active" data-filter="all">Все</button>
+                        <button class="filter-btn critical" data-filter="critical">Критические</button>
+                        <button class="filter-btn medium" data-filter="medium">Средние</button>
+                        <button class="filter-btn low" data-filter="low">Низкие</button>
+                        <button class="filter-btn holiday" data-filter="holiday">События</button>
+                    </div>
+                </div>
+                
+                <div class="control-box">
+                    <div class="control-label"><i class="fas fa-chart-bar"></i> СТАТИСТИКА</div>
+                    <div class="stats-display">
+                        <div class="stat-item">
+                            <span class="stat-value" id="totalEvents">31</span>
+                            <span class="stat-label">инцидентов</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value critical">8</span>
+                            <span class="stat-label">критических</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">7</span>
+                            <span class="stat-label">праздников</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Основной календарь (сетка) -->
+        <section class="full-calendar-grid">
+            <!-- Дни недели -->
+            <div class="weekdays-header">
+                <div class="weekday">ПН</div>
+                <div class="weekday">ВТ</div>
+                <div class="weekday">СР</div>
+                <div class="weekday">ЧТ</div>
+                <div class="weekday">ПТ</div>
+                <div class="weekday">СБ</div>
+                <div class="weekday">ВС</div>
+            </div>
+            
+            <!-- Сетка дней -->
+            <div class="days-grid" id="calendarGrid">
+                <!-- Заполняется JavaScript -->
+            </div>
+        </section>
+        
+        <!-- Детализированная панель события -->
+        <section class="detailed-event-panel">
+            <div class="panel-header">
+                <h2 class="panel-title">
+                    <i class="fas fa-info-circle"></i>
+                    <span id="eventDateTitle">ВЫБЕРИТЕ ДАТУ</span>
+                </h2>
+                <div class="panel-actions">
+                    <button class="panel-btn" id="prevEvent"><i class="fas fa-arrow-left"></i></button>
+                    <button class="panel-btn" id="nextEvent"><i class="fas fa-arrow-right"></i></button>
+                    <button class="panel-btn" id="closePanel"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            
+            <div class="panel-content" id="eventDetails">
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <i class="fas fa-calendar-day"></i>
+                    </div>
+                    <h3>ВЫБЕРИТЕ ДАТУ НА КАЛЕНДАРЕ</h3>
+                    <p>Нажмите на любой день, чтобы просмотреть подробную информацию о киберинциденте или событии</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Хронологическая шкала -->
+        <section class="timeline-section" id="timeline">
+            <h2 class="section-title-glitch">
+                <span data-text="ХРОНОЛОГИЯ">ХРОНОЛОГИЯ</span>
+                <span class="sub">ИНЦИДЕНТОВ МЕСЯЦА</span>
+            </h2>
+            
+            <div class="timeline-container">
+                <div class="timeline-track" id="timelineTrack">
+                    <!-- Заполняется JavaScript -->
+                </div>
+            </div>
+            
+            <div class="timeline-controls">
+                <button class="timeline-nav" id="timelineLeft"><i class="fas fa-chevron-left"></i></button>
+                <div class="timeline-scale">1-31 ЯНВАРЯ 2026</div>
+                <button class="timeline-nav" id="timelineRight"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </section>
+        
+        <!-- Статистика -->
+        <section class="stats-section" id="stats">
+            <h2 class="section-title-glitch">
+                <span data-text="СТАТИСТИКА">СТАТИСТИКА</span>
+                <span class="sub">АНАЛИЗ УГРОЗ</span>
+            </h2>
+            
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <div class="stat-card-header critical">
+                        <i class="fas fa-skull-crossbones"></i>
+                        <h3>КРИТИЧЕСКИЕ</h3>
+                    </div>
+                    <div class="stat-card-body">
+                        <div class="stat-number">8</div>
+                        <div class="stat-desc">инцидентов</div>
+                        <div class="stat-bar">
+                            <div class="bar-fill" style="width: 25.8%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-card-header medium">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>СРЕДНИЕ</h3>
+                    </div>
+                    <div class="stat-card-body">
+                        <div class="stat-number">6</div>
+                        <div class="stat-desc">инцидентов</div>
+                        <div class="stat-bar">
+                            <div class="bar-fill" style="width: 19.4%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-card-header low">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>НИЗКИЕ</h3>
+                    </div>
+                    <div class="stat-card-body">
+                        <div class="stat-number">4</div>
+                        <div class="stat-desc">инцидентов</div>
+                        <div class="stat-bar">
+                            <div class="bar-fill" style="width: 12.9%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-card-header holiday">
+                        <i class="fas fa-calendar-star"></i>
+                        <h3>СОБЫТИЯ</h3>
+                    </div>
+                    <div class="stat-card-body">
+                        <div class="stat-number">13</div>
+                        <div class="stat-desc">исторических дат</div>
+                        <div class="stat-bar">
+                            <div class="bar-fill" style="width: 41.9%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="heatmap-container">
+                <h3>ТЕПЛОВАЯ КАРТА АКТИВНОСТИ</h3>
+                <div class="heatmap" id="heatmap">
+                    <!-- Заполняется JavaScript -->
+                </div>
+                <div class="heatmap-legend">
+                    <span class="legend-item"><span class="legend-color low"></span> Низкая активность</span>
+                    <span class="legend-item"><span class="legend-color medium"></span> Средняя активность</span>
+                    <span class="legend-item"><span class="legend-color critical"></span> Высокая активность</span>
+                </div>
+            </div>
+        </section>
+        
+       <!-- Интерактивная карта -->
+<section class="map-section">
+    <h2 class="section-title-glitch">
+        <span data-text="ГЕОГРАФИЯ">ГЕОГРАФИЯ</span>
+        <span class="sub">РАСПРЕДЕЛЕНИЕ ИНЦИДЕНТОВ ПО МИРУ</span>
+    </h2>
+    
+    <div class="cyber-map-container">
+        <div class="map-display">
+            <!-- Карта с вашим изображением -->
+            <div class="custom-world-map">
+                <!-- Ваше изображение карты -->
+                <img src="./world-map.png" alt="Карта мира" class="map-base-image">
+                
+                <!-- Точки инцидентов поверх карты -->
+                <div class="incident-marker russia" style="top: 35%; left: 65%;">
+                    <div class="marker-pulse"></div>
+                    <div class="marker-tooltip">
+                        <strong>🇷🇺 Россия</strong><br>
+                        8 инцидентов<br>
+                        <span class="critical">3 критических</span>
+                    </div>
+                </div>
+                
+                <div class="incident-marker usa" style="top: 45%; left: 25%;">
+                    <div class="marker-pulse"></div>
+                    <div class="marker-tooltip">
+                        <strong>🇺🇸 США</strong><br>
+                        12 инцидентов<br>
+                        <span class="critical">4 критических</span>
+                    </div>
+                </div>
+                
+                <div class="incident-marker europe" style="top: 40%; left: 48%;">
+                    <div class="marker-pulse"></div>
+                    <div class="marker-tooltip">
+                        <strong>🇪🇺 Европа</strong><br>
+                        15 инцидентов<br>
+                        <span class="critical">5 критических</span>
+                    </div>
+                </div>
+                
+                <div class="incident-marker asia" style="top: 50%; left: 75%;">
+                    <div class="marker-pulse"></div>
+                    <div class="marker-tooltip">
+                        <strong>🌏 Азия</strong><br>
+                        9 инцидентов<br>
+                        <span class="critical">2 критических</span>
+                    </div>
+                </div>
+                
+                <!-- Сетка поверх карты -->
+                <div class="map-grid-overlay"></div>
+            </div>
+        </div>
+        
+        <div class="map-legend">
+            <h3><i class="fas fa-globe-americas"></i> АКТИВНОСТЬ ПО РЕГИОНАМ</h3>
+            
+            <div class="region-stats">
+                <div class="stat-row">
+                    <span class="region-name">🇪🇺 Европа</span>
+                    <div class="stat-bar">
+                        <div class="bar-fill" style="width: 90%;"></div>
+                    </div>
+                    <span class="stat-value">15</span>
+                </div>
+                
+                <div class="stat-row">
+                    <span class="region-name">🇺🇸 США</span>
+                    <div class="stat-bar">
+                        <div class="bar-fill" style="width: 72%;"></div>
+                    </div>
+                    <span class="stat-value">12</span>
+                </div>
+                
+                <div class="stat-row">
+                    <span class="region-name">🇷🇺 Россия</span>
+                    <div class="stat-bar">
+                        <div class="bar-fill" style="width: 48%;"></div>
+                    </div>
+                    <span class="stat-value">8</span>
+                </div>
+                
+                <div class="stat-row">
+                    <span class="region-name">🌏 Азия</span>
+                    <div class="stat-bar">
+                        <div class="bar-fill" style="width: 54%;"></div>
+                    </div>
+                    <span class="stat-value">9</span>
+                </div>
+            </div>
+            
+            <div class="map-notes">
+                <p><i class="fas fa-info-circle"></i> Интенсивность цвета показывает уровень киберактивности</p>
+            </div>
+        </div>
+    </div>
+</section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
         <div class="container footer-grid">
             <div class="footer-col">
                 <div style="display:flex; align-items:center; margin-bottom:20px;">
                     <div class="logo-shield" style="width:30px; height:30px; margin:0 15px 0 0; font-size:16px; border-width:1px;"><i>!</i></div>
                     <h4 style="margin:0">ЦИФРОВОЙ ЩИТ РФ</h4>
                 </div>
-                <p style="color:var(--text-muted); line-height:1.6;">Официальный ресурс по вопросам цифровой безопасности и противодействия киберугрозам.</p>
+                <p style="color:var(--text-muted); line-height:1.6;">Полный архив киберинцидентов с 1980 года. Система мониторинга угроз в реальном времени.</p>
             </div>
             
             <div class="footer-col">
-                <h4>КАРТА САЙТА</h4>
+                <h4>НАВИГАЦИЯ</h4>
                 <ul class="footer-links">
-                    <li><a href="#">Оперативная сводка</a></li>
-                    <li><a href="#">Календарь инцидентов</a></li>
-                    <li><a href="#">Киберполигон</a></li>
-                    <li><a href="#">Учебный класс</a></li>
+                    <li><a href="index.html">Главная страница</a></li>
+                    <li><a href="#stats">Статистика угроз</a></li>
+                    <li><a href="#timeline">Хронология</a></li>
+                    <li><a href="#">Экспорт данных</a></li>
                 </ul>
             </div>
 
             <div class="footer-col">
-                <h4>ДОКУМЕНТЫ</h4>
+                <h4>РЕСУРСЫ</h4>
                 <ul class="footer-links">
-                    <li><a href="#">Политика конфиденциальности</a></li>
-                    <li><a href="#">Условия использования</a></li>
-                    <li><a href="#">Сертификаты безопасности</a></li>
+                    <li><a href="#">API данных</a></li>
+                    <li><a href="#">Отчёты в PDF</a></li>
+                    <li><a href="#">Методические материалы</a></li>
                 </ul>
             </div>
 
             <div class="footer-col">
-                <h4>СТАТУС СИСТЕМЫ</h4>
-                <div style="color:var(--text-muted); margin-bottom:10px;"><span class="status-dot"></span> HTTPS Шифрование активно</div>
-                <div style="color:var(--text-muted); margin-bottom:10px;"><span class="status-dot"></span> Уязвимости не обнаружены</div>
-                <div style="color:var(--text-muted); margin-bottom:10px;"><span class="status-dot"></span> Мониторинг 24/7</div>
-                <!-- счетчик -->
-        <p>
-        <div style="color:var(--text-muted); margin-bottom:10px;"><span class="status-dot"></span>Посетителей: <span
-            id="counter">0</span></p>
+                <h4>СИСТЕМНЫЙ СТАТУС</h4>
+                <div style="color:var(--text-muted); margin-bottom:10px;">
+                    <span class="status-dot"></span> База данных: <span id="dbStatus">В сети</span>
+                </div>
+                <div style="color:var(--text-muted); margin-bottom:10px;">
+                    <span class="status-dot"></span> Последнее обновление: <span id="lastUpdate">сегодня 14:30</span>
+                </div>
+                <div style="color:var(--text-muted); margin-bottom:10px;">
+                    <span class="status-dot"></span> Инцидентов в базе: <span id="totalIncidents">417</span>
+                </div>
+            </div>
         </div>
-
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2026 МЧС России | Система мониторинга киберугроз. Все данные защищены.</p>
+                <p class="cyber-warning">
+                    <i class="fas fa-shield-alt"></i> ВНИМАНИЕ: Информация на этой странице обновляется в реальном времени.
+                </p>
             </div>
         </div>
     </footer>
-
+    
+    <!-- Скрипты -->
+    <script src="full-calendar.js"></script>
+    <script src="js.js"></script>
+    
+    <!-- Инициализация бургер-меню -->
+    <script>
+        // Бургер-меню
+        const burger = document.getElementById('burger');
+        const menu = document.getElementById('burgerMenu');
+        const overlay = document.getElementById('burgerOverlay');
+        
+        burger.onclick = () => {
+            menu.classList.toggle('active');
+            overlay.classList.toggle('active');
+        };
+        
+        overlay.onclick = () => {
+            menu.classList.remove('active');
+            overlay.classList.remove('active');
+        };
+        
+        // Закрытие меню при клике на ссылку
+        menu.querySelectorAll('a').forEach(link => {
+            link.onclick = () => {
+                menu.classList.remove('active');
+                overlay.classList.remove('active');
+            };
+        });
+        
+        // Обновление времени в футере
+        function updateDateTime() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('lastUpdate').textContent = `сегодня ${timeStr}`;
+        }
+        
+        // Запускаем обновление времени
+        updateDateTime();
+        setInterval(updateDateTime, 60000); // Обновляем каждую минуту
+    </script>
 </body>
 </html>
