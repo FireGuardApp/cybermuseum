@@ -80,48 +80,62 @@
   
 
 <!-- FOOTER (копируешь 1 в 1) -->
-<footer>
-  <div class="container footer-grid">
-    <!-- твой footer без изменений -->
-       <div class="container footer-grid">
+  <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
             <div class="footer-col">
                 <div style="display:flex; align-items:center; margin-bottom:20px;">
-                    <div class="logo-shield" style="width:30px; height:30px; margin:0 15px 0 0; font-size:14px; border-width:1px;"><i>!</i></div>
+                    <div class="logo-shield" style="width:30px; height:30px; margin:0 15px 0 0; font-size:16px; border-width:1px;"><i>!</i></div>
                     <h4 style="margin:0">ЦИФРОВОЙ ЩИТ РФ</h4>
                 </div>
-                <p style="color:var(--text-muted); line-height:1.6;">Официальный ресурс по вопросам цифровой безопасности и противодействия киберугрозам.</p>
+                <p style="color:var(--text-muted); line-height:1.6;">Полный архив киберинцидентов с 1980 года. Система мониторинга угроз в реальном времени.</p>
             </div>
             
             <div class="footer-col">
-                <h4>КАРТА САЙТА</h4>
+                <h4>НАВИГАЦИЯ</h4>
                 <ul class="footer-links">
-                    <li><a href="#">Оперативная сводка</a></li>
-                    <li><a href="#">Календарь инцидентов</a></li>
-                    <li><a href="#">Киберполигон</a></li>
-                    <li><a href="#">Учебный класс</a></li>
+                    <li><a href="index.html">Главная страница</a></li>
+                    <li><a href="#stats">Статистика угроз</a></li>
+                    <li><a href="#timeline">Хронология</a></li>
+                    <li><a href="#">Экспорт данных</a></li>
                 </ul>
             </div>
 
             <div class="footer-col">
-                <h4>ДОКУМЕНТЫ</h4>
+                <h4>РЕСУРСЫ</h4>
                 <ul class="footer-links">
-                    <li><a href="#">Политика конфиденциальности</a></li>
-                    <li><a href="#">Условия использования</a></li>
-                    <li><a href="#">Сертификаты безопасности</a></li>
+                    <li><a href="#">API данных</a></li>
+                    <li><a href="#">Отчёты в PDF</a></li>
+                    <li><a href="#">Методические материалы</a></li>
                 </ul>
             </div>
 
             <div class="footer-col">
-                <h4>СТАТУС СИСТЕМЫ</h4>
-                <div style="color:var(--text-muted); margin-bottom:10px;"><span class="status-dot"></span> HTTPS Шифрование активно</div>
-                <div style="color:var(--text-muted); margin-bottom:10px;"><span class="status-dot"></span> Уязвимости не обнаружены</div>
-                <div style="color:var(--text-muted); margin-bottom:10px;"><span class="status-dot"></span> Мониторинг 24/7</div>
+                <h4>СИСТЕМНЫЙ СТАТУС</h4>
+                <div style="color:var(--text-muted); margin-bottom:10px;">
+                    <span class="status-dot"></span> База данных: <span id="dbStatus">В сети</span>
+                </div>
+                <div style="color:var(--text-muted); margin-bottom:10px;">
+                    <span class="status-dot"></span> Последнее обновление: <span id="lastUpdate">сегодня 14:30</span>
+                </div>
+                <div style="color:var(--text-muted); margin-bottom:10px;">
+                    <span class="status-dot"></span> Инцидентов в базе: <span id="totalIncidents">417</span>
+                </div>
             </div>
         </div>
-  </div>
-</footer>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2026 МЧС России | Система мониторинга киберугроз. Все данные защищены.</p>
+                <p class="cyber-warning">
+                    <i class="fas fa-shield-alt"></i> ВНИМАНИЕ: Информация на этой странице обновляется в реальном времени.
+                </p>
+            </div>
+        </div>
+    </footer>
 
   <script src="script.js"></script>
 
 </body>
 </html>
+
