@@ -199,6 +199,7 @@ main {
             max-width: 1400px; /* Увеличил ширину для вместимости 4 видео */
             margin: 0 auto;
             padding: 0 40px;
+             margin-top: 80px;
         }
 
         a { text-decoration: none; color: inherit; transition: 0.3s; }
@@ -1008,3 +1009,4 @@ body.modal-open {
 .page-test footer {
   display: none;
 }
+
