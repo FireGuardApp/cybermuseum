@@ -36,7 +36,6 @@ main {
 
 /* ===== БУРГЕР ===== */
 .burger {
-  display: none;
   position: fixed;
   top: 20px;
   right: 20px;
@@ -109,15 +108,15 @@ main {
 }
 
 /* === Скрываем бургер-меню по умолчанию на ПК === */
-
+.burger-menu,
 .burger-overlay {
   display: none;
 }
 
 /* === Показываем бургер и overlay только на мобильных === */
-@media (max-width: 1023px) {
+@media (min-width: 1024px) {
   .burger {
-    display: block; /* кнопка бургер */
+    display: none; /* кнопка бургер */
     z-index: 10000; /* чтобы быть над шапкой */
   }
 
