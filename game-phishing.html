@@ -1,14 +1,282 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Протокол реагирования</title>
-  <link rel="stylesheet" href="css1.css">
-  <link href="https://fonts.googleapis.com/css2?family=Oswald&family=Roboto&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабиринт Фишинга: Узел Правды</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+
+              /* ================= ТОП-БАР ================= */
+.top-bar {
+    width: 100%;
+    background-color: #050911; /* тёмный фон */
+    color:  #00BCD4;           /* белый текст */
+    font-size: 25px;
+    font-weight: 500;
+    padding: 25px 0;
+    text-align:left;
+    position: fixed;          /* фиксируем сверху */
+    top: 0;
+    left: 0;
+    z-index: 10;            /* чтобы было поверх всего */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+html, body {
+  height: 100%;
+}
+/* чтобы основной контент не прятался под фиксированным топ-баром */
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+.top-bar-container {
+    max-width: 1200px; /* можно под размер сайта */
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* ===== БУРГЕР ===== */
+.burger {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 30px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.burger span {
+  display: block;
+  height: 3px;
+  background: #00BCD4;
+  margin: 6px 0;
+  transition: 0.3s;
+}
+
+/* ===== TOP BAR С МЕНЮ ===== */
+.top-bar-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top-bar-title {
+   text-transform: uppercase;     /* КАПС */
+  font-size: 22px;               /* больше */
+  font-weight: 600;
+  letter-spacing: 1.2px;         /* как у вкладок */
+}
+
+/* меню справа */
+.top-nav--bar {
+  display: flex;
+  gap: 25px;
+}
+
+.top-nav--bar a {
+  font-size: 15px;
+  color: #8FA3BF;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.top-nav--bar a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: #00BCD4;
+  transition: 0.3s;
+}
+
+.top-nav--bar a:hover {
+  color: #EAF2FF;
+}
+
+.top-nav--bar a:hover::after {
+  width: 100%;
+}
+
+/* 📱 ТЕЛЕФОН — ТОЛЬКО ТЕКСТ */
+@media (max-width: 768px) {
+  .top-nav--bar {
+    display: none;
+  }
+}
+
+/* === Скрываем бургер-меню по умолчанию на ПК === */
+.burger-menu,
+.burger-overlay {
+  display: none;
+}
+
+/* === Показываем бургер и overlay только на мобильных === */
+@media (min-width: 1024px) {
+  .burger {
+    display: none; /* кнопка бургер */
+    z-index: 10000; /* чтобы быть над шапкой */
+  }
+
+/* ===== МЕНЮ ===== */
+.burger-menu {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 320px;
+  height: 100%;
+  background: #0B1220;
+  padding: 80px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transform: translateX(100%);
+  transition: right 0.3s ease;
+  z-index: 9999;
+}
+
+.burger-menu a {
+  color: #EAF2FF;
+  text-decoration: none;
+  font-size: 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 10px;
+}
+
+.burger-menu.active {
+    transform: translateX(0);
+  right: 0;
+}
+
+/* затемнение */
+.burger-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  z-index: 9998;
+}
+
+.burger-overlay.active {
+  display: block;
+}
+}
+
+
+        :root {
+            --neon-cyan: #00ffff;
+            --neon-green: #00ffaa;
+            --neon-red: #ff4444;
+            --bg-dark: #000a0a;
+        }
+
+        body {
+            margin: 70px;
+            background: var(--bg-dark);
+            color: var(--neon-cyan);
+            font-family: 'Montserrat', sans-serif;
+            overflow-y: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #game-wrapper {
+            position: relative;
+            border: 2px solid var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        canvas { display: block; background: #000; }
+
+        /* Табличка с правилами и экраны */
+        .overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 5, 5, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            z-index: 10;
+        }
+
+        .terminal-text {
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--neon-green);
+            margin-bottom: 20px;
+            max-width: 500px;
+            line-height: 1.5;
+        }
+
+        .cyber-btn {
+            background: transparent;
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            padding: 15px 30px;
+            font-family: 'Share Tech Mono', monospace;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .cyber-btn:hover {
+            background: var(--neon-cyan);
+            color: #000;
+            box-shadow: 0 0 20px var(--neon-cyan);
+        }
+
+        /* Окно вопроса */
+        #quiz-overlay {
+            display: none;
+            background: rgba(0, 20, 20, 0.98);
+            border: 2px solid var(--neon-green);
+        }
+
+        .quiz-option {
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid var(--neon-cyan);
+            color: #fff;
+            padding: 15px;
+            margin: 10px;
+            width: 80%;
+            cursor: pointer;
+            font-family: 'Share Tech Mono', monospace;
+            transition: 0.2s;
+        }
+
+        .quiz-option:hover {
+            background: rgba(0, 255, 255, 0.2);
+            border-color: #fff;
+        }
+
+        .hidden { display: none !important; }
+        
+        .hud {
+            position: absolute;
+            top: 10px; left: 10px;
+            font-family: 'Share Tech Mono', monospace;
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
 
-<!-- ТОП-БАР (тот же самый) -->
+     <!-- ТОП-БАР (тот же самый) -->
 <div class="top-bar">
   <div class="top-bar-container top-bar-flex">
     <div class="top-bar-title">
@@ -23,59 +291,255 @@
   </div>
 </div>
 
-<!-- КОНТЕНТ (ПОКА ПУСТО) -->
-<div class="container" style="padding-top:120px; min-height:60vh;">
-  <h1>РАЗДЕЛ В РАЗРАБОТКЕ</h1>
-  <p style="color:var(--text-muted); max-width:600px;">
-    Контент будет добавлен позже.
-  </p>
-</div>
+    <div id="game-wrapper">
+        <div class="hud">УРОВЕНЬ: <span id="lvl-val">1</span> | ЖИЗНИ: <span id="hp-val">3</span></div>
+        
+        <canvas id="gameCanvas" width="600" height="600"></canvas>
 
-<!-- FOOTER (копируешь 1 в 1) -->
- <footer>
-        <div class="container footer-grid">
-            <div class="footer-col">
-                <div style="display:flex; align-items:center; margin-bottom:20px;">
-                    <div class="logo-shield" style="width:30px; height:30px; margin:0 15px 0 0; font-size:16px; border-width:1px;"><i>!</i></div>
-                    <h4 style="margin:0">ЦИФРОВОЙ ЩИТ РФ</h4>
-                </div>
-                <p style="color:var(--text-muted); line-height:1.6;">Официальный ресурс по вопросам цифровой безопасности и противодействия киберугрозам.</p>
+        <div id="start-screen" class="overlay">
+            <h1 style="color: var(--neon-cyan); text-shadow: 0 0 10px var(--neon-cyan);">ЛАБИРИНТ ФИШИНГА</h1>
+            <div class="terminal-text">
+                > ЦЕЛЬ: Дойти до выхода (зеленый портал).<br>
+                > ПРЕГРАДЫ: Красные боты-сканеры отнимают энергию.<br>
+                > ЗАМКИ: Чтобы открыть дверь, коснись желтого терминала и выбери БЕЗОПАСНУЮ ссылку или действие.<br>
+                > УПРАВЛЕНИЕ: СТРЕЛКИ или WASD.
             </div>
-            
-            <div class="footer-col">
-                <h4>КАРТА САЙТА</h4>
-                <ul class="footer-links">
-                    <li><a href="#">Оперативная сводка</a></li>
-                    <li><a href="#">Календарь инцидентов</a></li>
-                    <li><a href="#">Киберполигон</a></li>
-                    <li><a href="#">Учебный класс</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-col">
-                <h4>ДОКУМЕНТЫ</h4>
-                <ul class="footer-links">
-                    <li><a href="#">Политика конфиденциальности</a></li>
-                    <li><a href="#">Условия использования</a></li>
-                    <li><a href="#">Сертификаты безопасности</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-col">
-                <h4>СТАТУС СИСТЕМЫ</h4>
-                <div style="color:var(--text-muted); margin-bottom:10px;"><span class="status-dot"></span> HTTPS Шифрование активно</div>
-                <div style="color:var(--text-muted); margin-bottom:10px;"><span class="status-dot"></span> Уязвимости не обнаружены</div>
-                <div style="color:var(--text-muted); margin-bottom:10px;"><span class="status-dot"></span> Мониторинг 24/7</div>
-                <!-- счетчик -->
-        <p>
-        <div style="color:var(--text-muted); margin-bottom:10px;"><span class="status-dot"></span>Посетителей: <span
-            id="counter">0</span></p>
+            <button class="cyber-btn" onclick="startGame()">ЗАПУСТИТЬ ПРОТОКОЛ</button>
         </div>
 
-            </div>
+        <div id="quiz-overlay" class="overlay">
+            <h2 id="quiz-title" style="color: var(--neon-green);">ПРОВЕРКА БЕЗОПАСНОСТИ</h2>
+            <p id="quiz-question" class="terminal-text">Выберите безопасный адрес для входа в систему:</p>
+            <div id="options-container"></div>
         </div>
-    </footer>
 
+        <div id="end-screen" class="overlay hidden">
+            <h1 id="end-title">СИСТЕМА СКОМПРОМЕТИРОВАНА</h1>
+            <p id="end-msg" class="terminal-text"></p>
+            <button class="cyber-btn" onclick="location.reload()">ПЕРЕЗАГРУЗКА</button>
+        </div>
+    </div>
+
+<script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const TILE_SIZE = 40;
+    const COLS = canvas.width / TILE_SIZE;
+    const ROWS = canvas.height / TILE_SIZE;
+
+    let player = { x: 1, y: 1, hp: 3 };
+    let level = 1;
+    let gameActive = false;
+    let enemies = [];
+    let terminals = [];
+    let doorOpen = false;
+
+    // Данные вопросов
+    const quizData = [
+        { q: "Пришло письмо от 'Security-PayPal'. Куда нажмете?", a: "Проверю адрес отправителя", b: "Срочно нажму 'Восстановить доступ'", correct: 'a' },
+        { q: "Какой URL настоящий?", a: "accounts.google.com", b: "accounts-google.security-update.io", correct: 'a' },
+        { q: "Вам прислали файл 'invoice.exe'. Ваши действия?", a: "Открою, вдруг это счет", b: "Удалю файл не открывая", correct: 'b' },
+        { q: "Коллега прислал ссылку в Telegram: 'Глянь свои фото'.", a: "Спрошу коллегу лично, присылал ли он это", b: "Перейду, это же коллега", correct: 'a' }
+    ];
+
+    // Карта (1 - стена, 0 - пол, 2 - терминал, 3 - выход)
+    let maze = [
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,0,0,0,1,0,0,0,0,0,0,1,0,3,1],
+        [1,0,1,0,1,0,1,1,1,1,0,1,0,1,1],
+        [1,0,1,0,0,0,0,0,0,1,0,0,0,0,1],
+        [1,0,1,1,1,1,1,1,0,1,1,1,1,0,1],
+        [1,0,0,0,0,0,2,1,0,0,0,0,1,0,1],
+        [1,1,1,1,1,1,1,1,0,1,1,0,1,0,1],
+        [1,0,0,0,0,0,0,0,0,1,0,0,1,0,1],
+        [1,0,1,1,1,1,1,1,1,1,0,1,1,0,1],
+        [1,0,1,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,1,0,1,1,1,1,1,1,1,1,1,1,1],
+        [1,0,1,0,1,0,0,0,0,0,0,0,0,0,1],
+        [1,0,0,0,1,0,1,1,1,1,1,1,1,0,1],
+        [1,0,1,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    ];
+
+    function startGame() {
+        document.getElementById('start-screen').classList.add('hidden');
+        gameActive = true;
+        spawnEnemies();
+        requestAnimationFrame(gameLoop);
+    }
+
+    function spawnEnemies() {
+        enemies = [
+            { x: 5, y: 3, dx: 1, dy: 0 },
+            { x: 10, y: 7, dx: 0, dy: 1 },
+            { x: 2, y: 13, dx: 1, dy: 0 }
+        ];
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (let r = 0; r < ROWS; r++) {
+            for (let c = 0; c < COLS; c++) {
+                let x = c * TILE_SIZE;
+                let y = r * TILE_SIZE;
+
+                if (maze[r][c] === 1) {
+                    ctx.fillStyle = '#002222';
+                    ctx.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+                    ctx.strokeStyle = varColor('--neon-cyan');
+                    ctx.strokeRect(x, y, TILE_SIZE, TILE_SIZE);
+                } else if (maze[r][c] === 2) {
+                    ctx.fillStyle = doorOpen ? '#004400' : '#ffff00';
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = '#ffff00';
+                    ctx.fillRect(x+10, y+10, 20, 20);
+                    ctx.shadowBlur = 0;
+                } else if (maze[r][c] === 3) {
+                    ctx.fillStyle = '#00ff00';
+                    ctx.shadowBlur = 15;
+                    ctx.shadowColor = '#00ff00';
+                    ctx.fillRect(x+5, y+5, 30, 30);
+                    ctx.shadowBlur = 0;
+                }
+            }
+        }
+
+        // Игрок
+        ctx.fillStyle = varColor('--neon-cyan');
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = varColor('--neon-cyan');
+        ctx.fillRect(player.x * TILE_SIZE + 8, player.y * TILE_SIZE + 8, 24, 24);
+        ctx.shadowBlur = 0;
+
+        // Враги
+        enemies.forEach(en => {
+            ctx.fillStyle = varColor('--neon-red');
+            ctx.beginPath();
+            ctx.arc(en.x * TILE_SIZE + 20, en.y * TILE_SIZE + 20, 12, 0, Math.PI * 2);
+            ctx.fill();
+        });
+    }
+
+    function update() {
+        if (!gameActive) return;
+
+        // Движение врагов
+        if (Math.random() < 0.05) {
+            enemies.forEach(en => {
+                let nextX = en.x + en.dx;
+                let nextY = en.y + en.dy;
+                if (maze[nextY][nextX] !== 1) {
+                    en.x = nextX;
+                    en.y = nextY;
+                } else {
+                    en.dx *= -1;
+                    en.dy *= -1;
+                }
+                
+                // Коллизия с игроком
+                if (en.x === player.x && en.y === player.y) {
+                    player.hp--;
+                    updateHUD();
+                    player.x = 1; player.y = 1; // Респаун
+                    if (player.hp <= 0) endGame(false);
+                }
+            });
+        }
+    }
+
+    function handleInput(e) {
+        if (!gameActive) return;
+        let nextX = player.x;
+        let nextY = player.y;
+
+        if (e.key === 'ArrowUp' || e.key === 'w') nextY--;
+        if (e.key === 'ArrowDown' || e.key === 's') nextY++;
+        if (e.key === 'ArrowLeft' || e.key === 'a') nextX--;
+        if (e.key === 'ArrowRight' || e.key === 'd') nextX++;
+
+        if (maze[nextY][nextX] === 1) return;
+        
+        // Если выход
+        if (maze[nextY][nextX] === 3) {
+            if (doorOpen) endGame(true);
+            else alert("Сначала нужно деактивировать фишинг-замок (желтый терминал)!");
+            return;
+        }
+
+        // Если терминал
+        if (maze[nextY][nextX] === 2) {
+            startQuiz();
+            return;
+        }
+
+        player.x = nextX;
+        player.y = nextY;
+    }
+
+    function startQuiz() {
+        gameActive = false;
+        const quiz = quizData[Math.floor(Math.random() * quizData.length)];
+        const overlay = document.getElementById('quiz-overlay');
+        const container = document.getElementById('options-container');
+        
+        document.getElementById('quiz-question').innerText = quiz.q;
+        container.innerHTML = '';
+        overlay.style.display = 'flex';
+
+        const createOpt = (text, id) => {
+            const btn = document.createElement('div');
+            btn.className = 'quiz-option';
+            btn.innerText = text;
+            btn.onclick = () => {
+                if (id === quiz.correct) {
+                    doorOpen = true;
+                    overlay.style.display = 'none';
+                    gameActive = true;
+                    alert("ДОСТУП РАЗРЕШЕН. Ворота выхода открыты.");
+                } else {
+                    player.hp--;
+                    updateHUD();
+                    overlay.style.display = 'none';
+                    gameActive = true;
+                    alert("ОШИБКА! Фишинговая атака прошла успешно. Энергия снижена.");
+                    if(player.hp <= 0) endGame(false);
+                }
+            };
+            container.appendChild(btn);
+        };
+
+        createOpt(quiz.a, 'a');
+        createOpt(quiz.b, 'b');
+    }
+
+    function endGame(win) {
+        gameActive = false;
+        const screen = document.getElementById('end-screen');
+        screen.classList.remove('hidden');
+        document.getElementById('end-title').innerText = win ? "СИСТЕМА ЗАЩИЩЕНА" : "СИСТЕМА СКОМПРОМЕТИРОВАНА";
+        document.getElementById('end-title').style.color = win ? 'var(--neon-green)' : 'var(--neon-red)';
+        document.getElementById('end-msg').innerText = win ? 
+            "Вы успешно прошли через лабиринт угроз и сохранили данные в безопасности." : 
+            "Фишинг-атаки перегрузили ваш узел. Хакеры получили доступ к серверу.";
+    }
+
+    function updateHUD() {
+        document.getElementById('hp-val').innerText = player.hp;
+        document.getElementById('lvl-val').innerText = level;
+    }
+
+    function varColor(name) {
+        return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
+
+    function gameLoop() {
+        update();
+        draw();
+        if (gameActive || !gameActive) requestAnimationFrame(gameLoop);
+    }
+
+    window.addEventListener('keydown', handleInput);
+</script>
 </body>
-
 </html>
