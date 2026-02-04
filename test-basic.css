@@ -14,6 +14,9 @@
     box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
+html, body {
+  height: 100%;
+}
 /* чтобы основной контент не прятался под фиксированным топ-баром */
 body {
     padding-top: 100px; /* подстрой под высоту топ-бара */
@@ -329,7 +332,7 @@ body {
             border-top: 1px solid var(--border-color);
             font-size: 16px;
 
-            margin-top: auto;
+            margin-top: 26vh;
         }
         .footer-grid {
             display: grid;
