@@ -1,4 +1,30 @@
+/* Обертка для видео и боковой панели */
+.video-page-wrapper {
+    display: flex;         /* Включаем гибкий контейнер */
+    align-items: flex-start; /* Выравниваем по верху */
+    gap: 30px;             /* Расстояние между видео и списком */
+    margin-top: 20px;
+}
 
+/* Левая часть с главным видео */
+.video-main {
+    flex: 2;               /* Занимает больше места */
+}
+
+/* Правая часть для будущих видео */
+.video-sidebar {
+    flex: 1;               /* Занимает меньше места */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Чтобы видео само подстраивалось под размер колонки */
+.video-main iframe {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
 /* ================= ТОП-БАР ================= */
 .top-bar {
     width: 100%;
@@ -163,6 +189,141 @@ main {
   display: block;
 }
 }
+
+/* ===== УНИВЕРСИТЕТСКАЯ ШАПКА ===== */
+        .univ-header {
+            background: linear-gradient(135deg, #020508 0%, #0A1525 60%, #0d1e35 100%);
+            border-bottom: 2px solid rgba(0, 188, 212, 0.25);
+            padding: 22px 0 22px;
+            position: relative;
+            margin-top: 75px; /* offset под fixed top-bar */
+        }
+        .univ-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0,188,212,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,188,212,0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+        }
+        .univ-header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            position: relative;
+        }
+        .univ-logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .univ-logo-wrap img.seal {
+            width: 78px;
+            height: 78px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 14px rgba(0,188,212,0.3));
+            flex-shrink: 0;
+        }
+        .univ-logo-wrap img.anniversary {
+            height: 64px;
+            width: auto;
+            object-fit: contain;
+            filter: invert(1) brightness(0.85) drop-shadow(0 0 8px rgba(0,188,212,0.35));
+            flex-shrink: 0;
+        }
+        .univ-text {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .univ-text .univ-name {
+            font-family: 'Oswald', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            color: #EAF2FF;
+            text-transform: uppercase;
+            letter-spacing: 1.1px;
+            line-height: 1.35;
+        }
+        .univ-text .univ-sub {
+            font-size: 12px;
+            color: #8FA3BF;
+            letter-spacing: 0.4px;
+        }
+        .univ-center-badge {
+            text-align: center;
+            flex: 1;
+        }
+        .univ-center-badge .badge-label {
+            font-family: 'Oswald', sans-serif;
+            font-size: 15px;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+        .univ-center-badge .badge-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 21px;
+            font-weight: 600;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .univ-right-info {
+            text-align: right;
+            font-size: 12px;
+            color: #8FA3BF;
+            line-height: 1.8;
+        }
+        .univ-right-info .status-online { color: #4CAF50; }
+        @media (max-width: 1024px) {
+            .univ-center-badge { display: none; }
+        }
+        @media (max-width: 768px) {
+            .univ-right-info { display: none; }
+            .univ-logo-wrap img.seal { width: 60px; height: 60px; }
+            .univ-logo-wrap img.anniversary { height: 48px; }
+            .univ-text .univ-name { font-size: 12px; }
+        }
+
+        /* ===== СБРОС ЛИШНЕГО ОТСТУПА ХЕДЕРА ===== */
+        header.container {
+            margin-top: 0 !important;
+            padding-top: 50px;
+        }
+
+        /* ===== FOOTER BOTTOM ===== */
+        .footer-bottom {
+            background: rgba(5, 9, 17, 0.95);
+            border-top: 1px solid var(--border-color);
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        .footer-bottom .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .footer-bottom p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin: 0;
+        }
+        .cyber-warning {
+            color: var(--accent-orange) !important;
+            font-weight: 500;
+        }
+
+           
 
 /* --- ОСНОВНЫЕ ПЕРЕМЕННЫЕ --- */
         :root {
@@ -1008,5 +1169,110 @@ body.modal-open {
 
 .page-test footer {
   display: none;
+}
+
+/* ================= ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ tests.js ================= */
+.hidden {
+  display: none !important;
+}
+
+#quiz-section,
+#result-section {
+  margin-bottom: 120px;
+}
+
+#quiz-description,
+#result-text {
+  color: var(--text-muted);
+  margin-top: 10px;
+  max-width: 850px;
+}
+
+.test-card h2 {
+  font-size: 28px;
+  line-height: 1.3;
+}
+
+.answer {
+  width: 100%;
+  background: transparent;
+  color: var(--text-main);
+  text-align: left;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+.answer:disabled {
+  cursor: default;
+  opacity: 0.9;
+}
+
+.answer-letter {
+  color: var(--accent-blue);
+  font-weight: 700;
+  margin-right: 8px;
+}
+
+.answer.correct {
+  border-color: #4CAF50;
+  background: rgba(76, 175, 80, 0.16);
+}
+
+.answer.wrong {
+  border-color: var(--accent-orange);
+  background: rgba(255, 87, 34, 0.16);
+}
+
+.feedback-box {
+  margin-top: 25px;
+  padding: 18px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.feedback-box.correct {
+  border: 1px solid #4CAF50;
+  background: rgba(76, 175, 80, 0.12);
+  color: #dfffe0;
+}
+
+.feedback-box.wrong {
+  border: 1px solid var(--accent-orange);
+  background: rgba(255, 87, 34, 0.12);
+  color: #ffe4dc;
+}
+
+.result-card {
+  background: #0B1220;
+  border: 1px solid #1E2A44;
+  padding: 35px;
+  max-width: 800px;
+}
+
+.result-score {
+  color: var(--accent-blue);
+  font-family: 'Oswald', sans-serif;
+  font-size: 34px;
+  margin: 15px 0;
+}
+
+.result-actions {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+@media (max-width: 900px) {
+  .test-card {
+    width: 100%;
+  }
+
+  .test-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
 }
 
