@@ -8,138 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="calendar.css">
     <style>
-        /* ===== УНИВЕРСИТЕТСКАЯ ШАПКА ===== */
-        .univ-header {
-            background: linear-gradient(135deg, #020508 0%, #0A1525 60%, #0d1e35 100%);
-            border-bottom: 2px solid rgba(0, 188, 212, 0.25);
-            padding: 22px 0 22px;
-            position: relative;
-            margin-top: 75px; /* offset под fixed top-bar */
-        }
-        .univ-header::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(0,188,212,0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0,188,212,0.04) 1px, transparent 1px);
-            background-size: 40px 40px;
-            pointer-events: none;
-        }
-        .univ-header-inner {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 24px;
-            position: relative;
-        }
-        .univ-logo-wrap {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-        }
-        .univ-logo-wrap img.seal {
-            width: 78px;
-            height: 78px;
-            object-fit: contain;
-            filter: drop-shadow(0 0 14px rgba(0,188,212,0.3));
-            flex-shrink: 0;
-        }
-        .univ-logo-wrap img.anniversary {
-            height: 64px;
-            width: auto;
-            object-fit: contain;
-            filter: invert(1) brightness(0.85) drop-shadow(0 0 8px rgba(0,188,212,0.35));
-            flex-shrink: 0;
-        }
-        .univ-text {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-        .univ-text .univ-name {
-            font-family: 'Oswald', sans-serif;
-            font-size: 15px;
-            font-weight: 500;
-            color: #EAF2FF;
-            text-transform: uppercase;
-            letter-spacing: 1.1px;
-            line-height: 1.35;
-        }
-        .univ-text .univ-sub {
-            font-size: 12px;
-            color: #8FA3BF;
-            letter-spacing: 0.4px;
-        }
-        .univ-center-badge {
-            text-align: center;
-            flex: 1;
-        }
-        .univ-center-badge .badge-label {
-            font-family: 'Oswald', sans-serif;
-            font-size: 11px;
-            color: var(--accent-blue);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 5px;
-        }
-        .univ-center-badge .badge-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 21px;
-            font-weight: 600;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .univ-right-info {
-            text-align: right;
-            font-size: 12px;
-            color: #8FA3BF;
-            line-height: 1.8;
-        }
-        .univ-right-info .status-online { color: #4CAF50; }
-        @media (max-width: 1024px) {
-            .univ-center-badge { display: none; }
-        }
-        @media (max-width: 768px) {
-            .univ-right-info { display: none; }
-            .univ-logo-wrap img.seal { width: 60px; height: 60px; }
-            .univ-logo-wrap img.anniversary { height: 48px; }
-            .univ-text .univ-name { font-size: 12px; }
-        }
-
-        /* ===== СБРОС ЛИШНЕГО ОТСТУПА ХЕДЕРА ===== */
-        header.container {
-            margin-top: 0 !important;
-            padding-top: 50px;
-        }
-
-        /* ===== FOOTER BOTTOM ===== */
-        .footer-bottom {
-            background: rgba(5, 9, 17, 0.95);
-            border-top: 1px solid var(--border-color);
-            padding: 20px 0;
-            margin-top: 40px;
-        }
-        .footer-bottom .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        .footer-bottom p {
-            color: var(--text-muted);
-            font-size: 14px;
-            margin: 0;
-        }
-        .cyber-warning {
-            color: var(--accent-orange) !important;
-            font-weight: 500;
-        }
+        
     </style>
 </head>
 <body>
@@ -207,6 +76,7 @@
 <div class="container">
 
     <!-- ===== СЛАЙДЕР УГРОЗ ===== -->
+        <h2>киберграмотность</h2>
     <section class="emergency-slider">
         <div class="emergency-viewport">
             <div class="emergency-track">
@@ -279,32 +149,59 @@
     </section>
 
     <!-- ===== КИБЕРТЕСТЫ ===== -->
-    <section>
-        <div style="text-align:center; margin-bottom:50px;">
-            <h2>КИБЕРТЕСТЫ</h2>
-            <p style="color:var(--text-muted)">ВСЕГО 5 МИНУТ ОТДЕЛЯЮТ ТЕБЯ ОТ ЗВАНИЯ «КИБЕР-БОГАТЫРЬ</p>
+  <section id="tests-list">
+    <div style="text-align:center; margin-bottom:50px;">
+        <h2>КИБЕРТЕСТЫ</h2>
+        <p style="color:var(--text-muted)">
+            5 минут отделяют тебя от мирового признания!
+        </p>
+    </div>
+
+    <!-- Сюда tests.js сам подгрузит карточки тестов -->
+    <div id="tests-grid" class="games-grid tests-grid"></div>
+</section>
+
+<!-- Блок прохождения теста -->
+<section id="quiz-section" class="hidden test-container container">
+    <div class="test-header">
+        <div>
+            <h2 id="quiz-title"></h2>
+            <p id="quiz-description" style="color:var(--text-muted)"></p>
         </div>
-        <div class="games-grid tests-grid">
-            <div class="game-card">
-                <div class="game-icon">🛡️</div>
-                <h3>Основы кибербезопасности</h3>
-                <p style="font-size:15px;color:var(--text-muted);margin:15px 0;">Пройдите тест и проверьте базовые знания о киберугрозах и защите данных.</p>
-                <a href="test-basic.html" class="game-btn">Пройти тест</a>
-            </div>
-            <div class="game-card">
-                <div class="game-icon">🔐</div>
-                <h3>Пароли и защита аккаунтов</h3>
-                <p style="font-size:15px;color:var(--text-muted);margin:15px 0;">Узнайте, насколько вы умеете создавать безопасные пароли и защищать учётные записи.</p>
-                <a href="test-password.html" class="game-btn">Пройти тест</a>
-            </div>
-            <div class="game-card">
-                <div class="game-icon">📧</div>
-                <h3>Фишинг и социальная инженерия</h3>
-                <p style="font-size:15px;color:var(--text-muted);margin:15px 0;">Попробуйте распознать фишинговые атаки и защитить себя от мошенников.</p>
-                <a href="test-phishing.html" class="game-btn">Пройти тест</a>
-            </div>
-        </div>
-    </section>
+        <div id="test-progress" class="test-progress"></div>
+    </div>
+
+    <div class="test-card">
+        <h3 id="question-text"></h3>
+
+        <div id="answers" class="answers"></div>
+
+        <div id="feedback-box" class="feedback-box hidden"></div>
+    </div>
+
+    <div class="test-footer">
+        <button id="next-btn" class="game-btn" disabled>Следующий вопрос</button>
+    </div>
+
+    <button class="game-btn" data-action="back-to-tests">Назад к тестам</button>
+</section>
+
+<!-- Блок результата -->
+<section id="result-section" class="hidden test-container container">
+    <div class="test-card">
+        <h2 id="result-title"></h2>
+
+        <p style="color:var(--text-muted); margin:20px 0;">
+            Ваш результат:
+            <strong id="result-score"></strong>
+        </p>
+
+        <p id="result-text" style="color:var(--text-muted); margin-bottom:25px;"></p>
+
+        <button id="restart-btn" class="game-btn">Пройти ещё раз</button>
+        <button class="game-btn" data-action="back-to-tests">Назад к тестам</button>
+    </div>
+</section>
 
     <!-- ===== УЧЕБНЫЙ КЛАСС ===== -->
     <section>
@@ -460,7 +357,7 @@
     </div>
     <div class="footer-bottom">
         <div class="container">
-            <p>© 2026 СПб университет ГПС МЧС России | Музей Кибербезопасности. Все данные защищены.</p>
+            <p>© Музей Кибербезопасности. Все данные защищены.</p>
             <p class="cyber-warning">⚠ ВНИМАНИЕ: Информация обновляется в реальном времени.</p>
         </div>
     </div>
@@ -620,6 +517,8 @@ try {
 </script>
 
 <script src="calendar.js"></script>
+
+<script src="tests.js" defer></script>
 
 </body>
 </html>
