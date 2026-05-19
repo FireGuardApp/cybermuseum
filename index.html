@@ -3,671 +3,623 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Музей Кибербезопасности им. МЧС России</title>
+    <title>Музей Кибербезопасности — СПб университет ГПС МЧС России</title>
     <link rel="stylesheet" href="css1.css">
-    <link rel="stylesheet" href="js.js">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="calendar.css">
+    <style>
+        /* ===== УНИВЕРСИТЕТСКАЯ ШАПКА ===== */
+        .univ-header {
+            background: linear-gradient(135deg, #020508 0%, #0A1525 60%, #0d1e35 100%);
+            border-bottom: 2px solid rgba(0, 188, 212, 0.25);
+            padding: 22px 0 22px;
+            position: relative;
+            margin-top: 75px; /* offset под fixed top-bar */
+        }
+        .univ-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0,188,212,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,188,212,0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+        }
+        .univ-header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            position: relative;
+        }
+        .univ-logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .univ-logo-wrap img.seal {
+            width: 78px;
+            height: 78px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 14px rgba(0,188,212,0.3));
+            flex-shrink: 0;
+        }
+        .univ-logo-wrap img.anniversary {
+            height: 64px;
+            width: auto;
+            object-fit: contain;
+            filter: invert(1) brightness(0.85) drop-shadow(0 0 8px rgba(0,188,212,0.35));
+            flex-shrink: 0;
+        }
+        .univ-text {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .univ-text .univ-name {
+            font-family: 'Oswald', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            color: #EAF2FF;
+            text-transform: uppercase;
+            letter-spacing: 1.1px;
+            line-height: 1.35;
+        }
+        .univ-text .univ-sub {
+            font-size: 12px;
+            color: #8FA3BF;
+            letter-spacing: 0.4px;
+        }
+        .univ-center-badge {
+            text-align: center;
+            flex: 1;
+        }
+        .univ-center-badge .badge-label {
+            font-family: 'Oswald', sans-serif;
+            font-size: 11px;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+        .univ-center-badge .badge-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 21px;
+            font-weight: 600;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .univ-right-info {
+            text-align: right;
+            font-size: 12px;
+            color: #8FA3BF;
+            line-height: 1.8;
+        }
+        .univ-right-info .status-online { color: #4CAF50; }
+        @media (max-width: 1024px) {
+            .univ-center-badge { display: none; }
+        }
+        @media (max-width: 768px) {
+            .univ-right-info { display: none; }
+            .univ-logo-wrap img.seal { width: 60px; height: 60px; }
+            .univ-logo-wrap img.anniversary { height: 48px; }
+            .univ-text .univ-name { font-size: 12px; }
+        }
 
+        /* ===== СБРОС ЛИШНЕГО ОТСТУПА ХЕДЕРА ===== */
+        header.container {
+            margin-top: 0 !important;
+            padding-top: 50px;
+        }
 
-
+        /* ===== FOOTER BOTTOM ===== */
+        .footer-bottom {
+            background: rgba(5, 9, 17, 0.95);
+            border-top: 1px solid var(--border-color);
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        .footer-bottom .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .footer-bottom p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin: 0;
+        }
+        .cyber-warning {
+            color: var(--accent-orange) !important;
+            font-weight: 500;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- БУРГЕР -->
+<!-- ===== БУРГЕР ===== -->
 <div class="burger" id="burger">
-  <span></span>
-  <span></span>
-  <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
 </div>
 
-<!-- МЕНЮ -->
+<!-- ===== МОБИЛЬНОЕ МЕНЮ ===== -->
 <nav class="burger-menu" id="burgerMenu">
-  <a href="library.html" >🎬 Видеобиблиотека</a>
-  <a href="games.html" >🎮 Библиотека игр</a>
-  <a href="traning.html" >📚 Учебный класс</a>
+    <a href="library.html">🎬 Видеобиблиотека</a>
+    <a href="games.html">🎮 Библиотека игр</a>
+    <a href="full-calendar.html">📅 Полный календарь</a>
+    <a href="summary.html">📰 Оперативная сводка</a>
 </nav>
-
 <div class="burger-overlay" id="burgerOverlay"></div>
 
- <div class="top-bar">
-  <div class="top-bar-container top-bar-flex">
-
-    <div class="top-bar-title">
-      Виртуальный Музей Киберинцидентов
+<!-- ===== ТОП-БАР ===== -->
+<div class="top-bar">
+    <div class="top-bar-container top-bar-flex">
+        <div class="top-bar-title">Виртуальный Музей Киберинцидентов</div>
+        <nav class="top-nav top-nav--bar">
+            <a href="library.html">Видеобиблиотека</a>
+            <a href="games.html">Киберполигон</a>
+            <a href="summary.html">Оперативная сводка</a>
+            <a href="full-calendar.html">Календарь</a>
+        </nav>
     </div>
-
-    <nav class="top-nav top-nav--bar">
-      <a href="library.html" >Видеобиблиотека</a>
-      <a href="games.html" >Киберполигон</a>
-      <a href="summary.html" >Оперативная сводка</a>
-    </nav>
-
-  </div>
 </div>
-    <header class="container">
-        <div class="logo-shield"><i>!</i></div>
-        <div class="sub-title">УГПС МЧС РОССИИ</div>
-        <h1 class="main-title">МУЗЕЙ <span>КИБЕРБЕЗОПАСНОСТИ</span></h1>
-        <div class="mission-text">
-            ОФИЦИАЛЬНАЯ ПЛАТФОРМА МОНИТОРИНГА УГРОЗ И ОБУЧЕНИЯ НАСЕЛЕНИЯ
+
+<!-- ===== УНИВЕРСИТЕТСКАЯ ШАПКА С ЛОГОТИПАМИ ===== -->
+<div class="univ-header">
+    <div class="univ-header-inner">
+        <div class="univ-logo-wrap">
+            <img src = "https://media.discordapp.net/attachments/1461396801625133295/1506393651285065818/image.png?ex=6a0e19e9&is=6a0cc869&hm=86083a362691fa46e59d27550db790036a00ca5eac7dc4e77e83823d0ce343a8&=&format=webp&quality=lossless&width=120&height=120">
+           <img src = "https://media.discordapp.net/attachments/1461396801625133295/1506395038702243870/image_2026-01-23_10-46-34.png?ex=6a0e1b34&is=6a0cc9b4&hm=b7d58e9c759a5eabeaab0a4fc0435256b348852bbe3e878494312e984bf09dda&=&format=webp&quality=lossless&width=120&height=120">
+            <div class="univ-text">
+
+            </div>
         </div>
-    </header>
-    
-    <main class="main">
+        <div class="univ-center-badge">
+            <div class="badge-label">Проект кафедры</div>
+            <div class="badge-title">Музей Кибербезопасности</div>
+        </div>
+        <div class="univ-right-info">
+            <div><span class="status-online">●</span> Система активна</div>
+            <div>Мониторинг 24/7</div>
+            <div>МЧС России</div>
+        </div>
+    </div>
+</div>
 
+<!-- ===== HERO HEADER ===== -->
+<header class="container">
+    <h1 class="main-title"> <span>Культурно-просветительный портал в области информационной безопасности</span></h1>
+    <div class="mission-text">
+        ОФИЦИАЛЬНАЯ ПЛАТФОРМА МОНИТОРИНГА УГРОЗ И ОБУЧЕНИЯ НАСЕЛЕНИЯ
+    </div>
+</header>
 
-    <div class="container">
-        
-        <section class="emergency-slider">
+<main class="main">
+<div class="container">
 
-  
-
-  <div class="emergency-viewport">
-    <div class="emergency-track">
+    <!-- ===== СЛАЙДЕР УГРОЗ ===== -->
+    <section class="emergency-slider">
+        <div class="emergency-viewport">
+            <div class="emergency-track">
                 <div class="card virus">
-                    <div class="card-header"><span class="card-title">ОБНАРУЖЕН ВИРУС</span><span style="color:var(--accent-orange)">☣</span></div>
+                    <div class="card-header">
+                        <span class="card-title">ОБНАРУЖЕН ВИРУС</span>
+                        <span style="color:var(--accent-orange)">☣</span>
+                    </div>
                     <div class="card-text">Немедленно отключите сеть. Не запускайте программы. Сохраните критические файлы на внешний носитель.</div>
                     <a href="#" class="action-link" data-protocol="virus">ПРОТОКОЛ ДЕЙСТВИЙ</a>
                 </div>
                 <div class="card phishing">
-                    <div class="card-header"><span class="card-title">ФИШИНГ-АТАКА</span><span style="color:var(--accent-blue)">⚡</span></div>
+                    <div class="card-header">
+                        <span class="card-title">ФИШИНГ-АТАКА</span>
+                        <span style="color:var(--accent-blue)">⚡</span>
+                    </div>
                     <div class="card-text">Не вводите данные карты. Проверьте адресную строку. Сообщите в банк о компрометации карты.</div>
                     <a href="#" class="action-link" data-protocol="phishing">ПРОТОКОЛ ДЕЙСТВИЙ</a>
                 </div>
                 <div class="card leak">
-                    <div class="card-header"><span class="card-title">УТЕЧКА ДАННЫХ</span><span style="color:var(--accent-blue)">🔒</span></div>
+                    <div class="card-header">
+                        <span class="card-title">УТЕЧКА ДАННЫХ</span>
+                        <span style="color:var(--accent-blue)">🔒</span>
+                    </div>
                     <div class="card-text">Смените пароли на всех ресурсах. Настройте двухфакторную аутентификацию. Проверьте кредитную историю.</div>
                     <a href="#" class="action-link" data-protocol="leak">ПРОТОКОЛ ДЕЙСТВИЙ</a>
                 </div>
-
-            <div class="card ddos">
-                    <div class="card-header"><span class="card-title">DDOS-АТАКА</span><span style="color:var(--accent-blue)">🔒</span></div>
-                    <div class="card-text">Массовая перегрузка сервиса сетевым трафиком.</div>
+                <div class="card ddos">
+                    <div class="card-header">
+                        <span class="card-title">DDOS-АТАКА</span>
+                        <span style="color:var(--accent-blue)">⚠️</span>
+                    </div>
+                    <div class="card-text">Массовая перегрузка сервиса сетевым трафиком. Немедленно уведомите провайдера и ограничьте трафик.</div>
                     <a href="#" class="action-link" data-protocol="ddos">ПРОТОКОЛ ДЕЙСТВИЙ</a>
                 </div>
-           
-            <div class="card social">
-                    <div class="card-header"><span class="card-title">СОЦ. ИНЖЕНЕРИЯ</span><span style="color:var(--accent-blue)">🔒</span></div>
-                    <div class="card-text">Манипуляция пользователями для получения доступа.</div>
-                   <a href="#" class="action-link" data-protocol="social">ПРОТОКОЛ ДЕЙСТВИЙ</a>
+                <div class="card social">
+                    <div class="card-header">
+                        <span class="card-title">СОЦ. ИНЖЕНЕРИЯ</span>
+                        <span style="color:var(--accent-orange)">🎭</span>
+                    </div>
+                    <div class="card-text">Манипуляция пользователями для получения доступа. Не доверяйте незнакомым звонкам и запросам.</div>
+                    <a href="#" class="action-link" data-protocol="social">ПРОТОКОЛ ДЕЙСТВИЙ</a>
                 </div>
-          
-
-
-
-        </section>
-
-        
-<section class="calendar-section">
-    <div class="calendar-header">
-        <h2>КАЛЕНДАРЬ КИБЕРИНЦИДЕНТОВ</h2>
-        
-        <div class="week-navigation">
-            <button class="week-arrow prev" aria-label="Предыдущая неделя" title="Предыдущая неделя">‹</button>
-            <div class="week-label" id="weekLabel">Загрузка...</div>
-            <button class="week-arrow next" aria-label="Следующая неделя" title="Следующая неделя">›</button>
-        </div>
-        
-        <a href="full-calendar.html" class="full-calendar-link">
-            📅 ПОЛНЫЙ КАЛЕНДАРЬ
-        </a>
-    </div>
-    
-    <div class="calendar-wrapper">
-        <div class="loading-indicator">Загрузка календаря...</div>
-        
-        <!-- 7 дней слева -->
-        <div class="date-grid" id="dateGrid">
-            <!-- JavaScript заполнит это -->
-        </div>
-        
-        <!-- Детали события справа -->
-        <div class="incident-details" id="incidentDetails">
-            <div class="loading-placeholder">
-                <div class="threat-tag threat-level-low" style="width: 150px; height: 30px; margin-bottom: 20px;"></div>
-                <div style="width: 80%; height: 40px; background: rgba(255,255,255,0.1); margin-bottom: 30px;"></div>
-                <div style="width: 90%; height: 100px; background: rgba(255,255,255,0.05);"></div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-        <section>
-  <div style="text-align:center; margin-bottom:50px;">
-      <h2>КИБЕРТЕСТЫ</h2>
-      <p style="color:var(--text-muted)">Проверка знаний по кибербезопасности в интерактивном формате.</p>
-  </div>
-  <div class="games-grid tests-grid">
-      <div class="game-card">
-          <div class="game-icon">🛡️</div>
-          <h3>Основы кибербезопасности</h3>
-          <p style="font-size:15px; color:var(--text-muted); margin:15px 0;">Пройдите тест и проверьте базовые знания о киберугрозах и защите данных.</p>
-          <a href="test-basic.html" class="game-btn">Пройти тест</a>
-      </div>
-      <div class="game-card">
-          <div class="game-icon">🔐</div>
-          <h3>Пароли и защита аккаунтов</h3>
-          <p style="font-size:15px; color:var(--text-muted); margin:15px 0;">Узнайте, насколько вы умеете создавать безопасные пароли и защищать свои учетные записи.</p>
-          <a href="test-password.html" class="game-btn">Пройти тест</a>
-      </div>
-      <div class="game-card">
-          <div class="game-icon">📧</div>
-          <h3>Фишинг и социальная инженерия</h3>
-          <p style="font-size:15px; color:var(--text-muted); margin:15px 0;">Попробуйте распознать фишинговые атаки и защитить себя от мошенников.</p>
-          <a href="test-phishing.html" class="game-btn">Пройти тест</a>
-      </div>
-  </div>
-</section>
-        
-       
-        <section>
-            <div class="section-header" style="display:flex; justify-content:space-between; align-items:flex-end;">
-                <div>
-                    <h2>УЧЕБНЫЙ КЛАСС</h2>
-                    <p style="font-size:16px; color:var(--text-muted)">Видеоинструктажи и методические материалы.</p>
-                </div>
-                <a href="library.html" class="action-link"
-   style="color:var(--accent-blue); border:1px solid var(--accent-blue); padding: 5px 15px;"> 
-   ВСЯ БИБЛИОТЕКА</a>
+    <!-- ===== КАЛЕНДАРЬ КИБЕРИНЦИДЕНТОВ ===== -->
+    <section class="calendar-section">
+        <div class="calendar-header">
+            <h2>КАЛЕНДАРЬ КИБЕРИНЦИДЕНТОВ</h2>
+            <div class="week-navigation">
+                <button class="week-arrow prev" aria-label="Предыдущая неделя" title="Предыдущая неделя">‹</button>
+                <div class="week-label" id="weekLabel">Загрузка...</div>
+                <button class="week-arrow next" aria-label="Следующая неделя" title="Следующая неделя">›</button>
             </div>
-
-            <div class="video-grid">
-                <div class="video-card">
-                    <div class="video-thumb">
-                        <div class="play-btn"></div>
-                        <div class="video-time">04:30</div>
-                    </div>
-                    <div class="video-title">Алгоритм действий при звонке мошенника</div>
-                    <div class="video-meta">Инструктаж №104</div>
-                </div>
-                <div class="video-card">
-                    <div class="video-thumb">
-                        <div class="play-btn"></div>
-                        <div class="video-time">06:15</div>
-                    </div>
-                    <div class="video-title">Как опознать фейковый сайт госуслуг</div>
-                    <div class="video-meta">Инструктаж №105</div>
-                </div>
-                <div class="video-card">
-                    <div class="video-thumb">
-                        <div class="play-btn"></div>
-                        <div class="video-time">03:45</div>
-                    </div>
-                    <div class="video-title">Инструктаж по настройке приватности</div>
-                    <div class="video-meta">Инструктаж №106</div>
-                </div>
-                <div class="video-card">
-                    <div class="video-thumb">
-                        <div class="play-btn"></div>
-                        <div class="video-time">02:20</div>
-                    </div>
-                    <div class="video-title">Памятка по созданию стойкого пароля</div>
-                    <div class="video-meta">Инструктаж №107</div>
+            <a href="full-calendar.html" class="full-calendar-link">📅 ПОЛНЫЙ КАЛЕНДАРЬ</a>
+        </div>
+        <div class="calendar-wrapper">
+            <div class="loading-indicator">Загрузка календаря...</div>
+            <div class="date-grid" id="dateGrid"></div>
+            <div class="incident-details" id="incidentDetails">
+                <div class="loading-placeholder">
+                    <div class="threat-tag threat-level-low" style="width:150px;height:30px;margin-bottom:20px;"></div>
+                    <div style="width:80%;height:40px;background:rgba(255,255,255,0.1);margin-bottom:30px;"></div>
+                    <div style="width:90%;height:100px;background:rgba(255,255,255,0.05);"></div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-         <section>
-            <div style="text-align:center; margin-bottom:50px;">
-                <h2>КИБЕРПОЛИГОН</h2>
-                <p style="color:var(--text-muted)">Отработка навыков цифровой обороны в симулированной среде.</p>
+    <!-- ===== КИБЕРТЕСТЫ ===== -->
+    <section>
+        <div style="text-align:center; margin-bottom:50px;">
+            <h2>КИБЕРТЕСТЫ</h2>
+            <p style="color:var(--text-muted)">ВСЕГО 5 МИНУТ ОТДЕЛЯЮТ ТЕБЯ ОТ ЗВАНИЯ «КИБЕР-БОГАТЫРЬ</p>
+        </div>
+        <div class="games-grid tests-grid">
+            <div class="game-card">
+                <div class="game-icon">🛡️</div>
+                <h3>Основы кибербезопасности</h3>
+                <p style="font-size:15px;color:var(--text-muted);margin:15px 0;">Пройдите тест и проверьте базовые знания о киберугрозах и защите данных.</p>
+                <a href="test-basic.html" class="game-btn">Пройти тест</a>
             </div>
-            <div class="games-grid">
-                <div class="game-card">
-                    <div class="game-icon">💣</div>
-                    <h3>КИБЕРСАПЁР</h3>
-                    <p style="font-size:15px; color:var(--text-muted); margin:15px 0;">Идентификация скрытых угроз. Отличите фишинговые ссылки от легитимных ресурсов.</p>
-                    <a href="game-cybersaper.html" class="game-btn">НАЧАТЬ ТРЕНИРОВКУ</a>   
-                </div>
-                <div class="game-card">
-                    <div class="game-icon">🧱</div>
-                    <h3>АНТИВИРУСНЫЙ ТЕТРИС</h3>
-                    <p style="font-size:15px; color:var(--text-muted); margin:15px 0;">Динамическое построение обороны. Блокируйте потоки вредоносного кода правильными патчами.</p>
-                    <a href="game-tetris.html" class="game-btn">НАЧАТЬ ТРЕНИРОВКУ</a>
-                </div>
-                <div class="game-card">
-                    <div class="game-icon">🕸</div>
-                    <h3>ЛАБИРИНТ ФИШИНГА</h3>
-                    <p style="font-size:15px; color:var(--text-muted); margin:15px 0;">Текстовый квест. Пройдите через серию социальных манипуляций и сохраните свои средства.</p>
-                    <a href="game-phishing.html" class="game-btn">НАЧАТЬ ТРЕНИРОВКУ</a>
-                </div>
+            <div class="game-card">
+                <div class="game-icon">🔐</div>
+                <h3>Пароли и защита аккаунтов</h3>
+                <p style="font-size:15px;color:var(--text-muted);margin:15px 0;">Узнайте, насколько вы умеете создавать безопасные пароли и защищать учётные записи.</p>
+                <a href="test-password.html" class="game-btn">Пройти тест</a>
             </div>
-        </section>
-
-
-        <section>
-            <div class="section-header">
-                <h2>ОПЕРАТИВНАЯ СВОДКА</h2>
+            <div class="game-card">
+                <div class="game-icon">📧</div>
+                <h3>Фишинг и социальная инженерия</h3>
+                <p style="font-size:15px;color:var(--text-muted);margin:15px 0;">Попробуйте распознать фишинговые атаки и защитить себя от мошенников.</p>
+                <a href="test-phishing.html" class="game-btn">Пройти тест</a>
             </div>
-            
-            <div class="news-wrapper">
-                <div class="news-item">
-                    <div class="news-meta"><span class="tag urgent">● СРОЧНО</span> 12.10.2023 | 14:30</div>
-                    <div class="news-title">Уровень угрозы распространения вируса-шифровальщика повышен до «жёлтого»</div>
-                    <div class="news-body">По данным Центра мониторинга, зафиксирована массовая рассылка вредоносного ПО под видом повесток. Рекомендуется не открывать вложения.</div>
-                </div>
-                <div class="news-item">
-                    <div class="news-meta"><span class="tag report">● ОТЧЕТ</span> 11.10.2023 | 09:15</div>
-                    <div class="news-title">Обезврежена новая фишинг-кампания «ГосВыплата»</div>
-                    <div class="news-body">Специалисты ЦУК заблокировали сеть из 450 доменов, имитирующих портал государственных услуг.</div>
-                </div>
-                <div class="news-item">
-                    <div class="news-meta"><span class="tag" style="color:var(--accent-blue)">● ИНФО</span> 10.10.2023 | 18:00</div>
-                    <div class="news-title">Обновлены рекомендации по парольной политике</div>
-                    <div class="news-body">В связи с увеличением мощностей брутфорс-атак, минимальная длина пароля для критических систем увеличена до 12 символов.</div>
-                </div>
+        </div>
+    </section>
+
+    <!-- ===== УЧЕБНЫЙ КЛАСС ===== -->
+    <section>
+        <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-end;">
+            <div>
+                <h2>УЧЕБНЫЙ КЛАСС</h2>
+                <p style="font-size:16px;color:var(--text-muted)">Видеоинструктажи и методические материалы.</p>
             </div>
-        </section>
+            <a href="library.html" class="action-link"
+               style="color:var(--accent-blue);border:1px solid var(--accent-blue);padding:5px 15px;">
+               ВСЯ БИБЛИОТЕКА
+            </a>
+        </div>
+        <div class="video-grid">
+            <div class="video-card">
+                <div class="video-thumb">
+                    <div class="play-btn"></div>
+                    <div class="video-time">04:30</div>
+                </div>
+                <div class="video-title">Алгоритм действий при звонке мошенника</div>
+                <div class="video-meta">Инструктаж №104</div>
+            </div>
+            <div class="video-card">
+                <div class="video-thumb">
+                    <div class="play-btn"></div>
+                    <div class="video-time">06:15</div>
+                </div>
+                <div class="video-title">Как опознать фейковый сайт госуслуг</div>
+                <div class="video-meta">Инструктаж №105</div>
+            </div>
+            <div class="video-card">
+                <div class="video-thumb">
+                    <div class="play-btn"></div>
+                    <div class="video-time">03:45</div>
+                </div>
+                <div class="video-title">Инструктаж по настройке приватности</div>
+                <div class="video-meta">Инструктаж №106</div>
+            </div>
+            <div class="video-card">
+                <div class="video-thumb">
+                    <div class="play-btn"></div>
+                    <div class="video-time">02:20</div>
+                </div>
+                <div class="video-title">Памятка по созданию стойкого пароля</div>
+                <div class="video-meta">Инструктаж №107</div>
+            </div>
+        </div>
+    </section>
 
-    </div>
+    <!-- ===== КИБЕРПОЛИГОН ===== -->
+    <section>
+        <div style="text-align:center;margin-bottom:50px;">
+            <h2>КИБЕРПОЛИГОН</h2>
+            <p style="color:var(--text-muted)">Отработка навыков цифровой обороны в симулированной среде.</p>
+        </div>
+        <div class="games-grid">
+            <div class="game-card">
+                <div class="game-icon">💣</div>
+                <h3>КИБЕРСАПЁР</h3>
+                <p style="font-size:15px;color:var(--text-muted);margin:15px 0;">Идентификация скрытых угроз. Отличите фишинговые ссылки от легитимных ресурсов.</p>
+                <a href="game-cybersaper.html" class="game-btn">НАЧАТЬ ТРЕНИРОВКУ</a>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🧱</div>
+                <h3>АНТИВИРУСНЫЙ ТЕТРИС</h3>
+                <p style="font-size:15px;color:var(--text-muted);margin:15px 0;">Динамическое построение обороны. Блокируйте потоки вредоносного кода правильными патчами.</p>
+                <a href="game-tetris.html" class="game-btn">НАЧАТЬ ТРЕНИРОВКУ</a>
+            </div>
+            <div class="game-card">
+                <div class="game-icon">🕸</div>
+                <h3>ЛАБИРИНТ ФИШИНГА</h3>
+                <p style="font-size:15px;color:var(--text-muted);margin:15px 0;">Текстовый квест. Пройдите через серию социальных манипуляций и сохраните свои средства.</p>
+                <a href="game-phishing.html" class="game-btn">НАЧАТЬ ТРЕНИРОВКУ</a>
+            </div>
+        </div>
+    </section>
 
+    <!-- ===== ОПЕРАТИВНАЯ СВОДКА ===== -->
+    <section>
+        <div class="section-header">
+            <h2>ОПЕРАТИВНАЯ СВОДКА</h2>
+        </div>
+        <div class="news-wrapper">
+            <div class="news-item">
+                <div class="news-meta"><span class="tag urgent">● СРОЧНО</span> 12.10.2023 | 14:30</div>
+                <div class="news-title">Уровень угрозы распространения вируса-шифровальщика повышен до «жёлтого»</div>
+                <div class="news-body">По данным Центра мониторинга, зафиксирована массовая рассылка вредоносного ПО под видом повесток. Рекомендуется не открывать вложения.</div>
+            </div>
+            <div class="news-item">
+                <div class="news-meta"><span class="tag report">● ОТЧЕТ</span> 11.10.2023 | 09:15</div>
+                <div class="news-title">Обезврежена новая фишинг-кампания «ГосВыплата»</div>
+                <div class="news-body">Специалисты ЦУК заблокировали сеть из 450 доменов, имитирующих портал государственных услуг.</div>
+            </div>
+            <div class="news-item">
+                <div class="news-meta"><span class="tag" style="color:var(--accent-blue)">● ИНФО</span> 10.10.2023 | 18:00</div>
+                <div class="news-title">Обновлены рекомендации по парольной политике</div>
+                <div class="news-body">В связи с увеличением мощностей брутфорс-атак, минимальная длина пароля для критических систем увеличена до 12 символов.</div>
+            </div>
+        </div>
+    </section>
 
-    <!-- ===== МОДАЛЬНОЕ ОКНО ПРОТОКОЛОВ ===== -->
-<div class="modal-overlay" id="protocolOverlay">
-  <div class="modal-window">
-    <button class="modal-close" id="protocolClose">✕</button>
-    <div class="modal-content" id="protocolContent"></div>
-  </div>
 </div>
-
 </main>
 
-     <!-- Footer -->
-    <footer>
-        <div class="container footer-grid">
-            <div class="footer-col">
-                <div style="display:flex; align-items:center; margin-bottom:20px;">
-                    <div class="logo-shield" style="width:30px; height:30px; margin:0 15px 0 0; font-size:16px; border-width:1px;"><i>!</i></div>
-                    <h4 style="margin:0">ЦИФРОВОЙ ЩИТ РФ</h4>
-                </div>
-                <p style="color:var(--text-muted); line-height:1.6;">Полный архив киберинцидентов с 1980 года. Система мониторинга угроз в реальном времени.</p>
-            </div>
-            
-            <div class="footer-col">
-                <h4>НАВИГАЦИЯ</h4>
-                <ul class="footer-links">
-                    <li><a href="index.html">Главная страница</a></li>
-                    <li><a href="#stats">Статистика угроз</a></li>
-                    <li><a href="#timeline">Хронология</a></li>
-                    <li><a href="#">Экспорт данных</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-col">
-                <h4>РЕСУРСЫ</h4>
-                <ul class="footer-links">
-                    <li><a href="#">API данных</a></li>
-                    <li><a href="#">Отчёты в PDF</a></li>
-                    <li><a href="#">Методические материалы</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-col">
-                <h4>СИСТЕМНЫЙ СТАТУС</h4>
-                <div style="color:var(--text-muted); margin-bottom:10px;">
-                    <span class="status-dot"></span> База данных: <span id="dbStatus">В сети</span>
-                </div>
-                <div style="color:var(--text-muted); margin-bottom:10px;">
-                    <span class="status-dot"></span> Последнее обновление: <span id="lastUpdate">сегодня 14:30</span>
-                </div>
-                <div style="color:var(--text-muted); margin-bottom:10px;">
-                    <span class="status-dot"></span> Инцидентов в базе: <span id="totalIncidents">417</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <div class="container">
-                <p>© 2026 МЧС России | Система мониторинга киберугроз. Все данные защищены.</p>
-                <p class="cyber-warning">
-                    <i class="fas fa-shield-alt"></i> ВНИМАНИЕ: Информация на этой странице обновляется в реальном времени.
-                </p>
-            </div>
-        </div>
-    </footer>
-
-<script>
-
-const VIDEO_LIBRARY = [
-  { id:1, title:"Алгоритм действий при звонке мошенника", time:"04:30", tag:"Инструктаж №104" },
-  { id:2, title:"Как опознать фейковый сайт госуслуг", time:"06:15", tag:"Инструктаж №105" },
-  { id:3, title:"Инструктаж по настройке приватности", time:"03:45", tag:"Инструктаж №106" },
-  { id:4, title:"Памятка по созданию стойкого пароля", time:"02:20", tag:"Инструктаж №107" },
-  { id:5, title:"Что делать при утечке данных", time:"05:10", tag:"Методика №201" },
-  { id:6, title:"Безопасность мобильных устройств", time:"07:00", tag:"Методика №202" }
-];
-const libraryModal = document.getElementById('library-modal');
-const libraryBody  = document.getElementById('library-body');
-
-document.getElementById('library-close').onclick = () => {
-  libraryModal.style.display = 'none';
-};
- 
-
-function openVideo(id) {
-  const video = VIDEO_LIBRARY.find(v => v.id == id);
-  if (!video) return;
-
-  contentBody.innerHTML = `
-    <h2>${video.title}</h2>
-    <p style="color:#8FA3BF; margin-bottom:15px;">${video.tag} · ${video.time}</p>
-
-    <div style="aspect-ratio:16/9; background:#000; display:flex; align-items:center; justify-content:center;">
-      ▶ Здесь будет видеоплеер
+<!-- ===== МОДАЛЬНОЕ ОКНО ПРОТОКОЛОВ ===== -->
+<div class="modal-overlay" id="protocolOverlay">
+    <div class="modal-window">
+        <button class="modal-close" id="protocolClose">✕</button>
+        <div class="modal-content" id="protocolContent"></div>
     </div>
-  `;
+</div>
 
-  libraryModal.style.display = 'none';
-  contentModal.style.display = 'flex';
-}
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="container footer-grid">
+        <div class="footer-col">
+            <div style="display:flex;align-items:center;margin-bottom:20px;">
+                <div class="logo-shield" style="width:30px;height:30px;margin:0 15px 0 0;font-size:16px;border-width:1px;"><i>!</i></div>
+                <h4 style="margin:0">ЦИФРОВОЙ ЩИТ РФ</h4>
+            </div>
+            <p style="color:var(--text-muted);line-height:1.6;">Полный архив киберинцидентов. Система мониторинга угроз в реальном времени. Проект СПб ГПС МЧС России.</p>
+        </div>
+        <div class="footer-col">
+            <h4>НАВИГАЦИЯ</h4>
+            <ul class="footer-links">
+                <li><a href="index.html">Главная страница</a></li>
+                <li><a href="library.html">Видеобиблиотека</a></li>
+                <li><a href="games.html">Киберполигон</a></li>
+                <li><a href="full-calendar.html">Календарь инцидентов</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>ОБУЧЕНИЕ</h4>
+            <ul class="footer-links">
+                <li><a href="test-basic.html">Основы кибербезопасности</a></li>
+                <li><a href="test-password.html">Защита паролей</a></li>
+                <li><a href="test-phishing.html">Фишинг и угрозы</a></li>
+                <li><a href="summary.html">Оперативная сводка</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>СИСТЕМНЫЙ СТАТУС</h4>
+            <div style="color:var(--text-muted);margin-bottom:10px;">
+                <span class="status-dot"></span> База данных: В сети
+            </div>
+            <div style="color:var(--text-muted);margin-bottom:10px;">
+                <span class="status-dot"></span> Мониторинг 24/7
+            </div>
+            <div style="color:var(--text-muted);margin-bottom:10px;">
+                <span class="status-dot"></span> Посетителей: <span id="counter">—</span>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <p>© 2026 СПб университет ГПС МЧС России | Музей Кибербезопасности. Все данные защищены.</p>
+            <p class="cyber-warning">⚠ ВНИМАНИЕ: Информация обновляется в реальном времени.</p>
+        </div>
+    </div>
+</footer>
 
-document.getElementById('open-library').addEventListener('click', e => {
-  e.preventDefault();
-  openLibrary();
-});
-
-const burger = document.getElementById('burger');
-const menu   = document.getElementById('burgerMenu');
-const overlay = document.getElementById('burgerOverlay');
+<!-- ===== СКРИПТЫ ===== -->
+<script>
+/* ======== Бургер-меню ======== */
+const burger  = document.getElementById('burger');
+const menu    = document.getElementById('burgerMenu');
+const bOverlay = document.getElementById('burgerOverlay');
 
 function closeMenu() {
-  menu.classList.remove('active');
-  overlay.classList.remove('active');
+    menu.classList.remove('active');
+    bOverlay.classList.remove('active');
 }
-
 burger.onclick = () => {
-  menu.classList.toggle('active');
-  overlay.classList.toggle('active');
+    menu.classList.toggle('active');
+    bOverlay.classList.toggle('active');
 };
+bOverlay.onclick = closeMenu;
+menu.querySelectorAll('a').forEach(link => link.onclick = closeMenu);
 
-overlay.onclick = closeMenu;
-
-/* пункты меню */
-menu.querySelectorAll('a').forEach(link => {
-  link.onclick = e => {
-    e.preventDefault();
-    const action = link.dataset.action;
-
-    closeMenu();
-
-    if (action === 'videos') {
-      openLibrary();
-    }
-
-    if (action === 'games') {
-      contentBody.innerHTML = `
-        <h2>КИБЕРПОЛИГОН</h2>
-        <p style="color:#8FA3BF; margin-bottom:15px;">
-          Общая библиотека тренировочных симуляторов
-        </p>
-        <div class="games-grid">
-          ${document.querySelector('.games-grid').innerHTML}
-        </div>
-      `;
-      contentModal.style.display = 'flex';
-    }
-
-    if (action === 'training') {
-      openLibrary();
-    }
-  };
-});
-
-document.querySelectorAll('.top-nav a').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-
-    const action = link.dataset.action;
-
-    if (action === 'videos' || action === 'training') {
-      openLibrary();
-    }
-
-    if (action === 'games') {
-      contentBody.innerHTML = `
-        <h2>КИБЕРПОЛИГОН</h2>
-        <p style="color:#8FA3BF; margin-bottom:15px;">
-          Общая библиотека тренировочных симуляторов
-        </p>
-        <div class="games-grid">
-          ${document.querySelector('.games-grid').innerHTML}
-        </div>
-      `;
-      contentModal.style.display = 'flex';
-    }
-  });
-});
-
-/* ================= ЕДИНОЕ ВЕРХНЕЕ МЕНЮ ================= */
-
-document.querySelectorAll('.top-nav--bar a').forEach(link => {
-  link.onclick = e => {
-    e.preventDefault();
-
-    const action = link.dataset.action;
-
-    /* 🎬 ВИДЕОБИБЛИОТЕКА */
-    if (action === 'videos') {
-      openLibrary();
-      return;
-    }
-
-    /* 🎮 КИБЕРПОЛИГОН */
-    if (action === 'games') {
-  contentBody.innerHTML = `
-    <h2>КИБЕРПОЛИГОН</h2>
-    <p style="color:#8FA3BF; margin-bottom:15px;">
-      Общая библиотека тренировочных симуляторов
-    </p>
-    <div class="games-grid">
-      ${document.querySelector('.games-grid').innerHTML}
-    </div>
-  `;
-  contentModal.style.display = 'flex';
-
-  // Привязываем кнопки внутри модального окна
-  contentBody.querySelectorAll('.game-btn').forEach(btn => {
-    btn.onclick = () => {
-      const game = btn.closest('.game-card').querySelector('h3').innerText;
-
-      contentBody.innerHTML = `
-        <h2>${game}</h2>
-        <p style="color:#8FA3BF; margin:15px 0;">
-          Учебный симулятор запускается в изолированной среде.
-        </p>
-
-        <div style="padding:20px; border:1px dashed #00BCD4; text-align:center;">
-          ▶ Игровой модуль
-        </div>
-      `;
-    };
-  });
-}
-     
-
-    /* 📰 ОПЕРАТИВНАЯ СВОДКА */
-    if (action === 'summary') {
-      contentBody.innerHTML = `
-       <div class="summary-modal">
-        <h2>ОПЕРАТИВНАЯ СВОДКА</h2>
-        ${document.querySelector('.news-wrapper').innerHTML}
-          </div>
-      `;
-      contentModal.style.display = 'flex';
-      document.body.classList.add('modal-open');
-      return;
-    }
-  };
-});
-
-</script>
-
-<!-- ПРИВЯЗКА СЧЕТЧИКА К БД И ЕГО ФУНКЦИОНИРОВАНИЕ -->
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-    import {
-      getFirestore,
-      doc,
-      getDoc,
-      setDoc,
-      updateDoc
-    } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyDn5ZBf238tM4DpNu5y23qwAJ5DxsnLyhc",
-      authDomain: "cubermuseum.firebaseapp.com",
-      projectId: "cubermuseum",
-      storageBucket: "cubermuseum.firebasestorage.app",
-      messagingSenderId: "884172103093",
-      appId: "1:884172103093:web:5956d7aa378d37f1b20dfc"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    const counterRef = doc(db, "статистика", "посетители");
-
-    async function updateCounter() {
-      const snap = await getDoc(counterRef);
-
-      if (snap.exists()) {
-        const newCount = snap.data().считать + 1;
-        await updateDoc(counterRef, { считать: newCount });
-        document.getElementById("counter").textContent = newCount;
-      } else {
-        await setDoc(counterRef, { считать: 1 });
-        document.getElementById("counter").textContent = 1;
-      }
-    }
-
-    updateCounter();
-  </script>
-
-  <script>
-// ======== Круговой автослайдер с возможностью скролла ========
-
-const track = document.querySelector('.emergency-track');
-const viewport = document.querySelector('.emergency-viewport');
-const cards = document.querySelectorAll('.emergency-track .card');
-
-const cardWidth = cards[0].offsetWidth + 30; // ширина + gap
-let scrollPosition = 0;
-
-function autoScroll() {
-  scrollPosition += cardWidth;
-
-  // Если дошли до конца, возвращаемся в начало
-  if (scrollPosition >= track.scrollWidth / 2) {
-    scrollPosition = 0;
-    viewport.scrollTo({ left: 0, behavior: 'auto' });
-  } else {
-    viewport.scrollTo({ left: scrollPosition, behavior: 'smooth' });
-  }
-}
-
-// Запускаем автоскролл каждые 5 секунды
-setInterval(autoScroll, 5000);
-
+/* ======== Протоколы действий ======== */
 const PROTOCOLS = {
-  virus: {
-    title: "ПРОТОКОЛ: ВРЕДОНОСНОЕ ПО",
-    steps: [
-      "Немедленно отключить устройство от сети",
-      "Не перезагружать систему",
-      "Сохранить критические данные на внешний носитель",
-      "Просканировать систему в безопасном режиме",
-      "Сообщить в ИБ-отдел или специалисту"
-    ]
-  },
-
-  phishing: {
-    title: "ПРОТОКОЛ: ФИШИНГ-АТАКА",
-    steps: [
-      "Не переходить по ссылке",
-      "Не вводить персональные данные",
-      "Проверить адрес сайта",
-      "Сообщить в банк или организацию",
-      "Сменить пароли"
-    ]
-  },
-
-  leak: {
-    title: "ПРОТОКОЛ: УТЕЧКА ДАННЫХ",
-    steps: [
-      "Сменить все пароли",
-      "Включить 2FA",
-      "Проверить активные сессии",
-      "Проверить кредитную историю",
-      "Сообщить оператору сервиса"
-    ]
-  },
-
-  ddos: {
-    title: "ПРОТОКОЛ: DDOS-АТАКА",
-    steps: [
-      "Ограничить входящий трафик",
-      "Подключить анти-DDoS",
-      "Уведомить провайдера",
-      "Логировать источники атаки"
-    ]
-  },
-
-  social: {
-    title: "ПРОТОКОЛ: СОЦИАЛЬНАЯ ИНЖЕНЕРИЯ",
-    steps: [
-      "Прекратить диалог",
-      "Не передавать коды и пароли",
-      "Проверить источник обращения",
-      "Сообщить в службу безопасности"
-    ]
-  }
+    virus: {
+        title: "ПРОТОКОЛ: ВРЕДОНОСНОЕ ПО",
+        steps: [
+            "Немедленно отключить устройство от сети",
+            "Не перезагружать систему",
+            "Сохранить критические данные на внешний носитель",
+            "Просканировать систему в безопасном режиме",
+            "Сообщить в ИБ-отдел или специалисту"
+        ]
+    },
+    phishing: {
+        title: "ПРОТОКОЛ: ФИШИНГ-АТАКА",
+        steps: [
+            "Не переходить по ссылке",
+            "Не вводить персональные данные",
+            "Проверить адрес сайта",
+            "Сообщить в банк или организацию",
+            "Сменить пароли"
+        ]
+    },
+    leak: {
+        title: "ПРОТОКОЛ: УТЕЧКА ДАННЫХ",
+        steps: [
+            "Сменить все пароли",
+            "Включить двухфакторную аутентификацию (2FA)",
+            "Проверить активные сессии",
+            "Проверить кредитную историю",
+            "Сообщить оператору сервиса"
+        ]
+    },
+    ddos: {
+        title: "ПРОТОКОЛ: DDOS-АТАКА",
+        steps: [
+            "Ограничить входящий трафик",
+            "Подключить анти-DDoS защиту",
+            "Уведомить провайдера",
+            "Логировать источники атаки",
+            "Перевести сервисы на резервные мощности"
+        ]
+    },
+    social: {
+        title: "ПРОТОКОЛ: СОЦИАЛЬНАЯ ИНЖЕНЕРИЯ",
+        steps: [
+            "Прекратить диалог",
+            "Не передавать коды и пароли",
+            "Проверить источник обращения",
+            "Сообщить в службу безопасности",
+            "Предупредить коллег о попытке атаки"
+        ]
+    }
 };
 
 const protocolOverlay = document.getElementById('protocolOverlay');
 const protocolContent = document.getElementById('protocolContent');
-const protocolClose = document.getElementById('protocolClose');
+const protocolClose   = document.getElementById('protocolClose');
 
 document.querySelectorAll('.action-link[data-protocol]').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-
-    const key = link.dataset.protocol;
-    const protocol = PROTOCOLS[key];
-    if (!protocol) return;
-
-    protocolContent.innerHTML = `
-      <h2>${protocol.title}</h2>
-      <ul>
-        ${protocol.steps.map(step => `<li>${step}</li>`).join('')}
-      </ul>
-    `;
-
-    protocolOverlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  });
+    link.addEventListener('click', e => {
+        e.preventDefault();
+        const key = link.dataset.protocol;
+        const protocol = PROTOCOLS[key];
+        if (!protocol) return;
+        protocolContent.innerHTML = `
+            <h2 style="margin-bottom:20px;">${protocol.title}</h2>
+            <ol style="padding-left:20px;">
+                ${protocol.steps.map(step => `<li style="margin-bottom:14px;color:#EAF2FF;line-height:1.5;">${step}</li>`).join('')}
+            </ol>
+        `;
+        protocolOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
 });
 
 protocolClose.onclick = () => {
-  protocolOverlay.classList.remove('active');
-  document.body.style.overflow = '';
+    protocolOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+};
+protocolOverlay.onclick = e => {
+    if (e.target === protocolOverlay) protocolClose.onclick();
 };
 
-protocolOverlay.onclick = e => {
-  if (e.target === protocolOverlay) {
-    protocolClose.onclick();
-  }
-};
+/* ======== Автослайдер угроз ======== */
+(function() {
+    const track    = document.querySelector('.emergency-track');
+    const viewport = document.querySelector('.emergency-viewport');
+    const cards    = document.querySelectorAll('.emergency-track .card');
+    if (!track || !viewport || !cards.length) return;
+    let scrollPos = 0;
+    setInterval(() => {
+        const cardWidth = cards[0].offsetWidth + 30;
+        scrollPos += cardWidth;
+        if (scrollPos >= track.scrollWidth - viewport.offsetWidth + 10) {
+            scrollPos = 0;
+            viewport.scrollTo({ left: 0, behavior: 'auto' });
+        } else {
+            viewport.scrollTo({ left: scrollPos, behavior: 'smooth' });
+        }
+    }, 5000);
+})();
 </script>
 
+<!-- ===== СЧЁТЧИК ПОСЕТИТЕЛЕЙ (Firebase) ===== -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
+const firebaseConfig = {
+    apiKey: "AIzaSyDn5ZBf238tM4DpNu5y23qwAJ5DxsnLyhc",
+    authDomain: "cubermuseum.firebaseapp.com",
+    projectId: "cubermuseum",
+    storageBucket: "cubermuseum.firebasestorage.app",
+    messagingSenderId: "884172103093",
+    appId: "1:884172103093:web:5956d7aa378d37f1b20dfc"
+};
+
+try {
+    const app = initializeApp(firebaseConfig);
+    const db  = getFirestore(app);
+    const counterRef = doc(db, "статистика", "посетители");
+    const snap = await getDoc(counterRef);
+    if (snap.exists()) {
+        const newCount = snap.data().считать + 1;
+        await updateDoc(counterRef, { считать: newCount });
+        document.getElementById("counter").textContent = newCount;
+    } else {
+        await setDoc(counterRef, { считать: 1 });
+        document.getElementById("counter").textContent = 1;
+    }
+} catch(e) {
+    console.warn("Счётчик недоступен:", e.message);
+}
+</script>
 
 <script src="calendar.js"></script>
-
-
-
 
 </body>
 </html>
