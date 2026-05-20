@@ -329,7 +329,7 @@ main {
         :root {
             --bg-dark: #0A1221;
             --bg-card: #0F192B; /* Темно-синий фон карточек */
-            --accent-orange: #FF5722;
+            --accent-orange: #e37814;
             --accent-blue: #00BCD4;
             --text-main: #FFFFFF;
             --text-muted: #8FA3BF;
@@ -474,10 +474,10 @@ main {
             font-size: 16px; }
 
         .card.virus { 
-            border-left: 4px solid var(--accent-orange);
+            border-left: 4px solid var#e37814;
         }
         .card.virus .action-link { 
-            color: var(--accent-orange); 
+            color: var#e37814; 
         }
         
         .card.phishing { 
@@ -488,10 +488,10 @@ main {
         }
 
         .card.leak { 
-            border-left: 4px solid var(--accent-orange); 
+            border-left: 4px solid var#e37814; 
         }
         .card.leak .action-link {
-            color: var(--accent-orange); 
+            color: var#e37814; 
         }
 
         .card.ddos { 
@@ -502,10 +502,10 @@ main {
         }
 
         .card.social { 
-            border-left: 4px solid var(--accent-orange); 
+            border-left: 4px solid var#e37814; 
         }
         .card.social .action-link {
-            color: var(--accent-orange); 
+            color: var#e37814; 
         }
 
         /* --- ИСПРАВЛЕННЫЙ КАЛЕНДАРЬ --- */
