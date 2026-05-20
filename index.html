@@ -374,6 +374,116 @@
 
 <!-- ===== СКРИПТЫ ===== -->
 <script>
+
+    const VIDEO_LIBRARY = [
+  { id:1, title:"Алгоритм действий при звонке мошенника", time:"04:30", tag:"Инструктаж №104" },
+  { id:2, title:"Как опознать фейковый сайт госуслуг", time:"06:15", tag:"Инструктаж №105" },
+  { id:3, title:"Инструктаж по настройке приватности", time:"03:45", tag:"Инструктаж №106" },
+  { id:4, title:"Памятка по созданию стойкого пароля", time:"02:20", tag:"Инструктаж №107" },
+  { id:5, title:"Что делать при утечке данных", time:"05:10", tag:"Методика №201" },
+  { id:6, title:"Безопасность мобильных устройств", time:"07:00", tag:"Методика №202" }
+];
+const libraryModal = document.getElementById('library-modal');
+const libraryBody  = document.getElementById('library-body');
+
+document.getElementById('library-close').onclick = () => {
+  libraryModal.style.display = 'none';
+};
+ 
+
+function openVideo(id) {
+  const video = VIDEO_LIBRARY.find(v => v.id == id);
+  if (!video) return;
+
+  contentBody.innerHTML = `
+    <h2>${video.title}</h2>
+    <p style="color:#8FA3BF; margin-bottom:15px;">${video.tag} · ${video.time}</p>
+
+    <div style="aspect-ratio:16/9; background:#000; display:flex; align-items:center; justify-content:center;">
+      ▶ Здесь будет видеоплеер
+    </div>
+  `;
+
+  libraryModal.style.display = 'none';
+  contentModal.style.display = 'flex';
+}
+
+document.getElementById('open-library').addEventListener('click', e => {
+  e.preventDefault();
+  openLibrary();
+});
+
+const burger = document.getElementById('burger');
+const menu   = document.getElementById('burgerMenu');
+const overlay = document.getElementById('burgerOverlay');
+
+function closeMenu() {
+  menu.classList.remove('active');
+  overlay.classList.remove('active');
+}
+
+burger.onclick = () => {
+  menu.classList.toggle('active');
+  overlay.classList.toggle('active');
+};
+
+overlay.onclick = closeMenu;
+
+/* пункты меню */
+menu.querySelectorAll('a').forEach(link => {
+  link.onclick = e => {
+    e.preventDefault();
+    const action = link.dataset.action;
+
+    closeMenu();
+
+    if (action === 'videos') {
+      openLibrary();
+    }
+
+    if (action === 'games') {
+      contentBody.innerHTML = `
+        <h2>КИБЕРПОЛИГОН</h2>
+        <p style="color:#8FA3BF; margin-bottom:15px;">
+          Общая библиотека тренировочных симуляторов
+        </p>
+        <div class="games-grid">
+          ${document.querySelector('.games-grid').innerHTML}
+        </div>
+      `;
+      contentModal.style.display = 'flex';
+    }
+
+    if (action === 'training') {
+      openLibrary();
+    }
+  };
+});
+
+document.querySelectorAll('.top-nav a').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+
+    const action = link.dataset.action;
+
+    if (action === 'videos' || action === 'training') {
+      openLibrary();
+    }
+
+    if (action === 'games') {
+      contentBody.innerHTML = `
+        <h2>КИБЕРПОЛИГОН</h2>
+        <p style="color:#8FA3BF; margin-bottom:15px;">
+          Общая библиотека тренировочных симуляторов
+        </p>
+        <div class="games-grid">
+          ${document.querySelector('.games-grid').innerHTML}
+        </div>
+      `;
+      contentModal.style.display = 'flex';
+    }
+  });
+});
 /* ======== Бургер-меню ======== */
 const burger  = document.getElementById('burger');
 const menu    = document.getElementById('burgerMenu');
