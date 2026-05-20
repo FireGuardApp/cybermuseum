@@ -1276,3 +1276,8 @@ body.modal-open {
   }
 }
 
+.video-thumb {
+    position: relative; /* ← добавь эту строку */
+    /* остальное без изменений */
+}
+
