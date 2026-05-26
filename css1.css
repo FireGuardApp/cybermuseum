@@ -784,7 +784,7 @@ main {
 
         .footer-grid {
             display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            grid-template-columns: 1.5fr 1fr 1fr;
             gap: 40px;
         }
 
@@ -1254,3 +1254,129 @@ body.modal-open {
     /* остальное без изменений */
 }
 
+.artifacts-hero {
+            padding-top: 140px;
+            padding-bottom: 30px;
+            text-align: center;
+        }
+        .artifacts-hero h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #fff;
+            margin: 0 0 18px;
+            text-transform: uppercase;
+        }
+        .artifacts-hero h1 span {
+            color: var(--accent-blue);
+        }
+        .artifacts-hero .lead {
+            max-width: 820px;
+            margin: 0 auto;
+            color: var(--text-muted);
+            font-size: 16px;
+            line-height: 1.65;
+        }
+        .artifacts-hero .source-line {
+            margin-top: 14px;
+            font-size: 13px;
+            color: var(--accent-blue);
+            letter-spacing: 0.5px;
+        }
+
+        .category-block {
+            margin: 50px 0 20px;
+        }
+        .category-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            color: #fff;
+            text-transform: uppercase;
+            border-left: 4px solid var(--accent-orange);
+            padding-left: 14px;
+            margin-bottom: 10px;
+        }
+        .category-desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 24px;
+            padding-left: 18px;
+        }
+
+        .artifact-card {
+            background: rgba(10, 21, 37, 0.55);
+            border: 1px solid var(--border-color);
+            border-left: 3px solid var(--accent-blue);
+            padding: 22px 26px;
+            margin-bottom: 18px;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .artifact-card:hover {
+            border-left-color: var(--accent-orange);
+            background: rgba(10, 21, 37, 0.75);
+        }
+        .artifact-id {
+            font-family: 'Oswald', sans-serif;
+            font-size: 14px;
+            letter-spacing: 1.5px;
+            color: var(--accent-orange);
+            font-weight: 600;
+        }
+        .artifact-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-left: 14px;
+            letter-spacing: 0.4px;
+        }
+        .artifact-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 19px;
+            color: #EAF2FF;
+            margin: 10px 0 12px;
+            line-height: 1.35;
+            font-weight: 500;
+        }
+        .artifact-body {
+            color: var(--text-muted);
+            font-size: 14.5px;
+            line-height: 1.65;
+        }
+        .artifact-tags {
+            margin-top: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .artifact-tag {
+            font-size: 11px;
+            letter-spacing: 0.6px;
+            padding: 3px 10px;
+            border: 1px solid rgba(0, 188, 212, 0.4);
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            border-radius: 2px;
+        }
+
+        .source-footer {
+            margin-top: 50px;
+            padding: 22px 26px;
+            border: 1px dashed var(--border-color);
+            background: rgba(10, 21, 37, 0.35);
+            color: var(--text-muted);
+            font-size: 13.5px;
+            line-height: 1.7;
+        }
+        .source-footer strong {
+            color: #EAF2FF;
+            display: block;
+            margin-bottom: 8px;
+            font-family: 'Oswald', sans-serif;
+            letter-spacing: 1px;
+        }
+        .source-footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
