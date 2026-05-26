@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кибер-артефакты — Музей Кибербезопасности</title>
+    <link rel="stylesheet" href="css1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+   
+</head>
+<body>
+
+<!-- ===== БУРГЕР ===== -->
+<div class="burger" id="burger">
+    <span></span><span></span><span></span>
+</div>
+
+<nav class="burger-menu" id="burgerMenu">
+    <a href="index.html">🏛 На главную</a>
+    <a href="library.html">🎬 Видеобиблиотека</a>
+    <a href="games.html">🎮 Библиотека игр</a>
+    <a href="full-calendar.html">📅 Полный календарь</a>
+    <a href="artifacts.html">🗂 Кибер-артефакты</a>
+</nav>
+<div class="burger-overlay" id="burgerOverlay"></div>
+
+<!-- ===== ТОП-БАР ===== -->
+<div class="top-bar">
+    <div class="top-bar-container top-bar-flex">
+        <div class="top-bar-title"></div>
+        <nav class="top-nav top-nav--bar">
+            <a href="library.html">Видеобиблиотека</a>
+            <a href="games.html">Киберполигон</a>
+            <a href="artifacts.html">Кибер-артефакты</a>
+            <a href="full-calendar.html">Календарь</a>
+            <a href="index.html">На главную</a>
+        </nav>
+    </div>
+</div>
+
+<!-- ===== УНИВЕРСИТЕТСКАЯ ШАПКА С ЛОГОТИПАМИ ===== -->
+<div class="univ-header">
+    <div class="univ-header-inner">
+        <div class="univ-logo-wrap">
+            <img src = "image_2026-01-23_10-46-21.png"
+            width="90"
+            height="90">
+           <img src = "image_2026-01-23_10-46-34.png"
+           width="90"
+            height="90">
+            <div class="univ-text">
+
+            </div>
+        </div>
+        <div class="univ-center-badge">
+            <div class="badge-title">Культурно-просветительный портал в области информационной безопасности</div>
+        </div>
+        <div class="univ-right-info">
+
+        </div>
+    </div>
+</div>
+
+<main class="main">
+<div class="container">
+
+    <!-- ===== HERO ===== -->
+    <section class="artifacts-hero">
+        <h1>Кибер-<span>артефакты</span></h1>
+        <p class="lead">
+            Каталог угроз безопасности информации для объектов критической информационной инфраструктуры (КИИ),
+            государственных информационных систем (ГИС) и автоматизированных систем управления производственными
+            и технологическими процессами (АСУ ТП). Каждый артефакт — запись из Банка данных угроз безопасности информации
+            ФСТЭК России, обязательная для учёта при разработке моделей угроз.
+        </p>
+        <p class="source-line">Источник: bdu.fstec.ru · bduasutp.fstec.ru · ФАУ «ГНИИИ ПТЗИ ФСТЭК России»</p>
+    </section>
+
+    <!-- ===== КАТЕГОРИЯ 1: КОНТЕЙНЕРИЗАЦИЯ ===== -->
+    <div class="category-block">
+        <div class="category-title">Угрозы средам контейнеризации (внесены 04.06.2025)</div>
+        <div class="category-desc">
+            В июне 2025 года ФСТЭК России впервые за пять лет добавила в БДУ пять новых угроз, связанных
+            с управлением контейнерами. Все они обязательны к учёту в моделях угроз ИСПДн, ГИС и объектов КИИ.
+        </div>
+
+        <div class="artifact-card">
+            <div>
+                <span class="artifact-id">УБИ.223</span>
+                <span class="artifact-meta">Дата включения: 04.06.2025</span>
+            </div>
+            <div class="artifact-title">Угроза несанкционированного доступа к контейнерам, предоставляющего пользователям расширенные привилегии</div>
+            <div class="artifact-body">
+                Заключается в возможности осуществления нарушителем деструктивного программного воздействия путём получения повышенных привилегий
+                при доступе к контейнерам. Применяется в моделях угроз для систем, использующих средства контейнеризации.
+            </div>
+            <div class="artifact-tags">
+                <span class="artifact-tag">КИИ</span>
+                <span class="artifact-tag">ГИС</span>
+                <span class="artifact-tag">ИСПДн</span>
+                <span class="artifact-tag">Контейнеризация</span>
+            </div>
+        </div>
+
+        <div class="artifact-card">
+            <div>
+                <span class="artifact-id">УБИ.224</span>
+                <span class="artifact-meta">Дата включения: 04.06.2025</span>
+            </div>
+            <div class="artifact-title">Угроза нарушения целостности (подмены) контейнеров</div>
+            <div class="artifact-body">
+                Заключается в возможности запуска нарушителем собственного docker-контейнера, функционирующего по уровню
+                логического воздействия ниже компрометируемого. Реализация ведёт к подмене легитимных контейнеров и нарушению
+                целостности работы сервисов.
+            </div>
+            <div class="artifact-tags">
+                <span class="artifact-tag">Целостность</span>
+                <span class="artifact-tag">Docker</span>
+                <span class="artifact-tag">Контейнеризация</span>
+            </div>
+        </div>
+
+        <div class="artifact-card">
+            <div>
+                <span class="artifact-id">УБИ.225</span>
+                <span class="artifact-meta">Дата включения: 04.06.2025</span>
+            </div>
+            <div class="artifact-title">Угроза нарушения изоляции контейнеров</div>
+            <div class="artifact-body">
+                Заключается в возможности нарушения изоляции между контейнерами, что позволяет нарушителю получить доступ
+                к данным и процессам соседних контейнеров. Нарушает базовый принцип безопасности контейнерных сред.
+            </div>
+            <div class="artifact-tags">
+                <span class="artifact-tag">Изоляция</span>
+                <span class="artifact-tag">Контейнеризация</span>
+            </div>
+        </div>
+
+        <div class="artifact-card">
+            <div>
+                <span class="artifact-id">УБИ.226</span>
+                <span class="artifact-meta">Дата включения: 04.06.2025</span>
+            </div>
+            <div class="artifact-title">Угроза внедрения вредоносного программного обеспечения в контейнеры</div>
+            <div class="artifact-body">
+                Заключается в возможности нарушителя внедрить вредоносное программное обеспечение в существующий
+                docker-контейнер для дальнейшего деструктивного воздействия на объекты системы.
+            </div>
+            <div class="artifact-tags">
+                <span class="artifact-tag">Вредоносное ПО</span>
+                <span class="artifact-tag">Docker</span>
+                <span class="artifact-tag">Контейнеризация</span>
+            </div>
+        </div>
+
+        <div class="artifact-card">
+            <div>
+                <span class="artifact-id">УБИ.227</span>
+                <span class="artifact-meta">Дата включения: 04.06.2025</span>
+            </div>
+            <div class="artifact-title">Угроза модификации (подмены) образов контейнеров</div>
+            <div class="artifact-body">
+                Заключается в возможности подмены образов контейнеров на этапе сборки, хранения или распространения.
+                Реализуется через компрометацию реестров образов или цепочки поставки.
+            </div>
+            <div class="artifact-tags">
+                <span class="artifact-tag">Образы</span>
+                <span class="artifact-tag">Supply Chain</span>
+                <span class="artifact-tag">Контейнеризация</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== КАТЕГОРИЯ 2: ЦЕПОЧКА ПОСТАВКИ И БАЗОВЫЕ УГРОЗЫ ===== -->
+    <div class="category-block">
+        <div class="category-title">Угрозы цепочке поставки и базовые угрозы ИБ</div>
+        <div class="category-desc">
+            Угрозы, актуальные для всех типов информационных систем — от ИСПДн до объектов критической
+            информационной инфраструктуры.
+        </div>
+
+        <div class="artifact-card">
+            <div>
+                <span class="artifact-id">УБИ.217</span>
+                <span class="artifact-meta">Дата включения: 11.02.2020</span>
+            </div>
+            <div class="artifact-title">Угроза использования скомпрометированного доверенного источника обновлений программного обеспечения</div>
+            <div class="artifact-body">
+                Заключается в возможности проведения атаки через инфраструктуру обновлений доверенного поставщика
+                программного обеспечения. Реализация позволяет нарушителю распространить вредоносный код
+                под видом легитимного обновления на все подключённые системы.
+            </div>
+            <div class="artifact-tags">
+                <span class="artifact-tag">Supply Chain</span>
+                <span class="artifact-tag">Обновления ПО</span>
+                <span class="artifact-tag">КИИ</span>
+            </div>
+        </div>
+
+        <div class="artifact-card">
+            <div>
+                <span class="artifact-id">УБИ.1</span>
+                <span class="artifact-meta">Базовая угроза БДУ</span>
+            </div>
+            <div class="artifact-title">Угроза утечки информации</div>
+            <div class="artifact-body">
+                Заключается в возможности противоправного получения либо передачи информации
+                (конфиденциальной, конфигурационной, аутентификационной и др.). Например, утечка персональных
+                данных вследствие нарушения хранения или нарушения конфигурации.
+                Объекты воздействия: автоматизированные рабочие места, серверы, периферийное оборудование,
+                устройства хранения данных, устройства интернета вещей, активное сетевое оборудование, телефония (VoIP, GSM),
+                средства защиты информации, мобильные устройства, физические линии связи.
+            </div>
+            <div class="artifact-tags">
+                <span class="artifact-tag">Конфиденциальность</span>
+                <span class="artifact-tag">Раскрытие информации</span>
+                <span class="artifact-tag">НСД</span>
+            </div>
+        </div>
+
+        <div class="artifact-card">
+            <div>
+                <span class="artifact-id">УБИ.8</span>
+                <span class="artifact-meta">Базовая угроза БДУ</span>
+            </div>
+            <div class="artifact-title">Угроза восстановления аутентификационной информации</div>
+            <div class="artifact-body">
+                Заключается в возможности подбора (например, путём полного перебора или перебора по словарю)
+                аутентификационной информации дискредитируемой учётной записи пользователя в системе.
+                Источник: внешний нарушитель с низким потенциалом. Объект воздействия: системное программное обеспечение.
+            </div>
+            <div class="artifact-tags">
+                <span class="artifact-tag">Пароли</span>
+                <span class="artifact-tag">Brute-force</span>
+                <span class="artifact-tag">Аутентификация</span>
+            </div>
+        </div>
+
+        <div class="artifact-card">
+            <div>
+                <span class="artifact-id">УБИ.4</span>
+                <span class="artifact-meta">Базовая угроза БДУ</span>
+            </div>
+            <div class="artifact-title">Угроза аппаратного сброса пароля BIOS</div>
+            <div class="artifact-body">
+                Связана с особенностями активов типа «микропрограммное обеспечение» и может привести
+                к реализации угрозы несанкционированного локального доступа к BIOS. Актуальна при физическом
+                доступе нарушителя к оборудованию.
+            </div>
+            <div class="artifact-tags">
+                <span class="artifact-tag">BIOS</span>
+                <span class="artifact-tag">Физический доступ</span>
+                <span class="artifact-tag">Микропрограммное ПО</span>
+            </div>
+        </div>
+
+        <div class="artifact-card">
+            <div>
+                <span class="artifact-id">УБИ.213</span>
+                <span class="artifact-meta">Дата включения: 08.02.2019</span>
+            </div>
+            <div class="artifact-title">Угроза обхода многофакторной аутентификации</div>
+            <div class="artifact-body">
+                Заключается в возможности обхода нарушителем механизмов многофакторной аутентификации (MFA),
+                в том числе через атаки на каналы передачи второго фактора (SMS, push-уведомления) и через
+                социальную инженерию.
+            </div>
+            <div class="artifact-tags">
+                <span class="artifact-tag">MFA</span>
+                <span class="artifact-tag">Аутентификация</span>
+                <span class="artifact-tag">Социальная инженерия</span>
+            </div>
+        </div>
+
+        <div class="artifact-card">
+            <div>
+                <span class="artifact-id">УБИ.214</span>
+                <span class="artifact-meta">Дата включения: 15.11.2019</span>
+            </div>
+            <div class="artifact-title">Угроза несвоевременного выявления и реагирования компонентами информационной (автоматизированной) системы (в том числе средствами защиты информации) на события безопасности информации</div>
+            <div class="artifact-body">
+                Заключается в риске пропуска или задержки реагирования средств защиты на события безопасности,
+                что увеличивает временное окно для развития атаки. Актуальна для систем мониторинга и SIEM-решений
+                на объектах КИИ.
+            </div>
+            <div class="artifact-tags">
+                <span class="artifact-tag">SIEM</span>
+                <span class="artifact-tag">Мониторинг</span>
+                <span class="artifact-tag">КИИ</span>
+            </div>
+        </div>
+
+        <div class="artifact-card">
+            <div>
+                <span class="artifact-id">УБИ.215</span>
+                <span class="artifact-meta">Дата включения: 15.11.2019</span>
+            </div>
+            <div class="artifact-title">Угроза несанкционированного доступа к системе при помощи сторонних сервисов</div>
+            <div class="artifact-body">
+                Заключается в возможности получения нарушителем доступа к защищаемой системе через интегрированные
+                сторонние сервисы, имеющие легитимные права доступа. Реализуется при компрометации внешнего сервиса
+                или его учётных данных.
+            </div>
+            <div class="artifact-tags">
+                <span class="artifact-tag">Сторонние сервисы</span>
+                <span class="artifact-tag">НСД</span>
+                <span class="artifact-tag">Интеграции</span>
+            </div>
+        </div>
+
+        <div class="artifact-card">
+            <div>
+                <span class="artifact-id">УБИ.216</span>
+                <span class="artifact-meta">Дата включения: 15.11.2019</span>
+            </div>
+            <div class="artifact-title">Угроза получения несанкционированного доступа к приложениям, установленным на Smart-картах</div>
+            <div class="artifact-body">
+                Заключается в возможности получения нарушителем несанкционированного доступа к приложениям,
+                функционирующим на смарт-картах, в том числе при использовании их для аутентификации,
+                электронной подписи и хранения ключевой информации.
+            </div>
+            <div class="artifact-tags">
+                <span class="artifact-tag">Smart-карты</span>
+                <span class="artifact-tag">Криптография</span>
+                <span class="artifact-tag">НСД</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== ИСТОЧНИКИ ===== -->
+    <div class="source-footer">
+        <strong>Источники данных</strong>
+        Все артефакты сформированы по материалам Банка данных угроз безопасности информации ФСТЭК России,
+        размещённого по адресу <a href="https://bdu.fstec.ru" target="_blank" rel="noopener">bdu.fstec.ru</a>.
+        По состоянию на декабрь 2025 года БДУ содержит 227 угроз и более 80 000 уязвимостей.
+        Для угроз АСУ ТП ФСТЭК создан специализированный ресурс
+        <a href="https://bduasutp.fstec.ru" target="_blank" rel="noopener">bduasutp.fstec.ru</a>.
+        Ведение банка осуществляет ФАУ «ГНИИИ ПТЗИ ФСТЭК России».
+        Информация, размещённая в БДУ, является общедоступной и распространяется на безвозмездной основе
+        с указанием источника.
+    </div>
+
+</div>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="container footer-grid">
+        <div class="footer-col">
+            <div style="display:flex;align-items:center;margin-bottom:20px;">
+                <div class="logo-shield" style="width:30px;height:30px;margin:0 15px 0 0;font-size:16px;border-width:1px;"><i>!</i></div>
+                <h4 style="margin:0">ЦИФРОВОЙ ЩИТ РФ</h4>
+            </div>
+            <p style="color:var(--text-muted);line-height:1.6;">Полный архив киберинцидентов. Система мониторинга угроз в реальном времени. Проект СПб УГПС МЧС России.</p>
+        </div>
+        <div class="footer-col">
+            <h4>НАВИГАЦИЯ</h4>
+            <ul class="footer-links">
+                <li><a href="index.html">Главная страница</a></li>
+                <li><a href="library.html">Видеобиблиотека</a></li>
+                <li><a href="games.html">Киберполигон</a></li>
+                <li><a href="full-calendar.html">Календарь инцидентов</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>ОБУЧЕНИЕ</h4>
+            <ul class="footer-links">
+                <li><a href="test-basic.html">Основы кибербезопасности</a></li>
+                <li><a href="test-password.html">Защита паролей</a></li>
+                <li><a href="test-phishing.html">Фишинг и угрозы</a></li>
+                <li><a href="artifacts.html">Кибер-артефакты</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <p>© Музей Кибербезопасности. Все данные защищены.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+/* ======== Бургер-меню ======== */
+const burger  = document.getElementById('burger');
+const menu    = document.getElementById('burgerMenu');
+const bOver   = document.getElementById('burgerOverlay');
+function closeMenu() {
+    menu.classList.remove('active');
+    bOver.classList.remove('active');
+}
+burger.onclick = () => {
+    menu.classList.toggle('active');
+    bOver.classList.toggle('active');
+};
+bOver.onclick = closeMenu;
+menu.querySelectorAll('a').forEach(l => l.onclick = closeMenu);
+</script>
+
+</body>
+</html>
