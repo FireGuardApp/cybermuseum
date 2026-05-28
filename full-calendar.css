@@ -2253,3 +2253,44 @@ html {
 .calendar-day.auto-selected {
     animation: pulse-highlight 2s ease 3; 
 }
+
+/* ================= ПРИНУДИТЕЛЬНОЕ УМЕНЬШЕНИЕ КВАДРАТИКОВ ================= */
+.days-grid {
+    gap: 20px !important;
+}
+
+.days-grid .calendar-day {
+    min-height: 45px !important;
+    max-height: 150px !important;
+    height: 120px !important;
+    width: 150px !important;
+    aspect-ratio: 1 !important;
+    padding: 4px 2px !important;
+    border-width: 3px !important;
+}
+
+.days-grid .calendar-day .day-number {
+    font-size: 30px !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
+}
+
+.days-grid .calendar-day .event-indicator {
+    width: 5px !important;
+    height: 5px !important;
+}
+
+.days-grid .calendar-day .day-events {
+    gap: 2px !important;
+    margin-top: 2px !important;
+}
+
+.weekdays-header {
+    gap: 5px !important;
+    margin-bottom: 8px !important;
+}
+
+.weekday {
+    font-size: 11px !important;
+    padding: 6px 0 !important;
+}
